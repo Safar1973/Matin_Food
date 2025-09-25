@@ -1,0 +1,372 @@
+[
+  {
+    "cat": "grains",
+    "name_en": "Rice",
+    "name_ar": "رز",
+    "name_de": "Reis",
+    "price": 2.99,
+    "stock": 120,
+    "expiry": "2026-05-17",
+    "image": "rice.jpg"
+  },
+  {
+    "cat": "grains",
+    "name_en": "Bulghur",
+    "name_ar": "برغل",
+    "name_de": "Bulgur",
+    "price": 3.5,
+    "stock": 90,
+    "expiry": "2026-09-19",
+    "image": "bulghur.jpg"
+  },
+  {
+    "cat": "grains",
+    "name_en": "Lentils",
+    "name_ar": "عدس",
+    "name_de": "Linsen",
+    "price": 2.1,
+    "stock": 80,
+    "expiry": "2026-07-16",
+    "image": "lentils.jpg"
+  },
+  {
+    "cat": "grains",
+    "name_en": "Crushed Lentils",
+    "name_ar": "عدس مجروش",
+    "name_de": "Geschrotete Linsen",
+    "price": 2.4,
+    "stock": 60,
+    "expiry": "2026-05-17",
+    "image": "crushed_lentils.jpg"
+  },
+  {
+    "cat": "grains",
+    "name_en": "Chickpeas",
+    "name_ar": "حمص",
+    "name_de": "Kichererbsen",
+    "price": 2.3,
+    "stock": 100,
+    "expiry": "2026-09-19",
+    "image": "chickpeas.jpg"
+  },
+  {
+    "cat": "grains",
+    "name_en": "Wheat (Zer3)",
+    "name_ar": "زرع",
+    "name_de": "Weizen",
+    "price": 1.9,
+    "stock": 150,
+    "expiry": "2026-09-19",
+    "image": "wheat.jpg"
+  },
+  {
+    "cat": "molasses",
+    "name_en": "Tomato Paste",
+    "name_ar": "دبس بندورة",
+    "name_de": "Tomatenmark",
+    "price": 1.5,
+    "stock": 200,
+    "expiry": "2027-03-13",
+    "image": "tomato_paste.jpg"
+  },
+  {
+    "cat": "molasses",
+    "name_en": "Red Pepper Paste (Hot)",
+    "name_ar": "دبس فليفلة حار",
+    "name_de": "Paprikapaste (scharf)",
+    "price": 2.75,
+    "stock": 80,
+    "expiry": "2026-11-13",
+    "image": "pepper_paste_hot.jpg"
+  },
+  {
+    "cat": "molasses",
+    "name_en": "Red Pepper Paste (Sweet)",
+    "name_ar": "دبس فليفلة حلو",
+    "name_de": "Paprikapaste (mild)",
+    "price": 2.6,
+    "stock": 70,
+    "expiry": "2026-11-13",
+    "image": "pepper_paste_sweet.jpg"
+  },
+  {
+    "cat": "molasses",
+    "name_en": "Pomegranate Molasses",
+    "name_ar": "دبس رمان",
+    "name_de": "Granatapfelsirup",
+    "price": 4.99,
+    "stock": 60,
+    "expiry": "2027-05-12",
+    "image": "pomegranate_molasses.jpg"
+  },
+  {
+    "cat": "molasses",
+    "name_en": "Halawa",
+    "name_ar": "حلاوة",
+    "name_de": "Halawa",
+    "price": 3.99,
+    "stock": 60,
+    "expiry": "2026-05-17",
+    "image": "halawa.jpg"
+  },
+  {
+    "cat": "honey",
+    "name_en": "Honey",
+    "name_ar": "عسل",
+    "name_de": "Honig",
+    "price": 6.99,
+    "stock": 50,
+    "expiry": "2027-09-09",
+    "image": "honey.jpg"
+  },
+  {
+    "cat": "zaatar",
+    "name_en": "Zaatar Mix",
+    "name_ar": "زعتر",
+    "name_de": "Zaatar-Mischung",
+    "price": 2.8,
+    "stock": 120,
+    "expiry": "2027-03-13",
+    "image": "zaatar.jpg"
+  },
+  {
+    "cat": "spices",
+    "name_en": "Toabel",
+    "name_ar": "توابل",
+    "name_de": "Gewürzmischung",
+    "price": 1.99,
+    "stock": 300,
+    "expiry": "2027-03-13",
+    "image": "spices.jpg"
+  },
+  {
+    "cat": "dairy",
+    "name_en": "Labneh",
+    "name_ar": "لبنة",
+    "name_de": "Labneh",
+    "price": 3.2,
+    "stock": 40,
+    "expiry": "2025-10-09",
+    "image": "labneh.jpg"
+  },
+  {
+    "cat": "dairy",
+    "name_en": "Yogurt",
+    "name_ar": "لبن",
+    "name_de": "Joghurt",
+    "price": 1.2,
+    "stock": 80,
+    "expiry": "2025-10-03",
+    "image": "yogurt.jpg"
+  },
+  {
+    "cat": "dairy",
+    "name_en": "Cheese",
+    "name_ar": "أجبان",
+    "name_de": "Käse",
+    "price": 4.5,
+    "stock": 70,
+    "expiry": "2025-11-18",
+    "image": "cheese.jpg"
+  },
+  {
+    "cat": "meats",
+    "name_en": "Lamb",
+    "name_ar": "لحم خروف",
+    "name_de": "Lamm",
+    "price": 12.99,
+    "stock": 25,
+    "expiry": "2025-09-26",
+    "image": "lamb.jpg"
+  },
+  {
+    "cat": "meats",
+    "name_en": "Veal",
+    "name_ar": "لحم عجل",
+    "name_de": "Kalb",
+    "price": 11.5,
+    "stock": 25,
+    "expiry": "2025-09-26",
+    "image": "veal.jpg"
+  },
+  {
+    "cat": "meats",
+    "name_en": "Fish",
+    "name_ar": "سمك",
+    "name_de": "Fisch",
+    "price": 8.5,
+    "stock": 30,
+    "expiry": "2025-09-24",
+    "image": "fish.jpg"
+  },
+  {
+    "cat": "meats",
+    "name_en": "Chicken (Breast)",
+    "name_ar": "دجاج — صدور",
+    "name_de": "Hähnchenbrust",
+    "price": 6.4,
+    "stock": 50,
+    "expiry": "2025-09-24",
+    "image": "chicken_breast.jpg"
+  },
+  {
+    "cat": "meats",
+    "name_en": "Chicken (Thighs)",
+    "name_ar": "دجاج — أفخاذ",
+    "name_de": "Hähnchenschenkel",
+    "price": 5.9,
+    "stock": 50,
+    "expiry": "2025-09-24",
+    "image": "chicken_thighs.jpg"
+  },
+  {
+    "cat": "coffee",
+    "name_en": "Arabic Coffee",
+    "name_ar": "قهوة عربية",
+    "name_de": "Arabischer Kaffee",
+    "price": 5.5,
+    "stock": 120,
+    "expiry": "2027-03-13",
+    "image": "arabic_coffee.jpg"
+  },
+  {
+    "cat": "coffee",
+    "name_en": "Nescafé",
+    "name_ar": "نسكافيه",
+    "name_de": "Nescafé",
+    "price": 4.2,
+    "stock": 120,
+    "expiry": "2027-03-13",
+    "image": "nescafe.jpg"
+  },
+  {
+    "cat": "coffee",
+    "name_en": "Herbal Tea",
+    "name_ar": "شاي أعشاب",
+    "name_de": "Kräutertee",
+    "price": 2.6,
+    "stock": 120,
+    "expiry": "2027-03-13",
+    "image": "herbal_tea.jpg"
+  },
+  {
+    "cat": "coffee",
+    "name_en": "Green Tea",
+    "name_ar": "شاي أخضر",
+    "name_de": "Grüner Tee",
+    "price": 2.6,
+    "stock": 120,
+    "expiry": "2027-03-13",
+    "image": "green_tea.jpg"
+  },
+  {
+    "cat": "coffee",
+    "name_en": "Black Tea",
+    "name_ar": "شاي أسود",
+    "name_de": "Schwarzer Tee",
+    "price": 2.6,
+    "stock": 120,
+    "expiry": "2027-03-13",
+    "image": "black_tea.jpg"
+  },
+  {
+    "cat": "cans",
+    "name_en": "Tahini",
+    "name_ar": "طحينة",
+    "name_de": "Tahina",
+    "price": 3.99,
+    "stock": 70,
+    "expiry": "2027-03-13",
+    "image": "tahini.jpg"
+  },
+  {
+    "cat": "cans",
+    "name_en": "Foul Beans",
+    "name_ar": "فول",
+    "name_de": "Bohnen (Foul)",
+    "price": 1.3,
+    "stock": 220,
+    "expiry": "2027-03-13",
+    "image": "foul.jpg"
+  },
+  {
+    "cat": "cans",
+    "name_en": "Hummus Dip",
+    "name_ar": "حمص متبل",
+    "name_de": "Hummus Dip",
+    "price": 1.4,
+    "stock": 220,
+    "expiry": "2027-03-13",
+    "image": "hummus.jpg"
+  },
+  {
+    "cat": "cans",
+    "name_en": "Canned Chicken",
+    "name_ar": "لحم دجاج معلب",
+    "name_de": "Dosenhuhn",
+    "price": 2.99,
+    "stock": 90,
+    "expiry": "2027-03-13",
+    "image": "canned_chicken.jpg"
+  },
+  {
+    "cat": "cans",
+    "name_en": "Canned Beef",
+    "name_ar": "لحم بقري معلب",
+    "name_de": "Dosenrindfleisch",
+    "price": 3.5,
+    "stock": 90,
+    "expiry": "2027-03-13",
+    "image": "canned_beef.jpg"
+  },
+  {
+    "cat": "veg",
+    "name_en": "Tomato",
+    "name_ar": "بندورة",
+    "name_de": "Tomate",
+    "price": 0.6,
+    "stock": 500,
+    "expiry": "2025-09-26",
+    "image": "tomato.jpg"
+  },
+  {
+    "cat": "veg",
+    "name_en": "Cucumber",
+    "name_ar": "خيار",
+    "name_de": "Gurke",
+    "price": 0.5,
+    "stock": 500,
+    "expiry": "2025-09-26",
+    "image": "cucumber.jpg"
+  },
+  {
+    "cat": "veg",
+    "name_en": "Apple",
+    "name_ar": "تفاح",
+    "name_de": "Apfel",
+    "price": 0.7,
+    "stock": 400,
+    "expiry": "2025-10-04",
+    "image": "apple.jpg"
+  },
+  {
+    "cat": "veg",
+    "name_en": "Orange",
+    "name_ar": "برتقال",
+    "name_de": "Orange",
+    "price": 0.65,
+    "stock": 400,
+    "expiry": "2025-10-04",
+    "image": "orange.jpg"
+  },
+  {
+    "cat": "veg",
+    "name_en": "Banana",
+    "name_ar": "موز",
+    "name_de": "Banane",
+    "price": 0.55,
+    "stock": 400,
+    "expiry": "2025-09-26",
+    "image": "banana.jpg"
+  }
+]

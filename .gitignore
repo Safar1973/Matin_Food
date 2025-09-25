@@ -1,0 +1,22 @@
+# ملفات النظام والمحرر
+.vscode/
+.idea/
+__pycache__/
+*.pyc
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# بيئة بايثون الافتراضية
+.venv/
+env/
+
+# قواعد بيانات محلية
+backend/products.db
+backend-php/data/
+
+# بناء الواجهة الأمامية
+node_modules/
+dist/
+build/

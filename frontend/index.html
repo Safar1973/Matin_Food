@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MATIN FOOD</title>
+  <style>
+    :root{ --bg:#0b0f14; --card:#121923; --muted:#8aa0b7; --text:#eaf2fb; --accent:#ffd166; }
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;background:#0b0f14;color:#eaf2fb}
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(10,14,20,.7);border-bottom:1px solid rgba(255,255,255,.06)}
+    .topbar-inner{display:flex;align-items:center;gap:16px;padding:12px 20px;width:100%;margin:0;}
+    .nav{display:flex;gap:14px} .nav a{padding:8px 12px;border-radius:10px;color:#8aa0b7} .nav a.active,.nav a:hover{background:rgba(255,255,255,.06);color:#eaf2fb}
+    .spacer{flex:1} .pill{border:1px solid rgba(255,255,255,.12);padding:6px 10px;border-radius:999px;color:#8aa0b7;background:transparent;cursor:pointer}
+    .layout{display:grid;grid-template-columns:260px 1fr 320px;gap:16px;width: 100% ;margin:18px auto;padding:0 20px}
+    .sidebar,.cart{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 88px);overflow:auto;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:14px}
+    .section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:16px}
+    .search{flex:1;display:flex}.search input{flex:1;border-radius:12px 0 0 12px;border:1px solid rgba(255,255,255,.1);padding:10px 12px;background:#0e1520;color:#eaf2fb}
+    .search button{border-radius:0 12px 12px 0;border:1px solid rgba(255,255,255,.1);padding:10px 12px;background:rgba(255,255,255,.06);color:#eaf2fb;cursor:pointer}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+    .card{background:#121923;border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+    .thumb{aspect-ratio:4/3;border-bottom:1px solid rgba(255,255,255,.06)} .thumb img{width:100%;height:100%;object-fit:cover}
+    .card-body{padding:12px}.title{font-weight:700}.muted{color:#8aa0b7}.price{font-weight:700;color:#ffd166}
+    @media (max-width:1100px){.layout{grid-template-columns:1fr}.cart{position:relative;top:auto;max-height:none}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><img src="logo.png" alt="MATIN FOOD" style="height:50px"></div>
+      <nav class="nav" id="main-nav">
+        <a href="#home" data-section="home" class="active" id="nav-home">الرئيسية</a>
+        <a href="#about" data-section="about" id="nav-about">من نحن</a>
+        <a href="#products" data-section="products" id="nav-products">المنتجات</a>
+        <a href="#products" data-section="products" id="nav-products">المتفرقات</a>
+      </nav>
+      <div class="spacer"></div>
+      <div class="lang-switch">
+        <button class="pill active" data-lang="ar">عربي</button>
+        <button class="pill" data-lang="de">Deutsch</button>
+        <button class="pill" data-lang="en">English</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="side-title" id="side-title">الفئات</div>
+      
+      <div id="cat-list"></div>
+    </aside>
+
+    <section class="content">
+      <div id="home" class="section">
+        <h2 id="home-title">أهلاً بكم في متجرنا</h2>
+        <p id="home-sub" class="muted">اختر فئة من القائمة اليسرى أو تصفح أحدث العروض أدناه.</p>
+        <div class="toolbar" style="display:flex;gap:10px;align-items:center;margin:6px 0 14px">
+          <div class="search">
+            <input id="search-input" placeholder="ابحث عن منتج…" />
+            <button id="search-btn">بحث</button>
+          </div>
+        </div>
+        <div class="grid" id="home-grid"></div>
+      </div>
+
+      <div id="about" class="section" style="display:none">
+        <h2 id="about-title">من نحن</h2>
+        <p class="about" id="about-text">نوفّر أفضل المواد الغذائية الطازجة والمعلّبة بأسعار تنافسية مع خدمة توصيل سريعة وآمنة.</p>
+      </div>
+
+      <div id="products" class="section" style="display:none">
+        <h2 id="products-title">المنتجات</h2>
+        <div class="toolbar" style="display:flex;gap:10px;align-items:center;margin:6px 0 14px">
+          <div class="search">
+            <input id="search-input-2" placeholder="ابحث عن منتج…" />
+            <button id="search-btn-2">بحث</button>
+          </div>
+        </div>
+        <div class="grid" id="prod-grid"></div>
+      </div>
+    </section>
+
+    <aside class="cart" id="cart">
+      <h3 id="cart-title">السلة</h3>
+      <div id="cart-items"></div>
+      <div class="total">
+        <div><span id="subtotal-label">المجموع</span><strong id="subtotal-val">$0.00</strong></div>
+        <div><span id="tax-label">الضريبة (5%)</span><strong id="tax-val">$0.00</strong></div>
+        <div><span id="delivery-label">التوصيل</span><strong id="delivery-val">$0.00</strong></div>
+        <div><span id="total-label">الإجمالي</span><strong id="total-val">$0.00</strong></div>
+      </div>
+      <div style="margin-top:10px;display:grid;gap:8px">
+        <input id="address" placeholder="العنوان للتوصيل" />
+        <input id="delivery-date" type="date" />
+        <select id="pay-method">
+          <option value="cod">الدفع عند الاستلام</option>
+          <option value="card">بطاقة (تجريبي)</option>
+        </select>
+        <button class="btn" id="checkout-btn">إتمام الشراء</button>
+      </div>
+    </aside>
+  </main>
+
+<script>
+const API = "http://127.0.0.1:5000";
+const t = {
+  ar:{ cats:{ grains:" حبوب", molasses:"دبس", honey:"عسل", zaatar:"زعتر", spices:"توابل", dairy:"ألبان وأجبان", meats:"لحوم", coffee:"قهوة وشاي", cans:"معلبات", veg:"خضار وفواكه" } },
+  de:{ cats:{ grains:"Getreide & Hülsenfrüchte", molasses:"Sirupe/Dibs", honey:"Honig", zaatar:"Zaatar", spices:"Gewürze", dairy:"Molkerei & Käse", meats:"Fleisch", coffee:"Kaffee & Tee", cans:"Konserven", veg:"Obst & Gemüse" } },
+  en:{ cats:{ grains:"Grains & Pulses", molasses:"Molasses & Pastes", honey:"Honey", zaatar:"Zaatar", spices:"Spices", dairy:"Dairy & Cheese", meats:"Meats", coffee:"Coffee & Tea", cans:"Canned", veg:"Vegetables & Fruits" } }
+};
+let lang = "ar";
+const el = s=>document.querySelector(s); const els = s=>Array.from(document.querySelectorAll(s));
+function applyLang(){ renderCats(); fetchProducts('#home-grid'); fetchProducts('#prod-grid'); }
+function catLabel(key){ return (t[lang].cats[key]||key); }
+
+function renderCats(){
+  const cl = el('#cat-list'); cl.innerHTML='';
+  Object.entries(t[lang].cats).forEach(([key,label])=>{
+    const div = document.createElement('div'); div.className='cat'; div.dataset.key=key; div.textContent=label;
+    div.style.cssText='display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;color:#8aa0b7';
+    div.addEventListener('click',()=>{ selectCat(key); });
+    cl.appendChild(div);
+  });
+}
+
+async function fetchProducts(target='#home-grid', cat=null, query=null){
+  const url = new URL(API + '/api/products'); url.searchParams.set('lang', lang);
+  if(cat) url.searchParams.set('cat', cat); if(query) url.searchParams.set('q', query);
+  const list = await (await fetch(url, {credentials:'include'})).json();
+  renderGrid(target, list);
+}
+function renderGrid(where, list){
+  const host = el(where); host.innerHTML='';
+  list.forEach(p=>{
+    const card = document.createElement('div'); card.className='card'; card.style.cssText='background:#121923;border:1px solid rgba(255,255,255,.06);border-radius:16px;overflow:hidden';
+    const img = document.createElement('div'); img.className='thumb'; img.style.cssText='aspect-ratio:4/3;border-bottom:1px solid rgba(255,255,255,.06)'; img.innerHTML=`<img src="${API}${p.image}" alt="" style="width:100%;height:100%;object-fit:cover">`; card.appendChild(img);
+    const body = document.createElement('div'); body.className='card-body'; body.style.cssText='padding:12px';
+    const title = document.createElement('div'); title.className='title'; title.textContent=p.name; title.style.cssText='font-weight:700'; body.appendChild(title);
+    const sub = document.createElement('div'); sub.className='muted'; sub.textContent=catLabel(p.cat); sub.style.cssText='color:#8aa0b7'; body.appendChild(sub);
+    const price = document.createElement('div'); price.className='price'; price.textContent=`€${p.price.toFixed(2)}`; price.style.cssText='font-weight:700;color:#ffd166'; body.appendChild(price);
+    const btn = document.createElement('button'); btn.textContent="إضافة إلى السلة"; btn.style.cssText='margin-top:8px;padding:10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:#eaf2fb;cursor:pointer';
+    btn.addEventListener('click',()=>addToCart(p.id,1)); body.appendChild(btn);
+    card.appendChild(body); host.appendChild(card);
+  });
+}
+
+function switchSection(id){ els('.section').forEach(s=>s.style.display = (s.id===id? 'block':'none')); els('.nav a').forEach(a=>a.classList.toggle('active', a.dataset.section===id)); }
+function selectCat(key){ switchSection('products'); fetchProducts('#prod-grid', key); }
+function doSearch(inputId, gridSel){ const q = el(inputId).value.trim(); fetchProducts(gridSel, null, q); }
+
+async function addToCart(pid, qty=1){
+  await fetch(API + '/api/cart/add', {method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify({product_id:pid, qty})});
+  await refreshCart();
+}
+async function refreshCart(){
+  const c = await (await fetch(API + '/api/cart', {credentials:'include'})).json();
+  const host = el('#cart-items'); host.innerHTML='';
+  (c.items||[]).forEach(item=>{
+    const row = document.createElement('div'); row.className='cart-item'; row.style.cssText='display:grid;grid-template-columns:56px 1fr auto;gap:8px;align-items:center;margin:8px 0;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px';
+    row.innerHTML = `<img src="${API}${item.image}" alt="" style="width:56px;height:56px;object-fit:cover;border-radius:8px">`
+      + `<div><div>${item.name}</div><div style="color:#8aa0b7">$${item.price.toFixed(2)}</div></div>`
+      + `<div><input type="number" min="0" value="${item.qty}" data-id="${item.id}" style="width:52px;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:#0e1520;color:#eaf2fb"></div>`;
+    host.appendChild(row);
+  });
+  els('#cart-items input[type="number"]').forEach(inp=>{
+    inp.addEventListener('change', async ()=>{
+      await fetch(API + '/api/cart/update', {method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify({product_id:inp.dataset.id, qty:Number(inp.value)})});
+      refreshCart();
+    });
+  });
+  el('#subtotal-val').textContent = '€' + (c.subtotal||0).toFixed(2);
+  el('#tax-val').textContent = '€' + (c.tax||0).toFixed(2);
+  el('#delivery-val').textContent = '€' + (c.delivery_fee||0).toFixed(2);
+  el('#total-val').textContent = '€' + (c.total||0).toFixed(2);
+}
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelector('#search-btn').addEventListener('click', ()=>doSearch('#search-input','#home-grid'));
+  document.querySelector('#search-btn-2').addEventListener('click', ()=>doSearch('#search-input-2','#prod-grid'));
+  applyLang(); refreshCart();
+});
+</script>
+</body>
+</html>
