@@ -138,7 +138,7 @@ if ($path === '/api/cart/checkout' && $method==='POST') {
 
 // Admin
 if ($path === '/admin/login' && $method==='GET') {
-  echo '<!doctype html><meta charset="utf-8"><form method="post" action="/admin/login"><h3>Admin Login — MATIN FOOD</h3><input type="password" name="password"><button type="submit">Login</button></form>'; exit;
+  echo '<!doctype html><meta charset="utf-8"><form method="post" action="/admin/login" dir="rtl"><h3>تسجيل دخول المشرف — ماتين فود</h3><input type="password" name="password" placeholder="كلمة المرور"><button type="submit">دخول</button></form>'; exit;
 }
 if ($path === '/admin/login' && $method==='POST') {
   $pwd = $_POST['password'] ?? '';
