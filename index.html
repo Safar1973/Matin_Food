@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matin Food GmbH</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="brand-wrapper">
+            <div class="logo">
+                <span>🍃</span> Matin Food GmbH
+            </div>
+            <div class="header-slogan">
+                <span id="header-slogan-title" style="display: block; font-weight: bold; font-size: 0.9rem;">Welcome to
+                    Matin Food GmbH</span>
+                <span id="header-slogan-text" style="font-size: 0.8rem;">Fresh and quality products delivered to your
+                    door.</span>
+            </div>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#" id="nav-home" data-section="home-section">Home</a>
+            <a href="#" id="nav-products" data-section="products-section">Products</a>
+            <a href="#" id="nav-about" data-section="about-section">About</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="cart" onclick="toggleCart()">
+                🛒 <span id="cart-count">0</span>
+            </div>
+            <div class="lang-selector">
+                <select onchange="setLanguage(this.value)">
+                    <option value="de">Deutsch</option>
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- الصفحات (Home / Products / About / Checkout) -->
+    <main class="page-wrapper">
+
+        <!-- صفحة الرئيسية -->
+        <section id="home-section" class="page-section active">
+            <div class="home-hero">
+                <h1 id="home-title">Welcome to Matin Food GmbH</h1>
+                <p id="home-subtitle">
+                    Fresh and quality products delivered to your door.
+                </p>
+                <button class="home-btn" onclick="goToSection('products-section')" id="home-shop-btn">Shop now</button>
+            </div>
+        </section>
+
+        <!-- صفحة المنتجات -->
+        <section id="products-section" class="page-section">
+            <div class="container">
+                <aside class="sidebar">
+                    <h3 id="sidebar-title">Categories</h3>
+                    <ul class="category-list" id="category-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </aside>
+
+                <div class="main-content">
+                    <div class="product-grid" id="product-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- صفحة من نحن -->
+        <section id="about-section" class="page-section">
+            <div class="about-content">
+                <h2 id="about-title">About Matin Food</h2>
+                <p id="about-text">
+                    Wir sind ein echter Bio-Laden in Oberhausen seit 10 Jahren.
+                </p>
+                <button class="home-btn" onclick="goToSection('home-section')" id="about-back-home">
+                    Back to Home
+                </button>
+            </div>
+        </section>
+
+        <!-- صفحة الدفع (Checkout) -->
+        <section id="checkout-section" class="page-section">
+            <div class="checkout-container">
+                <h2 id="checkout-title">Checkout</h2>
+                <p id="checkout-info">
+                    Please fill in your details and choose your preferred payment method.
+                </p>
+
+                <div class="checkout-layout">
+                    <!-- نموذج البيانات -->
+                    <form class="checkout-form" onsubmit="submitOrder(event)">
+                        <div class="form-group">
+                            <label for="cust-name" id="label-name">Full name</label>
+                            <input type="text" id="cust-name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cust-address" id="label-address">Address</label>
+                            <input type="text" id="cust-address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cust-city" id="label-city">City</label>
+                            <input type="text" id="cust-city" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cust-phone" id="label-phone">Phone</label>
+                            <input type="tel" id="cust-phone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="payment-method-select" id="label-payment-select">
+                                Payment method
+                            </label>
+                            <select id="payment-method-select" required>
+                                <option value="online" id="opt-online">Online payment (card / PayPal)</option>
+                                <option value="card" id="opt-card">Card on delivery</option>
+                                <option value="cash" id="opt-cash">Cash on delivery</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="buy-btn" id="place-order-btn">
+                            Place Order
+                        </button>
+
+                        <div class="checkout-nav-buttons">
+                            <button type="button" class="secondary-btn" onclick="goToSection('home-section')"
+                                id="back-home-btn">
+                                Back to Home
+                            </button>
+                            <button type="button" class="secondary-btn" onclick="goToSection('products-section')"
+                                id="back-products-btn">
+                                Back to Products
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- ملخص الطلب -->
+                    <div class="checkout-summary">
+                        <h3 id="order-summary-title">Order summary</h3>
+                        <div id="order-summary-items">
+                            <!-- Filled from cart -->
+                        </div>
+                        <div class="cart-total-row">
+                            <span id="order-total-label">Total:</span>
+                            <span id="order-total-value">0.00 €</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- نافذة تفاصيل المنتج -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img src="" alt="" id="modal-img" class="modal-image">
+            <div class="modal-details">
+                <h2 id="modal-title">Product Name</h2>
+                <h3 id="modal-price" style="color: var(--primary-color); margin-bottom: 1rem;">$0.00</h3>
+                <div id="modal-details-content">
+                    <!-- Details populated by JS -->
+                </div>
+                <button id="modal-btn" class="buy-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- سلة المشتريات -->
+    <div id="cart-panel" class="cart-panel">
+        <div class="cart-header">
+            <h3 id="cart-title">Cart</h3>
+            <span class="close-btn" onclick="toggleCart()">&times;</span>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span id="cart-total-label">Total:</span>
+                <span id="cart-total">0.00 €</span>
+            </div>
+
+            <div class="payment-methods">
+                <h4 id="payment-methods-title">Payment methods</h4>
+                <ul>
+                    <li id="payment-method-online">Online payment (card / PayPal)</li>
+                    <li id="payment-method-cash">Cash on delivery</li>
+                </ul>
+            </div>
+
+            <div class="cart-actions">
+                <button class="secondary-btn" id="clear-cart-btn" onclick="clearCart()">
+                    Clear all
+                </button>
+                <button class="buy-btn" id="checkout-btn" onclick="openCheckout()">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
