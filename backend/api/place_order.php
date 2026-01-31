@@ -1,50 +1,48 @@
 <?php
-header('Content-Type: application/json');
-require '../db.php';
+header("Content-Type: application/json; charset=utf-8");
+include "../../db.php";
 
-// Get JSON input
-$input = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents("php://input"), true);
+$items = $data["items"] ?? [];
 
-if (!$input) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid input']);
+if (empty($items)) {
+    echo json_encode(["error" => "No items"]);
     exit;
 }
 
+mysqli_begin_transaction($conn);
+
 try {
-    $pdo->beginTransaction();
+    mysqli_query($conn, "INSERT INTO orders (created_at) VALUES (NOW())");
+    $order_id = mysqli_insert_id($conn);
 
-    // 1. Insert Order
-    $stmt = $pdo->prepare("INSERT INTO orders (customer_name, address, city, phone, payment_method, total_amount) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->execute([
-        $input['customer']['name'],
-        $input['customer']['address'],
-        $input['customer']['city'],
-        $input['customer']['phone'],
-        $input['paymentMethod'],
-        $input['total']
-    ]);
-    
-    $orderId = $pdo->lastInsertId();
+    foreach ($items as $item) {
+        $pid = (int)$item["product_id"];
+        $qty = (int)$item["qty"];
 
-    // 2. Insert Order Items
-    $stmtItem = $pdo->prepare("INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES (?, ?, ?, ?)");
-    
-    foreach ($input['items'] as $item) {
-        $stmtItem->execute([
-            $orderId,
-            $item['product']['id'],
-            $item['qty'],
-            $item['product']['price']
-        ]);
+        // تحقق من المخزون
+        $q = mysqli_query($conn, "SELECT stock FROM products WHERE id=$pid FOR UPDATE");
+        $row = mysqli_fetch_assoc($q);
+
+        if (!$row || $row["stock"] < $qty) {
+            throw new Exception("Not enough stock");
+        }
+
+        mysqli_query($conn,
+            "UPDATE products SET stock = stock - $qty WHERE id=$pid"
+        );
+
+        mysqli_query($conn,
+            "INSERT INTO order_items (order_id, product_id, quantity)
+             VALUES ($order_id, $pid, $qty)"
+        );
     }
 
-    $pdo->commit();
-    echo json_encode(['success' => true, 'orderId' => $orderId]);
+    mysqli_commit($conn);
+    echo json_encode(["success" => true, "order_id" => $order_id]);
 
 } catch (Exception $e) {
-    $pdo->rollBack();
-    http_response_code(500);
-    echo json_encode(['error' => $e->getMessage()]);
+    mysqli_rollback($conn);
+    echo json_encode(["error" => $e->getMessage()]);
 }
 ?>

@@ -2,13 +2,12 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "mtn_news"; // أو matin_food إذا غيّرت الاسم
+$db   = "matin_food";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
+mysqli_set_charset($conn, "utf8mb4");
 
 if (!$conn) {
     die("فشل الاتصال بقاعدة البيانات");
 }
-
-mysqli_set_charset($conn, "utf8mb4");
 ?>
