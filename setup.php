@@ -2,10 +2,18 @@
 require 'db.php';
 
 try {
+    // 0. Drop Tables (to ensure clean schema)
+    echo "Dropping old tables...<br>";
+    $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
+    $pdo->exec("DROP TABLE IF EXISTS order_items");
+    $pdo->exec("DROP TABLE IF EXISTS orders");
+    $pdo->exec("DROP TABLE IF EXISTS products");
+    $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+
     // 1. Create Tables
 
     // Products Table
-    $pdo->exec("CREATE TABLE IF NOT EXISTS products (
+    $pdo->exec("CREATE TABLE products (
         id INT AUTO_INCREMENT PRIMARY KEY,
         category VARCHAR(50) NOT NULL,
         img VARCHAR(255) NOT NULL,
@@ -13,11 +21,12 @@ try {
         name_de VARCHAR(100) NOT NULL,
         name_ar VARCHAR(100) NOT NULL,
         price DECIMAL(10, 2) NOT NULL,
-        expiry DATE NOT NULL
+        expiry DATE NOT NULL,
+        stock INT DEFAULT 100
     )");
 
     // Orders Table
-    $pdo->exec("CREATE TABLE IF NOT EXISTS orders (
+    $pdo->exec("CREATE TABLE orders (
         id INT AUTO_INCREMENT PRIMARY KEY,
         customer_name VARCHAR(100) NOT NULL,
         address VARCHAR(255) NOT NULL,
@@ -29,7 +38,7 @@ try {
     )");
 
     // Order Items Table
-    $pdo->exec("CREATE TABLE IF NOT EXISTS order_items (
+    $pdo->exec("CREATE TABLE order_items (
         id INT AUTO_INCREMENT PRIMARY KEY,
         order_id INT NOT NULL,
         product_id INT NOT NULL,
@@ -41,28 +50,26 @@ try {
 
     echo "Tables created successfully.<br>";
 
-    // 2. Insert Sample Data (only if empty)
-    $stmt = $pdo->query("SELECT COUNT(*) FROM products");
-    if ($stmt->fetchColumn() == 0) {
+    // 2. Insert/Reset Sample Data
+    echo "Resetting product data...<br>";
+    $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
+    $pdo->exec("TRUNCATE TABLE products");
+    $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+
+    if (true) { // Always insert fresh data
         $products = [
-            ['grains', 'images/bulgur_salad.jpg', 'Bulgur', 'Bulgur', 'برغل', 2.5, '2025-12-01'],
-            ['grains', 'https://placehold.co/400x300?text=Rice', 'Rice', 'Reis', 'رز', 3.0, '2026-01-15'],
-            ['grains', 'https://placehold.co/400x300?text=Lentils', 'Red Lentils', 'Rote Linsen', 'عدس مجروش', 2.2, '2025-11-30'],
-            ['syrups', 'https://placehold.co/400x300?text=Tomato+Paste', 'Tomato Paste', 'Tomatenmark', 'دبس بندورة', 1.5, '2025-06-20'],
-            ['syrups', 'images/pomegranate_molasses.jpg', 'Pomegranate Molasses', 'Granatapfelsirup', 'دبس رمان', 4.5, '2026-03-10'],
-            ['honey', 'https://placehold.co/400x300?text=Honey', 'Natural Honey', 'Naturhonig', 'عسل طبيعي', 12.0, '2027-01-01'],
-            ['honey', 'https://placehold.co/400x300?text=Zaatar', 'Zaatar', 'Zaatar', 'زعتر', 3.5, '2025-08-15'],
-            ['dairy', 'https://placehold.co/400x300?text=Cheese', 'White Cheese', 'Weißkäse', 'جبنة بيضاء', 6.0, '2024-02-28'],
-            ['dairy', 'https://placehold.co/400x300?text=Yogurt', 'Yogurt', 'Joghurt', 'لبن', 1.8, '2024-02-10'],
-            ['meat', 'https://placehold.co/400x300?text=Lamb', 'Lamb Meat', 'Lammfleisch', 'لحم خاروف', 15.0, '2024-01-20'],
-            ['meat', 'https://placehold.co/400x300?text=Chicken', 'Chicken Breast', 'Hähnchenbrust', 'صدر دجاج', 8.5, '2024-01-18'],
-            ['drinks', 'https://placehold.co/400x300?text=Coffee', 'Arabic Coffee', 'Arabischer Kaffee', 'قهوة عربية', 5.5, '2025-05-05'],
-            ['drinks', 'https://placehold.co/400x300?text=Tea', 'Green Tea', 'Grüner Tee', 'شاي أخضر', 3.0, '2026-12-12'],
-            ['canned', 'https://placehold.co/400x300?text=Tahini', 'Tahini', 'Tahini', 'طحينة', 4.0, '2025-09-09'],
-            ['produce', 'https://placehold.co/400x300?text=Apples', 'Red Apples', 'Rote Äpfel', 'تفاح أحمر', 2.0, '2024-02-01'],
-            ['produce', 'https://placehold.co/400x300?text=Tomatoes', 'Tomatoes', 'Tomaten', 'بندورة', 1.5, '2024-01-25'],
-            ['canned', 'images/grilled_eggplant_jar.jpg', 'Grilled Eggplant (Jar)', 'Gegrillte Aubergine (Glas)', 'باذنجان مشوي (مرطبان)', 3.5, '2026-05-20'],
-            ['canned', 'images/grilled_eggplant_can.jpg', 'Grilled Eggplant (Can)', 'Gegrillte Aubergine (Dose)', 'باذنجان مشوي (علبة)', 4.0, '2026-06-15']
+            ['grains', 'images/bulgur.png', 'Bulgur', 'Bulgur', 'برغل', 2.50, '2025-12-01'],
+            ['grains', 'images/شتورة_رز_مصري_10X1_KG.jpg', 'Egyptian Rice', 'Ägyptischer Reis', 'رز مصري', 3.00, '2026-01-15'],
+            ['grains', 'images/bulgur_salad.jpg', 'Bulgur Salad', 'Bulgursalat', 'سلطة برغل', 4.50, '2025-11-30'],
+            ['canned', 'images/شتورة_غاردن_دبس_بندورة_12X650g.jpg', 'Tomato Paste', 'Tomatenmark', 'دبس بندورة', 1.50, '2025-06-20'],
+            ['syrups', 'images/pomegranate_molasses.jpg', 'Pomegranate Molasses', 'Granatapfelsirup', 'دبس رمان', 4.50, '2026-03-10'],
+            ['canned', 'images/شتورا_غاردن_حمص_بطحينة_12X850_Gr.jpg', 'Hummus with Tahini', 'Hummus mit Tahini', 'حمص بطحينة', 2.20, '2025-12-15'],
+            ['canned', 'images/شتورا_غاردن_فول_خلطة_سورية_24X400_Gr.jpg', 'Fava Beans (Syrian style)', 'Fava-Bohnen (Syr. Art)', 'فول خلطة سورية', 1.80, '2025-10-10'],
+            ['canned', 'images/لارا_مكدوس_12x600g.jpg', 'Makdous (Lara)', 'Makdous (Lara)', 'مكدوس لارا', 5.50, '2026-01-01'],
+            ['canned', 'images/الدرة_ورق_عنب_محشي_24x400g.jpg', 'Stuffed Grape Leaves', 'Gefüllte Weinblätter', 'ورق عنب محشي', 3.50, '2026-05-15'],
+            ['canned', 'images/الدرة_بادنجان_مشوي_12x650g.jpg', 'Grilled Eggplant', 'Gegrillte Aubergine', 'باذنجان مشوي', 3.20, '2026-04-20'],
+            ['syrups', 'images/شتورة_غاردن_خل_تفاح_12X500ml.jpg', 'Apple Vinegar', 'Apfelessig', 'خل تفاح', 2.80, '2027-01-01'],
+            ['canned', 'images/كامشن_خضروات_12X450_Gr__.jpg', 'Mixed Vegetables', 'Mischgemüse', 'خضروات مشكلة', 2.10, '2026-08-08']
         ];
 
         $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, expiry) VALUES (?, ?, ?, ?, ?, ?, ?)");
