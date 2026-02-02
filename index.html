@@ -352,64 +352,88 @@
         </div>
     </div>
 
-    <footer class="site-footer mt-5">
-        <div class="footer-main py-5">
-            <div class="container border-bottom pb-4">
-                <div class="row g-4">
-                    <div class="col-lg-4">
-                        <h4 class="footer-title">Über MATIN FOOD</h4>
-                        <p class="text-muted small">
-                            Wir bringen die Frische des Orients direkt zu Ihnen nach Hause.
-                            Qualität, Auswahl und bester Service sind unsere Versprechen an Sie.
+    <footer class="site-footer mt-5 p-4" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);">
+        <div class="container py-5">
+            <div class="row g-5">
+                <!-- Left: Success Story -->
+                <div class="col-lg-4">
+                    <div class="mb-4">
+                        <span class="text-muted small">19. Dezember 2024 | Foodblog</span>
+                        <h4 class="fw-bold mt-2">MATIN FOOD</h4>
+                        <p class="small text-muted" style="line-height: 1.6;">
+                            <strong>MATIN FOOD ist 4 Jahre Computerbild Trendshop in Folge!</strong><br>
+                            Als wir im Jahr 2016 die ersten Onlineverkäufe starteten, konnten wir uns nicht vorstellen,
+                            dass dies ein solcher Erfolg wird.
+                            Wir danken unseren treuen Kunden für dieses Vertrauen.
                         </p>
-                        <div class="social-links mt-3">
-                            <span class="me-2">Follow us:</span>
-                            <a href="#">📱</a>
-                            <a href="#">📸</a>
-                            <a href="#">👨‍💼</a>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-2">
-                        <h4 class="footer-title">Einkaufen</h4>
-                        <ul class="footer-links list-unstyled">
-                            <li><a href="#">Angebote</a></li>
-                            <li><a href="#">Neuheiten</a></li>
-                            <li><a href="#">Bestseller</a></li>
-                            <li><a href="#">Kategorien</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-lg-2">
-                        <h4 class="footer-title">Service</h4>
-                        <ul class="footer-links list-unstyled">
-                            <li><a href="#">Versandinfo</a></li>
-                            <li><a href="#">Zahlungsarten</a></li>
-                            <li><a href="#">Rücksendungen</a></li>
-                            <li><a href="#">FAQ</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4">
-                        <h4 class="footer-title">Newsletter</h4>
-                        <p class="small text-muted mb-3">Erhalten Sie aktuelle Angebote und Neuigkeiten.</p>
-                        <form class="d-flex">
-                            <input type="email" class="form-control me-2" placeholder="E-Mail Adresse">
-                            <button class="btn btn-primary">Abonnieren</button>
-                        </form>
+                        <p class="x-small text-muted mt-3" style="font-size: 0.75rem;">
+                            * Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten und ggf. Nachnahmegebühren,
+                            wenn nicht anders angegeben.
+                        </p>
                     </div>
                 </div>
+
+                <!-- Newsletter -->
+                <div class="col-lg-4">
+                    <h4 class="fw-bold mb-3">Newsletter</h4>
+                    <p class="small text-muted mb-4">Abonnieren Sie den kostenlosen MATIN FOOD Newsletter und verpassen
+                        Sie keine Neuigkeiten und Aktionen in unserem Shop.</p>
+                    <form>
+                        <input type="email" class="form-control rounded-pill mb-3" placeholder="Ihre E-Mail Adresse">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="footer-privacy" required>
+                            <label class="form-check-label x-small text-muted" for="footer-privacy"
+                                style="font-size: 0.8rem;">
+                                Ich habe die <a href="#" class="text-danger">Datenschutzbestimmungen</a> zur Kenntnis
+                                genommen und gelesen und bin mit ihnen einverstanden. *
+                            </label>
+                        </div>
+                        <button class="btn btn-primary rounded-pill w-100 fw-bold"
+                            style="background: var(--primary-color); border: none;">Abonnieren</button>
+                    </form>
+                </div>
+
+                <!-- Links Sections -->
+                <div class="col-lg-2">
+                    <h4 class="fw-bold mb-3">Shop Service</h4>
+                    <ul class="list-unstyled small footer-links">
+                        <li><a href="#" class="text-muted text-decoration-none">Kontaktinformationen</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Unsere App</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Versand- und Zahlungsbedingungen</a>
+                        </li>
+                        <li><a href="#" class="text-muted text-decoration-none">Click & Collect</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Widerrufsrecht</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">AGB</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2">
+                    <h4 class="fw-bold mb-3">Information</h4>
+                    <ul class="list-unstyled small footer-links">
+                        <li><a href="#" class="text-muted text-decoration-none">Batteriegesetz</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Teilnahmebedingungen</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Über uns</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Datenschutz</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Impressum</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Cookie Einstellungen</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Jugendschutz</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Food-Blog</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="container pt-4">
-                <div class="row align-items-center">
-                    <div class="col-md-6 text-muted small">
-                        &copy; 2026 Matin Food GmbH. Alle Rechte vorbehalten.
-                    </div>
-                    <div class="col-md-6 text-md-end mt-3 mt-md-0">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal"
-                            height="20" class="me-3 opacity-75">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"
-                            height="15" class="me-3 opacity-75">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
-                            alt="Mastercard" height="20" class="opacity-75">
-                    </div>
+
+            <div class="row mt-5 pt-4 border-top">
+                <div class="col-md-6 text-muted small">
+                    &copy; 2026 Matin Food GmbH. Alle Rechte vorbehalten.
+                </div>
+                <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" height="20"
+                        class="me-3 opacity-75">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"
+                        height="15" class="me-3 opacity-75">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard"
+                        height="20" class="opacity-75">
                 </div>
             </div>
         </div>
