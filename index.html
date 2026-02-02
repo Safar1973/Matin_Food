@@ -4,222 +4,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matin Food GmbH</title>
+    <title>Matin Food GmbH | Frische & Qualität</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <header>
-        <div class="brand-wrapper">
-            <div class="logo">
-                <span>🍃</span> Matin Food GmbH
-            </div>
-            <div class="header-slogan">
-                <span id="header-slogan-title" style="display: block; font-weight: bold; font-size: 0.9rem;">Welcome to
-                    Matin Food GmbH</span>
-                <span id="header-slogan-text" style="font-size: 0.8rem;">Fresh and quality products delivered to your
-                    door.</span>
-            </div>
-        </div>
-
-        <nav class="nav-links">
-            <a href="#" id="nav-home" data-section="home-section">Home</a>
-            <a href="#" id="nav-products" data-section="products-section">Products</a>
-            <a href="#" id="nav-about" data-section="about-section">About</a>
-        </nav>
-
-        <div class="header-right">
-            <div class="cart" onclick="toggleCart()">
-                🛒 <span id="cart-count">0</span>
-            </div>
-            <div class="lang-selector">
-                <select onchange="setLanguage(this.value)">
-                    <option value="de">Deutsch</option>
-                    <option value="ar">العربية</option>
-                    <option value="en">English</option>
-                </select>
+        <div class="header-top-bar d-none d-lg-block">
+            <div class="container d-flex justify-content-between">
+                <div class="top-bar-left">
+                    <span>📞 Support: +49 (0) 123 456 789</span>
+                    <span class="ms-3">🚚 Kostenloser Versand ab 50€</span>
+                </div>
+                <div class="top-bar-right">
+                    <a href="#">Hilfe</a>
+                    <a href="#" class="ms-3">Über uns</a>
+                    <a href="#" class="ms-3">Kontakt</a>
+                </div>
             </div>
         </div>
-    </header>
 
-    <!-- الصفحات (Home / Products / About / Checkout) -->
-    <main class="page-wrapper">
-
-        <!-- صفحة الرئيسية -->
-        <section id="home-section" class="page-section active">
-            <div class="home-hero">
-                <h1 id="home-title">Welcome to Matin Food GmbH</h1>
-                <p id="home-subtitle">
-                    Fresh and quality products delivered to your door.
-                </p>
-                <button class="home-btn" onclick="goToSection('products-section')" id="home-shop-btn">Shop now</button>
-            </div>
-        </section>
-
-        <!-- صفحة المنتجات -->
-        <section id="products-section" class="page-section">
+        <div class="header-main">
             <div class="container">
-                <aside class="sidebar">
-                    <h3 id="sidebar-title">Categories</h3>
-                    <ul class="category-list" id="category-list">
-                        <!-- Populated by JS -->
-                    </ul>
-                </aside>
-
-                <div class="main-content">
-                    <div class="product-grid" id="product-grid">
-                        <!-- Populated by JS -->
+                <div class="row align-items-center py-3">
+                    <!-- Logo -->
+                    <div class="col-auto">
+                        <a href="#" class="logo-link" onclick="goToSection('home-section')">
+                            <span class="logo-icon">🌿</span>
+                            <span class="logo-text">MATIN FOOD</span>
+                        </a>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- صفحة من نحن -->
-        <section id="about-section" class="page-section">
-            <div class="about-content">
-                <h2 id="about-title">About Matin Food</h2>
-                <p id="about-text">
-                    Wir sind ein echter Bio-Laden in Oberhausen seit 10 Jahren.
-                </p>
-                <button class="home-btn" onclick="goToSection('home-section')" id="about-back-home">
-                    Back to Home
-                </button>
-            </div>
-        </section>
-
-        <!-- صفحة الدفع (Checkout) -->
-        <section id="checkout-section" class="page-section">
-            <div class="checkout-container">
-                <h2 id="checkout-title">Checkout</h2>
-                <p id="checkout-info">
-                    Please fill in your details and choose your preferred payment method.
-                </p>
-
-                <div class="checkout-layout">
-                    <!-- نموذج البيانات -->
-                    <form class="checkout-form" onsubmit="submitOrder(event)">
-                        <div class="form-group">
-                            <label for="cust-name" id="label-name">Full name</label>
-                            <input type="text" id="cust-name" required>
+                    <!-- Search -->
+                    <div class="col mx-xl-5">
+                        <div class="header-search-box">
+                            <form onsubmit="handleSearch(event)" class="d-flex">
+                                <div class="dropdown search-category-dropdown">
+                                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
+                                        id="searchCatBtn">
+                                        Alle Kategorien
+                                    </button>
+                                    <ul class="dropdown-menu" id="search-cat-list">
+                                        <li><a class="dropdown-item" href="#" onclick="setSearchCategory('all')">Alle
+                                                Kategorien</a></li>
+                                        <!-- Populated by JS -->
+                                    </ul>
+                                </div>
+                                <input type="text" class="form-control" id="main-search"
+                                    placeholder="Wonach suchen Sie?">
+                                <button type="submit" class="search-submit-btn">
+                                    <span class="icon">🔍</span>
+                                </button>
+                            </form>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="cust-address" id="label-address">Address</label>
-                            <input type="text" id="cust-address" required>
+                    <!-- Actions -->
+                    <div class="col-auto d-flex header-actions">
+                        <div class="action-item" onclick="goToSection('account-section')">
+                            <span class="icon">👤</span>
+                            <span class="label">Konto</span>
                         </div>
-
-                        <div class="form-group">
-                            <label for="cust-city" id="label-city">City</label>
-                            <input type="text" id="cust-city" required>
+                        <div class="action-item mx-3">
+                            <span class="icon">❤️</span>
+                            <span class="label">Merkzettel</span>
                         </div>
-
-                        <div class="form-group">
-                            <label for="cust-phone" id="label-phone">Phone</label>
-                            <input type="tel" id="cust-phone" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="payment-method-select" id="label-payment-select">
-                                Payment method
-                            </label>
-                            <select id="payment-method-select" required>
-                                <option value="online" id="opt-online">Online payment (card / PayPal)</option>
-                                <option value="card" id="opt-card">Card on delivery</option>
-                                <option value="cash" id="opt-cash">Cash on delivery</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="buy-btn" id="place-order-btn">
-                            Place Order
-                        </button>
-
-                        <div class="checkout-nav-buttons">
-                            <button type="button" class="secondary-btn" onclick="goToSection('home-section')"
-                                id="back-home-btn">
-                                Back to Home
-                            </button>
-                            <button type="button" class="secondary-btn" onclick="goToSection('products-section')"
-                                id="back-products-btn">
-                                Back to Products
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- ملخص الطلب -->
-                    <div class="checkout-summary">
-                        <h3 id="order-summary-title">Order summary</h3>
-                        <div id="order-summary-items">
-                            <!-- Filled from cart -->
-                        </div>
-                        <div class="cart-total-row">
-                            <span id="order-total-label">Total:</span>
-                            <span id="order-total-value">0.00 €</span>
+                        <div class="action-item cart-trigger" onclick="toggleCart()">
+                            <div class="icon-wrapper">
+                                <span class="icon">🛒</span>
+                                <span class="badge" id="cart-count">0</span>
+                            </div>
+                            <span class="label">Warenkorb</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-    </main>
-
-    <!-- نافذة تفاصيل المنتج -->
-    <div id="product-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <img src="" alt="" id="modal-img" class="modal-image">
-            <div class="modal-details">
-                <h2 id="modal-title">Product Name</h2>
-                <h3 id="modal-price" style="color: var(--primary-color); margin-bottom: 1rem;">$0.00</h3>
-                <div id="modal-details-content">
-                    <!-- Details populated by JS -->
-                </div>
-                <button id="modal-btn" class="buy-btn">Add to Cart</button>
-            </div>
         </div>
-    </div>
 
-    <!-- سلة المشتريات -->
-    <div id="cart-panel" class="cart-panel">
-        <div class="cart-header">
-            <h3 id="cart-title">Cart</h3>
-            <span class="close-btn" onclick="toggleCart()">&times;</span>
-        </div>
-        <div id="cart-items" class="cart-items">
-            <!-- Cart items here -->
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total-row">
-                <span id="cart-total-label">Total:</span>
-                <span id="cart-total">0.00 €</span>
-            </div>
-
-            <div class="payment-methods">
-                <h4 id="payment-methods-title">Payment methods</h4>
-                <ul>
-                    <li id="payment-method-online">Online payment (card / PayPal)</li>
-                    <li id="payment-method-cash">Cash on delivery</li>
+        <nav class="header-nav d-none d-lg-block">
+            <div class="container">
+                <ul class="nav-list d-flex">
+                    <li><a href="#" class="active" onclick="filterByCategory('all')">Startseite</a></li>
+                    <li><a href="#" onclick="filterByCategory('grains')">Getreide & Körner</a></li>
+                    <li><a href="#" onclick="filterByCategory('canned')">Konserven</a></li>
+                    <li><a href="#" onclick="filterByCategory('syrups')">Sirupe & Saucen</a></li>
+                    <li><a href="#" onclick="filterByCategory('Angebote')" class="text-danger fw-bold">ANGEBOTE %</a>
+                    </li>
                 </ul>
             </div>
+        </nav>
+    </header>
 
-            <div class="cart-actions">
-                <button class="secondary-btn" id="clear-cart-btn" onclick="clearCart()">
-                    Clear all
-                </button>
-                <button class="buy-btn" id="checkout-btn" onclick="openCheckout()">
-                    Checkout
-                </button>
+    <main class="page-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar-container">
+            <div class="sidebar-card">
+                <!-- Empfohlen -->
+                <h3 class="sidebar-title">Empfohlen</h3>
+                <ul class="category-list">
+                    <li class="category-item-ref" onclick="filterByCategory('all')">Alle Produkte</li>
+                    <li class="category-item-ref" onclick="filterByCategory('beliebt')">Beliebt</li>
+                    <li class="category-item-ref" onclick="filterByCategory('neu')">Neu im Shop</li>
+                    <li class="category-item-ref" onclick="filterByCategory('bestseller')">Bestseller</li>
+                    <li class="category-item-ref text-danger fw-bold" onclick="filterByCategory('ausverkauft')">Bald
+                        ausverkauft!</li>
+                </ul>
+
+                <!-- Kategorien -->
+                <h3 class="sidebar-title" style="margin-top: 2rem;">Kategorien</h3>
+                <ul class="category-list">
+                    <li class="category-item-ref" onclick="filterByCategory('Großpackungen')">Großpackungen</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Süßigkeiten')">Süßigkeiten</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Salziges')">Salziges</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Alles muss Raus')">Alles muss Raus</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Backen & Dessert')">Backen & Dessert</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Bio Produkte')">Bio Produkte</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Drogerie')">Drogerie</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Fitness und Supplements')">Fitness und
+                        Supplements</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Getränke')">Getränke</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Gewürze & Soßen')">Gewürze & Soßen</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Haushalt & Garten')">Haushalt & Garten</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Haustier')">Haustier</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Hobby & Freizeit')">Hobby & Freizeit</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Kaffee, Tee & Kakao')">Kaffee, Tee & Kakao
+                    </li>
+                    <li class="category-item-ref" onclick="filterByCategory('Konserven & Fertiggerichte')">Konserven &
+                        Fertiggerichte</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Milchprodukte und Alternativen')">
+                        Milchprodukte und Alternativen</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Müsli, Brot & Aufstriche')">Müsli, Brot &
+                        Aufstriche</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Nudeln, Reis & Getreide')">Nudeln, Reis &
+                        Getreide</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Vegane Produkte')">Vegane Produkte</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Wurstwaren & Käse')">Wurstwaren & Käse</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Marken')">Einkaufen nach Marken</li>
+                </ul>
+
+                <!-- Zusätzliche Kategorien -->
+                <h3 class="sidebar-title" style="margin-top: 2rem;">Zusätzliche Kategorien</h3>
+                <ul class="category-list">
+                    <li class="category-item-ref" onclick="filterByCategory('Marken')">Nach Marke shoppen</li>
+                    <li class="category-item-ref" onclick="filterByCategory('neu')">Neu im Shop</li>
+                    <li class="category-item-ref" onclick="filterByCategory('mhd')">MHD-Ware</li>
+                    <li class="category-item-ref" onclick="filterByCategory('bestseller')">Bestseller</li>
+                    <li class="category-item-ref" onclick="filterByCategory('deals')">Deals</li>
+                </ul>
+
+                <h3 class="sidebar-title" style="margin-top: 2rem;">Filter</h3>
+                <div class="filter-group">
+                    <label style="font-size: 0.85rem; font-weight: 600;">Preis bis</label>
+                    <input type="range" class="form-range" min="0" max="100" id="price-filter">
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+
+            <!-- Home Section (Landing) -->
+            <section id="home-section" class="page-section active">
+                <div class="hero-banner text-center">
+                    <h1>Willkommen bei MATIN FOOD</h1>
+                    <p>Entdecken Sie authentische orientalische Spezialitäten und frische Lebensmittel in bester
+                        Qualität.</p>
+                </div>
+                <div class="product-grid" id="product-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+            <!-- Account Section -->
+            <section id="account-section" class="page-section">
+                <div class="account-container mx-auto" style="max-width: 500px; padding: 40px 0;">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                        <div class="card-header bg-white border-0 p-0">
+                            <div class="d-flex">
+                                <button
+                                    class="btn btn-link flex-grow-1 py-3 text-decoration-none fw-bold account-tab active"
+                                    id="login-tab" onclick="switchAccountView('login')">Anmelden</button>
+                                <button class="btn btn-link flex-grow-1 py-3 text-decoration-none fw-bold account-tab"
+                                    id="register-tab" onclick="switchAccountView('register')">Registrieren</button>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <!-- Login Form -->
+                            <form id="login-form">
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">E-Mail Adresse</label>
+                                    <input type="email" class="form-control rounded-pill" placeholder="name@beispiel.de"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Passwort</label>
+                                    <input type="password" class="form-control rounded-pill" placeholder="********"
+                                        required>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="remember">
+                                        <label class="form-check-label small" for="remember">Angemeldet bleiben</label>
+                                    </div>
+                                    <a href="#" class="small text-danger text-decoration-none">Passwort vergessen?</a>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold"
+                                    style="background: var(--primary-color); border: none;">Anmelden</button>
+                            </form>
+
+                            <!-- Register Form (Hidden) -->
+                            <form id="register-form" style="display: none;">
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Vollständiger Name</label>
+                                    <input type="text" class="form-control rounded-pill" placeholder="Max Mustermann"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">E-Mail Adresse</label>
+                                    <input type="email" class="form-control rounded-pill" placeholder="name@beispiel.de"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold">Passwort</label>
+                                    <input type="password" class="form-control rounded-pill"
+                                        placeholder="min. 8 Zeichen" required>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="terms" required>
+                                        <label class="form-check-label small" for="terms">Ich akzeptiere die <a href="#"
+                                                class="text-danger">AGB</a> und <a href="#"
+                                                class="text-danger">Datenschutzbestimmungen</a></label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold"
+                                    style="background: var(--primary-color); border: none;">Konto erstellen</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Checkout Section -->
+            <section id="checkout-section" class="page-section">
+                <div class="checkout-container">
+                    <h2 class="mb-4" style="font-weight: 800;">Zur Kasse</h2>
+                    <div class="row g-4">
+                        <div class="col-lg-7">
+                            <form class="checkout-form bg-white p-4 rounded-4 shadow-sm" onsubmit="submitOrder(event)">
+                                <h4 class="mb-3">Persönliche Daten</h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Vorname & Nachname</label>
+                                        <input type="text" class="form-control" id="cust-name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Telefon</label>
+                                        <input type="tel" class="form-control" id="cust-phone" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Adresse</label>
+                                    <input type="text" class="form-control" id="cust-address" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Stadt</label>
+                                    <input type="text" class="form-control" id="cust-city" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Zahlungsart</label>
+                                    <select class="form-select" id="payment-method-select" required>
+                                        <option value="online">Online Zahlung (Karte / PayPal)</option>
+                                        <option value="card">Karte bei Lieferung</option>
+                                        <option value="cash">Barzahlung bei Lieferung</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="add-to-cart-btn py-3">Jetzt zahlungspflichtig
+                                    bestellen</button>
+                            </form>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="bg-white p-4 rounded-4 shadow-sm">
+                                <h4 class="mb-3">Bestellübersicht</h4>
+                                <div id="order-summary-items" class="mb-3">
+                                    <!-- Filled from cart -->
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="h5 mb-0">Gesamtsumme:</span>
+                                    <span class="h4 mb-0 text-danger" id="order-total-value">0.00 €</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 rounded-5 overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="" id="modal-img" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                    </div>
+                    <div class="col-md-6 p-4">
+                        <button type="button" class="btn-close float-end" onclick="closeModal()"></button>
+                        <h2 id="modal-title" class="mb-3 fw-bold"></h2>
+                        <h3 id="modal-price" class="text-danger fw-bold mb-4"></h3>
+                        <p id="modal-details-content" class="text-muted mb-4"></p>
+                        <button id="modal-btn" class="add-to-cart-btn btn-lg">In den Warenkorb</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- Cart Panel -->
+    <div id="cart-panel" class="cart-panel p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+            <h3 class="fw-bold mb-0">Ihr Warenkorb</h3>
+            <button class="btn-close" onclick="toggleCart()"></button>
+        </div>
+        <div id="cart-items" class="flex-grow-1 overflow-auto mb-4">
+            <!-- Cart items here -->
+        </div>
+        <div class="cart-footer pt-3 border-top">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <span class="h5 mb-0">Gesamtsumme:</span>
+                <span class="h4 mb-0 text-danger fw-bold" id="cart-total">0.00 €</span>
+            </div>
+            <div class="d-grid gap-2">
+                <button class="add-to-cart-btn py-3" onclick="openCheckout()">Zur Kasse gehen</button>
+                <button class="btn btn-link text-muted" onclick="clearCart()">Warenkorb leeren</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer mt-5">
+        <div class="footer-main py-5">
+            <div class="container border-bottom pb-4">
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <h4 class="footer-title">Über MATIN FOOD</h4>
+                        <p class="text-muted small">
+                            Wir bringen die Frische des Orients direkt zu Ihnen nach Hause.
+                            Qualität, Auswahl und bester Service sind unsere Versprechen an Sie.
+                        </p>
+                        <div class="social-links mt-3">
+                            <span class="me-2">Follow us:</span>
+                            <a href="#">📱</a>
+                            <a href="#">📸</a>
+                            <a href="#">👨‍💼</a>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <h4 class="footer-title">Einkaufen</h4>
+                        <ul class="footer-links list-unstyled">
+                            <li><a href="#">Angebote</a></li>
+                            <li><a href="#">Neuheiten</a></li>
+                            <li><a href="#">Bestseller</a></li>
+                            <li><a href="#">Kategorien</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <h4 class="footer-title">Service</h4>
+                        <ul class="footer-links list-unstyled">
+                            <li><a href="#">Versandinfo</a></li>
+                            <li><a href="#">Zahlungsarten</a></li>
+                            <li><a href="#">Rücksendungen</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="small text-muted mb-3">Erhalten Sie aktuelle Angebote und Neuigkeiten.</p>
+                        <form class="d-flex">
+                            <input type="email" class="form-control me-2" placeholder="E-Mail Adresse">
+                            <button class="btn btn-primary">Abonnieren</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="container pt-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-muted small">
+                        &copy; 2026 Matin Food GmbH. Alle Rechte vorbehalten.
+                    </div>
+                    <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal"
+                            height="20" class="me-3 opacity-75">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"
+                            height="15" class="me-3 opacity-75">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                            alt="Mastercard" height="20" class="opacity-75">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- Bootstrap 5 JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 

@@ -2,10 +2,20 @@
 header("Content-Type: application/json; charset=utf-8");
 include "../../db.php";
 
-$res = mysqli_query($conn, "SELECT * FROM products");
+$lang = $_GET["lang"] ?? "de";
+$valid_langs = ['de', 'en', 'ar'];
+if (!in_array($lang, $valid_langs)) {
+    $lang = 'de';
+}
+
+$nameField = "name_" . $lang;
+
+$query = "SELECT id, category, img, name_en, name_de, name_ar, $nameField AS name, price, expiry, stock FROM products";
+$res = mysqli_query($conn, $query);
 
 if ($res === false) {
     echo json_encode([
+        "success" => false,
         "error" => mysqli_error($conn)
     ], JSON_UNESCAPED_UNICODE);
     exit;
@@ -17,9 +27,4 @@ while ($row = mysqli_fetch_assoc($res)) {
 }
 
 echo json_encode($data, JSON_UNESCAPED_UNICODE);
-$lang = $_GET["lang"] ?? "de";
-$nameField = "name_" . $lang;
-
-$res = mysqli_query($conn,
-  "SELECT id, $nameField AS name, price, stock FROM products"
-);
+?>
