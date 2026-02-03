@@ -8,8 +8,11 @@ const API_URL = 'backend/api/get_products.php';
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    // Load saved language or default to 'de'
+    currentLanguage = localStorage.getItem('lang') || 'de';
+
     checkProtocol();
-    loadProducts();
+    setLanguage(currentLanguage); // This will load products and update UI
     updateCartUI();
     setupNavigation();
     setupFilters();
@@ -126,33 +129,133 @@ function renderProducts(productsToRender = products) {
     `}).join('');
 }
 
-// Category mapping for localized display
-const categoryMap = {
-    'grains': 'Getreide & Körner',
-    'canned': 'Konserven',
-    'syrups': 'Sirupe & Saucen'
+// i18n Dictionary
+const translations = {
+    'de': {
+        'help': 'Hilfe',
+        'about_us': 'Über uns',
+        'contact': 'Kontakt',
+        'all_categories': 'Alle Kategorien',
+        'account': 'Konto',
+        'wishlist': 'Merkzettel',
+        'cart': 'Warenkorb',
+        'home': 'Startseite',
+        'cat_grains': 'Getreide & Körner',
+        'cat_canned': 'Konserven',
+        'cat_syrups': 'Sirupe & Saucen',
+        'offers': 'ANGEBOTE %',
+        'recommended': 'Empfohlen',
+        'categories': 'Kategorien',
+        'welcome_title': 'Willkommen bei MATIN FOOD',
+        'welcome_text': 'Entdecken Sie authentische orientalische Spezialitäten und frische Lebensmittel in bester Qualität.',
+        'all_products': 'Alle Produkte',
+        'popular': 'Beliebt',
+        'new_in_shop': 'Neu im Shop',
+        'bestseller': 'Bestseller',
+        'sold_out_soon': 'Bald ausverkauft!',
+        'grains': 'Getreide & Körner',
+        'canned': 'Konserven',
+        'syrups': 'Sirupe & Saucen',
+        'bakery': 'Bäckerei',
+        'fresh': 'Frische Ware',
+        'sweets': 'Süßigkeiten'
+    },
+    'en': {
+        'help': 'Help',
+        'about_us': 'About Us',
+        'contact': 'Contact',
+        'all_categories': 'All Categories',
+        'account': 'Account',
+        'wishlist': 'Wishlist',
+        'cart': 'Cart',
+        'home': 'Home',
+        'cat_grains': 'Grains & Seeds',
+        'cat_canned': 'Canned Food',
+        'cat_syrups': 'Syrups & Sauces',
+        'offers': 'OFFERS %',
+        'recommended': 'Recommended',
+        'categories': 'Categories',
+        'welcome_title': 'Welcome to MATIN FOOD',
+        'welcome_text': 'Discover authentic oriental specialties and fresh food in top quality.',
+        'all_products': 'All Products',
+        'popular': 'Popular',
+        'new_in_shop': 'New in Shop',
+        'bestseller': 'Bestseller',
+        'sold_out_soon': 'Sold out soon!',
+        'grains': 'Grains & Seeds',
+        'canned': 'Canned Food',
+        'syrups': 'Syrups & Sauces',
+        'bakery': 'Bakery',
+        'fresh': 'Fresh Goods',
+        'sweets': 'Sweets'
+    },
+    'ar': {
+        'help': 'مساعدة',
+        'about_us': 'من نحن',
+        'contact': 'اتصل بنا',
+        'all_categories': 'جميع الفئات',
+        'account': 'حسابي',
+        'wishlist': 'قائمة الأمنيات',
+        'cart': 'عربة التسوق',
+        'home': 'الرئيسية',
+        'cat_grains': 'حبوب وبقوليات',
+        'cat_canned': 'معلبات',
+        'cat_syrups': 'شراب وصوص',
+        'offers': 'عروض %',
+        'recommended': 'مقترح لك',
+        'categories': 'الفئات',
+        'welcome_title': 'مرحباً بكم في MATIN FOOD',
+        'welcome_text': 'اكتشف التخصصات الشرقية الأصيلة والأغذية الطازجة بجودة عالية.',
+        'all_products': 'جميع المنتجات',
+        'popular': 'الأكثر شعبية',
+        'new_in_shop': 'جديد في المتجر',
+        'bestseller': 'الأكثر مبيعاً',
+        'sold_out_soon': 'قاربت على النفاد!',
+        'grains': 'حبوب وبقوليات',
+        'canned': 'معلبات',
+        'syrups': 'شراب وصوص',
+        'bakery': 'مخبوزات',
+        'fresh': 'مواد طازجة',
+        'sweets': 'حلويات'
+    }
 };
 
-// Render categories sidebar (Now only for search dropdown)
+// Category mapping for localized display (legacy support)
+const categoryMap = translations['de'];
+
+// Render categories (search dropdown and sidebar)
 function renderCategories() {
     const searchCatList = document.getElementById('search-cat-list');
-    if (!searchCatList) return;
+    const sidebarCatList = document.getElementById('sidebar-categories');
 
     const categories = [...new Set(products.map(p => p.category))];
+    const dict = translations[currentLanguage];
 
-    searchCatList.innerHTML = `
-        <li><a class="dropdown-item" href="#" onclick="setSearchCategory('all')">Alle Kategorien</a></li>
-        ${categories.map(cat => `
-            <li><a class="dropdown-item" href="#" onclick="setSearchCategory('${cat}')">${categoryMap[cat] || cat}</a></li>
-        `).join('')}
-    `;
+    if (searchCatList) {
+        searchCatList.innerHTML = `
+            <li><a class="dropdown-item" href="#" onclick="setSearchCategory('all')">${dict['all_categories']}</a></li>
+            ${categories.map(cat => `
+                <li><a class="dropdown-item" href="#" onclick="setSearchCategory('${cat}')">${dict[cat] || cat}</a></li>
+            `).join('')}
+        `;
+    }
+
+    if (sidebarCatList) {
+        sidebarCatList.innerHTML = `
+            <li class="category-item-ref" onclick="filterByCategory('all')">${dict['all_products']}</li>
+            ${categories.map(cat => `
+                <li class="category-item-ref" onclick="filterByCategory('${cat}')">${dict[cat] || cat}</li>
+            `).join('')}
+        `;
+    }
 }
 
 let selectedSearchCategory = 'all';
 function setSearchCategory(category) {
     selectedSearchCategory = category;
     const btn = document.getElementById('searchCatBtn');
-    if (btn) btn.innerText = category === 'all' ? 'Alle Kategorien' : (categoryMap[category] || category);
+    const dict = translations[currentLanguage];
+    if (btn) btn.innerText = category === 'all' ? dict['all_categories'] : (dict[category] || category);
 }
 
 function filterByCategory(category) {
@@ -300,11 +403,10 @@ async function submitOrder(event) {
         const result = await response.json();
 
         if (result.success) {
-            alert('Vielen Dank für Ihre Bestellung! Wir werden Sie in Kürze kontaktieren.');
             cart = [];
             saveCart();
             updateCartUI();
-            goToSection('home-section');
+            window.location.href = `invoice.php?order_id=${result.order_id}`;
         } else {
             alert('Fehler bei der Bestellung: ' + result.error);
         }
@@ -314,10 +416,37 @@ async function submitOrder(event) {
     }
 }
 
-// Language management (Simplified for now)
+// Language management
 function setLanguage(lang) {
     currentLanguage = lang;
+    localStorage.setItem('lang', lang);
+
+    // Update HTML attributes
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
+    // Update UI components
+    updateStaticText();
+    updateLanguageSwitcherUI();
     loadProducts();
+}
+
+function updateStaticText() {
+    const dict = translations[currentLanguage];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+            el.innerText = dict[key];
+        }
+    });
+}
+
+function updateLanguageSwitcherUI() {
+    const currentLangText = document.getElementById('current-lang-text');
+    if (currentLangText) {
+        const langMap = { 'de': 'Deutsch', 'en': 'English', 'ar': 'العربية' };
+        currentLangText.innerText = langMap[currentLanguage];
+    }
 }
 
 // UI Helpers

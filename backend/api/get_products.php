@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
-include "../../db.php";
+include_once dirname(__FILE__) . "/../../db.php";
 
 $lang = $_GET["lang"] ?? "de";
 $valid_langs = ['de', 'en', 'ar'];
