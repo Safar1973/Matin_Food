@@ -1,7 +1,20 @@
 <?php
-require 'db.php';
+// require 'db.php'; // We will handle connection manually to create DB if needed
+$host = "localhost";
+$user = "root";
+$pass = "";
+$db   = "matin_food";
 
 try {
+    // 0. Create Database if not exists
+    $pdo_init = new PDO("mysql:host=$host", $user, $pass);
+    $pdo_init->exec("CREATE DATABASE IF NOT EXISTS `$db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+    echo "Database `$db` checked/created.<br>";
+    
+    // Connect to the specific DB
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     // 0. Drop Tables (to ensure clean schema)
     echo "Dropping old tables...<br>";
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
@@ -60,18 +73,26 @@ try {
     if (true) { // Always insert fresh data
         $products = [
             ['grains', 'images/bulgur.png', 'Bulgur', 'Bulgur', 'برغل', 2.50, '2024-06-01', '2025-12-01'],
-            ['grains', 'images/شتورة_رز_مصري_10X1_KG.jpg', 'Egyptian Rice', 'Ägyptischer Reis', 'رز مصري', 3.00, '2024-07-15', '2026-01-15'],
+            ['grains', 'images/شتورة_رز_مصري_10X1_KG.jpg', 'Egyptian Rice (1kg)', 'Ägyptischer Reis (1kg)', 'رز مصري (1 كيلو)', 3.00, '2024-07-15', '2026-01-15'],
+            ['grains', 'images/شتورة_رز_مصري_4X5_KG.jpg', 'Egyptian Rice (5kg)', 'Ägyptischer Reis (5kg)', 'رز مصري (5 كيلو)', 13.50, '2024-07-15', '2026-01-15'],
             ['grains', 'images/bulgur_salad.jpg', 'Bulgur Salad', 'Bulgursalat', 'سلطة برغل', 4.50, '2024-05-30', '2025-11-30'],
-            ['canned', 'images/شتورة_غاردن_دبس_بندورة_12X650g.jpg', 'Tomato Paste', 'Tomatenmark', 'دبس بندورة', 1.50, '2024-01-20', '2025-06-20'],
+            ['canned', 'images/شتورة_غاردن_دبس_بندورة_12X650g.jpg', 'Tomato Paste (650g)', 'Tomatenmark (650g)', 'دبس بندورة (650غ)', 1.50, '2024-01-20', '2025-06-20'],
+            ['canned', 'images/شتورة_غاردن_دبس_بندورة_6x1100g.jpg', 'Tomato Paste (1.1kg)', 'Tomatenmark (1.1kg)', 'دبس بندورة (1.1 كيلو)', 2.80, '2024-01-20', '2025-06-20'],
             ['syrups', 'images/pomegranate.png', 'Pomegranate Molasses', 'Granatapfelsirup', 'دبس رمان', 4.50, '2024-03-10', '2026-03-10'],
             ['bakery', 'images/arabic_bread.jpg', 'Arabic Bread', 'Arabisches Brot', 'خبز عربي', 1.20, '2025-02-01', '2025-02-10'],
             ['fresh', 'images/vegetables.jpg', 'Mixed Vegetables (Fresh)', 'Frisches Gemüse', 'خضروات طازجة', 3.50, '2025-02-05', '2025-02-15'],
             ['sweets', 'images/oriental_sweets.jpg', 'Oriental Sweets', 'Orientalische Süßigkeiten', 'حلويات شرقية', 12.50, '2024-06-01', '2025-06-01'],
-            ['canned', 'images/شتورا_غاردن_حمص_بطحينة_12X850_Gr.jpg', 'Hummus with Tahini', 'Hummus mit Tahini', 'حمص بطحينة', 2.20, '2024-06-15', '2025-12-15'],
+            ['canned', 'images/شتورا_غاردن_حمص_بطحينة_12X850_Gr.jpg', 'Hummus with Tahini (850g)', 'Hummus mit Tahini (850g)', 'حمص بطحينة (850غ)', 2.20, '2024-06-15', '2025-12-15'],
+            ['canned', 'images/شتورا_غاردن_حمص_بطحينة_24X185_Gr.jpg', 'Hummus with Tahini (185g)', 'Hummus mit Tahini (185g)', 'حمص بطحينة (185غ)', 0.90, '2024-06-15', '2025-12-15'],
             ['canned', 'images/شتورا_غاردن_فول_خلطة_سورية_24X400_Gr.jpg', 'Fava Beans (Syrian style)', 'Fava-Bohnen (Syr. Art)', 'فول خلطة سورية', 1.80, '2024-04-10', '2025-10-10'],
-            ['canned', 'images/لارا_مكدوس_12x600g.jpg', 'Makdous (Lara)', 'Makdous (Lara)', 'مكدوس لارا', 5.50, '2024-07-01', '2026-01-01'],
+            ['canned', 'images/شتورا_غاردن_فول_كمون_24X400_Gr.jpg', 'Fava Beans with Cumin', 'Fava-Bohnen mit Kreuzkümmel', 'فول بالكمون', 1.80, '2024-04-10', '2025-10-10'],
+            ['canned', 'images/شتورا_غاردن_فول_مدمس_24X475_Gr.jpg', 'Broad Beans (Fava)', 'Ackerbohnen (Moudammas)', 'فول مدمس', 1.90, '2024-04-10', '2025-10-10'],
+            ['canned', 'images/لارا_مكدوس_12x600g.jpg', 'Makdous (Lara) 600g', 'Makdous (Lara) 600g', 'مكدوس لارا 600غ', 5.50, '2024-07-01', '2026-01-01'],
+            ['canned', 'images/الدرة_مكدوس_6x1250g.jpg', 'Makdous (Al Durra) 1.25kg', 'Makdous (Al Durra) 1.25kg', 'مكدوس الدرة 1.25 كيلو', 9.50, '2024-07-01', '2026-01-01'],
             ['canned', 'images/الدرة_ورق_عنب_محشي_24x400g.jpg', 'Stuffed Grape Leaves', 'Gefüllte Weinblätter', 'ورق عنب محشي', 3.50, '2024-11-15', '2026-05-15'],
-            ['canned', 'images/الدرة_بادنجان_مشوي_12x650g.jpg', 'Grilled Eggplant', 'Gegrillte Aubergine', 'باذنجان مشوي', 3.20, '2024-10-20', '2026-04-20'],
+            ['canned', 'images/الدرة_بادنجان_مشوي_12x650g.jpg', 'Grilled Eggplant (Jar)', 'Gegrillte Aubergine (Glas)', 'باذنجان مشوي (مرطبان)', 3.20, '2024-10-20', '2026-04-20'],
+            ['canned', 'images/الدرة_باذنجان_مشوي_تنك_4x2750g.jpg', 'Grilled Eggplant (Large Can)', 'Gegrillte Aubergine (Große Dose)', 'باذنجان مشوي (تنكة كبيرة)', 11.20, '2024-10-20', '2026-04-20'],
+            ['canned', 'images/لارا_باذنجان_مشوي_مقطع_12x610g.jpg', 'Chopped Grilled Eggplant', 'Gegrillte Aubergine geschnitten', 'باذنجان مشوي مقطع', 3.40, '2024-10-20', '2026-04-20'],
             ['syrups', 'images/شتورة_غاردن_خل_تفاح_12X500ml.jpg', 'Apple Vinegar', 'Apfelessig', 'خل تفاح', 2.80, '2025-01-01', '2027-01-01'],
             ['canned', 'images/كامشن_خضروات_12X450_Gr__.jpg', 'Mixed Vegetables', 'Mischgemüse', 'خضروات مشكلة', 2.10, '2024-08-08', '2026-08-08']
         ];

@@ -51,20 +51,25 @@ $items_result = mysqli_query($conn, $items_query);
         .logo {
             font-size: 28px;
             font-weight: 800;
-            color: #d63384; /* Matches Matin Food branding */
+            color: #2e7d32; /* Primary Green */
             text-decoration: none;
         }
         .invoice-title {
-            color: #333;
-            font-weight: 700;
+            color: #2e7d32;
+            font-weight: 800;
         }
         .table thead {
-            background-color: #fdfdfd;
+            background-color: #f1f8e9; /* Light Green */
         }
         .total-row {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #d63384;
+            color: #2e7d32;
+            background-color: #fffde7; /* Soft Yellow */
+        }
+        .btn-primary {
+            background-color: #2e7d32 !important;
+            border-color: #2e7d32 !important;
         }
         @media print {
             .no-print {
@@ -164,7 +169,7 @@ $items_result = mysqli_query($conn, $items_query);
             </div>
             
             <div class="text-center text-muted mb-5 small no-print">
-                Vielen Dank für Ihren Einkauf bei Matin Food!
+                Vielen Dank für Ihren Einkauf bei <strong>Matin Food</strong>!
             </div>
         </div>
     </div>

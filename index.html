@@ -129,59 +129,41 @@
                 <!-- Empfohlen -->
                 <h3 class="sidebar-title" data-i18n="recommended">Empfohlen</h3>
                 <ul class="category-list">
-                    <li class="category-item-ref" onclick="filterByCategory('all')">Alle Produkte</li>
-                    <li class="category-item-ref" onclick="filterByCategory('beliebt')">Beliebt</li>
-                    <li class="category-item-ref" onclick="filterByCategory('neu')">Neu im Shop</li>
-                    <li class="category-item-ref" onclick="filterByCategory('bestseller')">Bestseller</li>
-                    <li class="category-item-ref text-danger fw-bold" onclick="filterByCategory('ausverkauft')">Bald
+                    <li class="category-item-ref" onclick="filterByCategory('all')" data-i18n="all_products">Alle
+                        Produkte</li>
+                    <li class="category-item-ref" onclick="filterByCategory('beliebt')" data-i18n="popular">Beliebt</li>
+                    <li class="category-item-ref" onclick="filterByCategory('neu')" data-i18n="new_in_shop">Neu im Shop
+                    </li>
+                    <li class="category-item-ref" onclick="filterByCategory('bestseller')" data-i18n="bestseller">
+                        Bestseller</li>
+                    <li class="category-item-ref text-danger fw-bold" onclick="filterByCategory('ausverkauft')"
+                        data-i18n="sold_out_soon">Bald
                         ausverkauft!</li>
                 </ul>
 
                 <!-- Kategorien -->
                 <h3 class="sidebar-title" style="margin-top: 2rem;" data-i18n="categories">Kategorien</h3>
                 <ul class="category-list" id="sidebar-categories">
-                    <li class="category-item-ref" onclick="filterByCategory('Großpackungen')">Großpackungen</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Süßigkeiten')">Süßigkeiten</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Salziges')">Salziges</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Alles muss Raus')">Alles muss Raus</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Backen & Dessert')">Backen & Dessert</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Bio Produkte')">Bio Produkte</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Drogerie')">Drogerie</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Fitness und Supplements')">Fitness und
-                        Supplements</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Getränke')">Getränke</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Gewürze & Soßen')">Gewürze & Soßen</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Haushalt & Garten')">Haushalt & Garten</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Haustier')">Haustier</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Hobby & Freizeit')">Hobby & Freizeit</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Kaffee, Tee & Kakao')">Kaffee, Tee & Kakao
-                    </li>
-                    <li class="category-item-ref" onclick="filterByCategory('Konserven & Fertiggerichte')">Konserven &
-                        Fertiggerichte</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Milchprodukte und Alternativen')">
-                        Milchprodukte und Alternativen</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Müsli, Brot & Aufstriche')">Müsli, Brot &
-                        Aufstriche</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Nudeln, Reis & Getreide')">Nudeln, Reis &
-                        Getreide</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Vegane Produkte')">Vegane Produkte</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Wurstwaren & Käse')">Wurstwaren & Käse</li>
-                    <li class="category-item-ref" onclick="filterByCategory('Marken')">Einkaufen nach Marken</li>
+                    <!-- Populated by JS -->
                 </ul>
 
                 <!-- Zusätzliche Kategorien -->
-                <h3 class="sidebar-title" style="margin-top: 2rem;">Zusätzliche Kategorien</h3>
+                <h3 class="sidebar-title" style="margin-top: 2rem;" data-i18n="additional_categories">Zusätzliche
+                    Kategorien</h3>
                 <ul class="category-list">
-                    <li class="category-item-ref" onclick="filterByCategory('Marken')">Nach Marke shoppen</li>
-                    <li class="category-item-ref" onclick="filterByCategory('neu')">Neu im Shop</li>
-                    <li class="category-item-ref" onclick="filterByCategory('mhd')">MHD-Ware</li>
-                    <li class="category-item-ref" onclick="filterByCategory('bestseller')">Bestseller</li>
-                    <li class="category-item-ref" onclick="filterByCategory('deals')">Deals</li>
+                    <li class="category-item-ref" onclick="filterByCategory('Marken')" data-i18n="shopp_by_marken">Nach
+                        Marke shoppen</li>
+                    <li class="category-item-ref" onclick="filterByCategory('neu')" data-i18n="new_in_shop">Neu im Shop
+                    </li>
+                    <li class="category-item-ref" onclick="filterByCategory('mhd')" data-i18n="mhd_ware">MHD-Ware</li>
+                    <li class="category-item-ref" onclick="filterByCategory('bestseller')" data-i18n="bestseller">
+                        Bestseller</li>
+                    <li class="category-item-ref" onclick="filterByCategory('deals')" data-i18n="deals">Deals</li>
                 </ul>
 
-                <h3 class="sidebar-title" style="margin-top: 2rem;">Filter</h3>
+                <h3 class="sidebar-title" style="margin-top: 2rem;" data-i18n="filters">Filter</h3>
                 <div class="filter-group">
-                    <label style="font-size: 0.85rem; font-weight: 600;">Preis bis</label>
+                    <label style="font-size: 0.85rem; font-weight: 600;" data-i18n="price_until">Preis bis</label>
                     <input type="range" class="form-range" min="0" max="100" id="price-filter">
                 </div>
             </div>
@@ -211,33 +193,38 @@
                             <div class="d-flex">
                                 <button
                                     class="btn btn-link flex-grow-1 py-3 text-decoration-none fw-bold account-tab active"
-                                    id="login-tab" onclick="switchAccountView('login')">Anmelden</button>
+                                    id="login-tab" onclick="switchAccountView('login')"
+                                    data-i18n="login">Anmelden</button>
                                 <button class="btn btn-link flex-grow-1 py-3 text-decoration-none fw-bold account-tab"
-                                    id="register-tab" onclick="switchAccountView('register')">Registrieren</button>
+                                    id="register-tab" onclick="switchAccountView('register')"
+                                    data-i18n="register">Registrieren</button>
                             </div>
                         </div>
                         <div class="card-body p-4">
                             <!-- Login Form -->
                             <form id="login-form">
                                 <div class="mb-3">
-                                    <label class="form-label small fw-bold">E-Mail Adresse</label>
+                                    <label class="form-label small fw-bold" data-i18n="email">E-Mail Adresse</label>
                                     <input type="email" class="form-control rounded-pill" placeholder="name@beispiel.de"
                                         required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label small fw-bold">Passwort</label>
+                                    <label class="form-label small fw-bold" data-i18n="password">Passwort</label>
                                     <input type="password" class="form-control rounded-pill" placeholder="********"
                                         required>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="remember">
-                                        <label class="form-check-label small" for="remember">Angemeldet bleiben</label>
+                                        <label class="form-check-label small" for="remember"
+                                            data-i18n="remember_me">Angemeldet bleiben</label>
                                     </div>
-                                    <a href="#" class="small text-danger text-decoration-none">Passwort vergessen?</a>
+                                    <a href="#" class="small text-danger text-decoration-none"
+                                        data-i18n="forgot_pw">Passwort vergessen?</a>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold"
-                                    style="background: var(--primary-color); border: none;">Anmelden</button>
+                                    style="background: var(--primary-color); border: none;"
+                                    data-i18n="login">Anmelden</button>
                             </form>
 
                             <!-- Register Form (Hidden) -->
@@ -276,50 +263,53 @@
             <!-- Checkout Section -->
             <section id="checkout-section" class="page-section">
                 <div class="checkout-container">
-                    <h2 class="mb-4" style="font-weight: 800;">Zur Kasse</h2>
+                    <h2 class="mb-4" style="font-weight: 800;" data-i18n="checkout_title">Zur Kasse</h2>
                     <div class="row g-4">
                         <div class="col-lg-7">
                             <form class="checkout-form bg-white p-4 rounded-4 shadow-sm" onsubmit="submitOrder(event)">
-                                <h4 class="mb-3">Persönliche Daten</h4>
+                                <h4 class="mb-3" data-i18n="personal_data">Persönliche Daten</h4>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Vorname & Nachname</label>
+                                        <label class="form-label" data-i18n="name_placeholder">Vorname &
+                                            Nachname</label>
                                         <input type="text" class="form-control" id="cust-name" required>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="form-label">Telefon</label>
+                                        <label class="form-label" data-i18n="phone">Telefon</label>
                                         <input type="tel" class="form-control" id="cust-phone" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Adresse</label>
+                                    <label class="form-label" data-i18n="address">Adresse</label>
                                     <input type="text" class="form-control" id="cust-address" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label">Stadt</label>
+                                    <label class="form-label" data-i18n="city">Stadt</label>
                                     <input type="text" class="form-control" id="cust-city" required>
                                 </div>
                                 <div class="mb-4">
-                                    <label class="form-label">Zahlungsart</label>
+                                    <label class="form-label" data-i18n="payment_method">Zahlungsart</label>
                                     <select class="form-select" id="payment-method-select" required>
-                                        <option value="online">Online Zahlung (Karte / PayPal)</option>
-                                        <option value="card">Karte bei Lieferung</option>
-                                        <option value="cash">Barzahlung bei Lieferung</option>
+                                        <option value="online" data-i18n="online_payment">Online Zahlung (Karte /
+                                            PayPal)</option>
+                                        <option value="card" data-i18n="card_delivery">Karte bei Lieferung</option>
+                                        <option value="cash" data-i18n="cash_delivery">Barzahlung bei Lieferung</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="add-to-cart-btn py-3">Jetzt zahlungspflichtig
+                                <button type="submit" class="add-to-cart-btn py-3" data-i18n="order_btn">Jetzt
+                                    zahlungspflichtig
                                     bestellen</button>
                             </form>
                         </div>
                         <div class="col-lg-5">
                             <div class="bg-white p-4 rounded-4 shadow-sm">
-                                <h4 class="mb-3">Bestellübersicht</h4>
+                                <h4 class="mb-3" data-i18n="order_summary">Bestellübersicht</h4>
                                 <div id="order-summary-items" class="mb-3">
                                     <!-- Filled from cart -->
                                 </div>
                                 <hr>
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="h5 mb-0">Gesamtsumme:</span>
+                                    <span class="h5 mb-0" data-i18n="total_sum">Gesamtsumme:</span>
                                     <span class="h4 mb-0 text-danger" id="order-total-value">0.00 €</span>
                                 </div>
                             </div>
@@ -354,7 +344,7 @@
     <!-- Cart Panel -->
     <div id="cart-panel" class="cart-panel p-4">
         <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
-            <h3 class="fw-bold mb-0">Ihr Warenkorb</h3>
+            <h3 class="fw-bold mb-0" data-i18n="cart_title">Ihr Warenkorb</h3>
             <button class="btn-close" onclick="toggleCart()"></button>
         </div>
         <div id="cart-items" class="flex-grow-1 overflow-auto mb-4">
@@ -362,12 +352,14 @@
         </div>
         <div class="cart-footer pt-3 border-top">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <span class="h5 mb-0">Gesamtsumme:</span>
+                <span class="h5 mb-0" data-i18n="total_sum">Gesamtsumme:</span>
                 <span class="h4 mb-0 text-danger fw-bold" id="cart-total">0.00 €</span>
             </div>
             <div class="d-grid gap-2">
-                <button class="add-to-cart-btn py-3" onclick="openCheckout()">Zur Kasse gehen</button>
-                <button class="btn btn-link text-muted" onclick="clearCart()">Warenkorb leeren</button>
+                <button class="add-to-cart-btn py-3" onclick="openCheckout()" data-i18n="checkout_btn">Zur Kasse
+                    gehen</button>
+                <button class="btn btn-link text-muted" onclick="clearCart()" data-i18n="clear_cart">Warenkorb
+                    leeren</button>
             </div>
         </div>
     </div>

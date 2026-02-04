@@ -62,7 +62,8 @@ function handleSearch(event) {
     event.preventDefault();
     const query = document.getElementById('main-search').value.toLowerCase();
     const filtered = products.filter(p => {
-        const matchesQuery = p.name_de.toLowerCase().includes(query) ||
+        const nameInLang = (p['name_' + currentLanguage] || p.name).toLowerCase();
+        const matchesQuery = nameInLang.includes(query) ||
             p.category.toLowerCase().includes(query);
         const matchesCategory = selectedSearchCategory === 'all' || p.category === selectedSearchCategory;
         return matchesQuery && matchesCategory;
@@ -115,13 +116,13 @@ function renderProducts(productsToRender = products) {
             </div>
             <div class="product-info-ref text-center">
                 <div class="product-price-ref">${parseFloat(product.price).toFixed(2)} €</div>
-                <div class="product-tax-info">Inkl. MwSt. zzgl. Versandkosten</div>
+                <div class="product-tax-info" data-i18n="tax_info">${translations[currentLanguage]['tax_info']}</div>
                 <h3 class="product-name-ref" onclick="openProductModal(${product.id})">${product.name}</h3>
                 <div class="product-weight-price">${weightPrice} €/kg</div>
                 
                 <div class="mt-3">
                     <button class="add-to-cart-pill" onclick="addToCart(${product.id})">
-                        In den 🛒
+                        <span data-i18n="in_cart">${translations[currentLanguage]['in_cart']}</span> 🛒
                     </button>
                 </div>
             </div>
@@ -158,7 +159,50 @@ const translations = {
         'syrups': 'Sirupe & Saucen',
         'bakery': 'Bäckerei',
         'fresh': 'Frische Ware',
-        'sweets': 'Süßigkeiten'
+        'sweets': 'Süßigkeiten',
+        'additional_categories': 'Zusätzliche Kategorien',
+        'shopp_by_marken': 'Nach Marke shoppen',
+        'mhd_ware': 'MHD-Ware',
+        'deals': 'Deals',
+        'filters': 'Filter',
+        'price_until': 'Preis bis',
+        'tax_info': 'Inkl. MwSt. zzgl. Versandkosten',
+        'in_cart': 'In den',
+        'empty_cart_msg': 'Ihr Warenkorb ist leer!',
+        'empty_category_msg': 'Keine Produkte in dieser Kategorie gefunden.',
+        'show_all_products': 'Alle Produkte anzeigen',
+        'order_summary': 'Bestellübersicht',
+        'total_sum': 'Gesamtsumme',
+        'checkout_btn': 'Zur Kasse gehen',
+        'clear_cart': 'Warenkorb leeren',
+        'login': 'Anmelden',
+        'register': 'Registrieren',
+        'email': 'E-Mail Adresse',
+        'password': 'Passwort',
+        'remember_me': 'Angemeldet bleiben',
+        'forgot_pw': 'Passwort vergessen?',
+        'create_account': 'Konto erstellen',
+        'full_name': 'Vollständiger Name',
+        'accept_terms': 'Ich akzeptiere die AGB und Datenschutzbestimmungen',
+        'agb': 'AGB',
+        'privacy': 'Datenschutzbestimmungen',
+        'checkout_title': 'Zur Kasse',
+        'personal_data': 'Persönliche Daten',
+        'name_placeholder': 'Vorname & Nachname',
+        'phone': 'Telefon',
+        'address': 'Adresse',
+        'city': 'Stadt',
+        'payment_method': 'Zahlungsart',
+        'online_payment': 'Online Zahlung (Karte / PayPal)',
+        'card_delivery': 'Karte bei Lieferung',
+        'cash_delivery': 'Barzahlung bei Lieferung',
+        'order_btn': 'Jetzt zahlungspflichtig bestellen',
+        'added_to_cart': 'hinzugefügt',
+        'category_label': 'Kategorie',
+        'expiry_label': 'Haltbarkeit',
+        'description_label': 'Beschreibung',
+        'description_val': 'Authentische Qualität für Ihre Küche. Premium-Import.',
+        'cart_title': 'Ihr Warenkorb'
     },
     'en': {
         'help': 'Help',
@@ -187,7 +231,50 @@ const translations = {
         'syrups': 'Syrups & Sauces',
         'bakery': 'Bakery',
         'fresh': 'Fresh Goods',
-        'sweets': 'Sweets'
+        'sweets': 'Sweets',
+        'additional_categories': 'Additional Categories',
+        'shopp_by_marken': 'Shop by Brand',
+        'mhd_ware': 'Shelf Life Deals',
+        'deals': 'Deals',
+        'filters': 'Filters',
+        'price_until': 'Price up to',
+        'tax_info': 'Incl. VAT plus shipping costs',
+        'in_cart': 'Add to',
+        'empty_cart_msg': 'Your cart is empty!',
+        'empty_category_msg': 'No products found in this category.',
+        'show_all_products': 'Show all products',
+        'order_summary': 'Order Summary',
+        'total_sum': 'Total Sum',
+        'checkout_btn': 'Go to Checkout',
+        'clear_cart': 'Clear Cart',
+        'login': 'Login',
+        'register': 'Register',
+        'email': 'Email Address',
+        'password': 'Password',
+        'remember_me': 'Remember me',
+        'forgot_pw': 'Forgot password?',
+        'create_account': 'Create Account',
+        'full_name': 'Full Name',
+        'accept_terms': 'I accept the T&Cs and Privacy Policy',
+        'agb': 'T&Cs',
+        'privacy': 'Privacy Policy',
+        'checkout_title': 'Checkout',
+        'personal_data': 'Personal Data',
+        'name_placeholder': 'First & Last Name',
+        'phone': 'Phone',
+        'address': 'Address',
+        'city': 'City',
+        'payment_method': 'Payment Method',
+        'online_payment': 'Online Payment (Card / PayPal)',
+        'card_delivery': 'Card on Delivery',
+        'cash_delivery': 'Cash on Delivery',
+        'order_btn': 'Order Now (Commit to Pay)',
+        'added_to_cart': 'added',
+        'category_label': 'Category',
+        'expiry_label': 'Expiry',
+        'description_label': 'Description',
+        'description_val': 'Authentic quality for your kitchen. Premium import.',
+        'cart_title': 'Your Cart'
     },
     'ar': {
         'help': 'مساعدة',
@@ -216,7 +303,50 @@ const translations = {
         'syrups': 'شراب وصوص',
         'bakery': 'مخبوزات',
         'fresh': 'مواد طازجة',
-        'sweets': 'حلويات'
+        'sweets': 'حلويات',
+        'additional_categories': 'فئات إضافية',
+        'shopp_by_marken': 'تسوق حسب العلامة التجارية',
+        'mhd_ware': 'منتجات قريبة الانتهاء',
+        'deals': 'صفقات',
+        'filters': 'تصفية',
+        'price_until': 'السعر حتى',
+        'tax_info': 'شامل ضريبة القيمة المضافة بالإضافة إلى تكاليف الشحن',
+        'in_cart': 'أضف إلى',
+        'empty_cart_msg': 'عربة التسوق فارغة!',
+        'empty_category_msg': 'لم يتم العثور على منتجات في هذه الفئة.',
+        'show_all_products': 'عرض جميع المنتجات',
+        'order_summary': 'ملخص الطلبية',
+        'total_sum': 'المجموع الإجمالي',
+        'checkout_btn': 'الذهاب للدفع',
+        'clear_cart': 'تفريغ العربة',
+        'login': 'تسجيل الدخول',
+        'register': 'إنشاء حساب',
+        'email': 'البريد الإلكتروني',
+        'password': 'كلمة المرور',
+        'remember_me': 'تذكرني',
+        'forgot_pw': 'نسيت كلمة المرور؟',
+        'create_account': 'إنشاء حساب',
+        'full_name': 'الاسم الكامل',
+        'accept_terms': 'أوافق على الشروط والأحكام وسياسة الخصوصية',
+        'agb': 'الشروط والأحكام',
+        'privacy': 'سياسة الخصوصية',
+        'checkout_title': 'إتمام الطلب',
+        'personal_data': 'البيانات الشخصية',
+        'name_placeholder': 'الاسم الأول واللقب',
+        'phone': 'رقم الهاتف',
+        'address': 'العنوان',
+        'city': 'المدينة',
+        'payment_method': 'طريقة الدفع',
+        'online_payment': 'دفع عبر الإنترنت (بطاقة / باي بال)',
+        'card_delivery': 'بطاقة عند الاستلام',
+        'cash_delivery': 'نقدًا عند الاستلام',
+        'order_btn': 'طلب الآن (التزام بالدفع)',
+        'added_to_cart': 'تمت الإضافة',
+        'category_label': 'الفئة',
+        'expiry_label': 'الصلاحية',
+        'description_label': 'الوصف',
+        'description_val': 'جودة أصيلة لمطبخك. استيراد ممتاز.',
+        'cart_title': 'عربة تسوقك'
     }
 };
 
@@ -464,10 +594,11 @@ function openProductModal(productId) {
         <small class="text-muted" style="font-family: Arial, sans-serif;">${product.name_ar}</small>
     `;
     document.getElementById('modal-price').innerText = `${parseFloat(product.price).toFixed(2)} €`;
+    const dict = translations[currentLanguage];
     document.getElementById('modal-details-content').innerHTML = `
-        <strong>Kategorie:</strong> ${categoryMap[product.category] || product.category}<br>
-        <strong>Haltbarkeit:</strong> ${product.expiry}<br>
-        <strong>Beschreibung:</strong> Authentische Qualität für Ihre Küche. Premium-Import.
+        <strong>${dict['category_label']}:</strong> ${dict[product.category] || product.category}<br>
+        <strong>${dict['expiry_label']}:</strong> ${product.expiry}<br>
+        <strong>${dict['description_label']}:</strong> ${dict['description_val']}
     `;
     document.getElementById('modal-btn').onclick = () => {
         addToCart(product.id);
