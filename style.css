@@ -6,7 +6,7 @@
     --accent-yellow: #ffc107;
     --text-main: #2a2a2a;
     --text-muted: #6c757d;
-    --bg-light: #f4f4f4;
+    --bg-light: #fdfef0;
     --bg-white: #ffffff;
     --border-color: #dee2e6;
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -558,12 +558,14 @@ header {
         width: 100%;
     }
 }
+
 /* RTL Specific Styles */
 [dir="rtl"] {
     text-align: right;
 }
 
-[dir="rtl"] .ms-3, [dir="rtl"] .ms-4 {
+[dir="rtl"] .ms-3,
+[dir="rtl"] .ms-4 {
     margin-left: 0 !important;
     margin-right: 1rem !important;
 }
@@ -625,4 +627,3 @@ header {
 [lang="ar"] {
     font-family: "Outfit", "Inter", sans-serif;
 }
-
