@@ -50,6 +50,8 @@ while ($p = mysqli_fetch_assoc($res)) {
             </div>
             <nav>
                 <a href="index.php" class="nav-link active">📦 Lagerverwaltung</a>
+                <a href="ai_dashboard.php" class="nav-link">✨ AI Generator</a>
+                <a href="help.php" class="nav-link">📚 Hilfe (AI)</a>
                 <a href="../setup.php" class="nav-link" onclick="return confirm('Datenbank wirklich zurücksetzen?')">⚙️ DB Setup</a>
                 <a href="../index.html" class="nav-link mt-5">🌐 Zum Shop</a>
             </nav>
@@ -156,6 +158,119 @@ while ($p = mysqli_fetch_assoc($res)) {
         </main>
     </div>
 
+    <!-- AI Inventory Assistant Widget -->
+    <div id="ai-inventory-widget">
+        <button id="ai-inv-toggle-btn" class="ai-inv-btn shadow-lg">
+            <span class="ai-icon">📊</span>
+            <span class="ai-text">Analysieren</span>
+        </button>
+        
+        <div id="ai-inv-chat-box" class="ai-inv-chat-box shadow-lg d-none">
+            <div class="ai-inv-header">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="fs-4">🧠</span>
+                    <div>
+                        <div class="fw-bold">Lager-Assistent</div>
+                        <div class="small opacity-75">Bestandsanalyse & Tipps</div>
+                    </div>
+                </div>
+                <button id="ai-inv-close-btn" class="btn-close btn-close-white"></button>
+            </div>
+            <div id="ai-inv-messages" class="ai-inv-body">
+                <div class="ai-msg ai-msg-bot">
+                    Hallo! Ich habe Ihren Lagerbestand analysiert. Fragen Sie mich z.B. "Was läuft bald ab?" oder "Was muss ich nachbestellen?".
+                </div>
+            </div>
+            <div class="ai-inv-footer">
+                <div class="input-group">
+                    <input type="text" id="ai-inv-input" class="form-control border-0 bg-light" placeholder="Frage stellen..." style="box-shadow: none;">
+                    <button id="ai-inv-send-btn" class="btn btn-primary">➤</button>
+                </div>
+                <div class="text-center mt-1" style="font-size: 10px; color: #999;">Matin Intelligence v1.0</div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('ai-inv-toggle-btn');
+            const closeBtn = document.getElementById('ai-inv-close-btn');
+            const chatBox = document.getElementById('ai-inv-chat-box');
+            const input = document.getElementById('ai-inv-input');
+            const sendBtn = document.getElementById('ai-inv-send-btn');
+            const messages = document.getElementById('ai-inv-messages');
+
+            function toggleChat() {
+                chatBox.classList.toggle('d-none');
+                if (!chatBox.classList.contains('d-none')) input.focus();
+            }
+
+            toggleBtn.addEventListener('click', toggleChat);
+            closeBtn.addEventListener('click', toggleChat);
+
+            async function sendMessage() {
+                const text = input.value.trim();
+                if (!text) return;
+
+                addMessage(text, 'user');
+                input.value = '';
+                const typingId = addMessage('Analysiere Lagerdaten...', 'bot');
+
+                // Get API Key from Cookie
+                const apiKeyMatch = document.cookie.match(/openai_key=([^;]+)/);
+                const apiKey = apiKeyMatch ? apiKeyMatch[1] : null;
+
+                if (!apiKey) {
+                    document.getElementById(typingId).remove();
+                    addMessage('⚠️ Kein API Key gefunden. Bitte gehen Sie zuerst zum "AI Generator" und speichern Sie dort Ihren Key.', 'bot text-danger');
+                    return;
+                }
+
+                try {
+                    const response = await fetch('../backend/api/ai_inventory_handler.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ api_key: apiKey, query: text })
+                    });
+                    
+                    const result = await response.json();
+                    document.getElementById(typingId).remove();
+
+                    if (result.success) {
+                        addMessage(result.response, 'bot');
+                    } else {
+                        addMessage('Fehler: ' + result.error, 'bot text-danger');
+                    }
+                } catch (error) {
+                    document.getElementById(typingId).remove();
+                    addMessage('Netzwerkfehler.', 'bot text-danger');
+                }
+            }
+
+            sendBtn.addEventListener('click', sendMessage);
+            input.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
+
+            function addMessage(text, sender) {
+                const div = document.createElement('div');
+                div.className = `ai-msg ai-msg-${sender}`;
+                div.id = 'msg-' + Date.now();
+                
+                // Allow simple formatting specifically for the bot
+                if(sender === 'bot') {
+                    // Convert line breaks to <br> and bold text
+                    let formatted = text.replace(/\n/g, '<br>');
+                    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    div.innerHTML = formatted;
+                } else {
+                    div.textContent = text;
+                }
+                
+                messages.appendChild(div);
+                messages.scrollTop = messages.scrollHeight;
+                return div.id;
+            }
+        });
+    </script>
 </body>
 </html>

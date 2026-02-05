@@ -15,15 +15,24 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    echo "<div style='font-family: sans-serif; padding: 40px; line-height: 1.6; max-width: 800px; margin: 0 auto; background: #f1f8e9; border-radius: 12px; border: 1px solid #c5e1a5;'>";
+    echo "<h2 style='color: #2e7d32; text-align: center; font-weight: 800;'>🌿 Matin Food Database Setup</h2>";
+    echo "<hr style='border: 0; border-top: 1px solid #c5e1a5; margin-bottom: 20px;'>";
+    
     // 0. Drop Tables (to ensure clean schema)
-    echo "Dropping old tables...<br>";
+    echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";
+    echo "<strong>Step 1: Cleaning Schema</strong><br>";
+    echo "<span style='color: #555;'>Dropping old tables... </span>";
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
     $pdo->exec("DROP TABLE IF EXISTS order_items");
     $pdo->exec("DROP TABLE IF EXISTS orders");
     $pdo->exec("DROP TABLE IF EXISTS products");
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+    echo "<span style='color: #2e7d32;'>✔ Done</span></div>";
 
     // 1. Create Tables
+    echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";
+    echo "<strong>Step 2: Creating Tables</strong><br>";
 
     // Products Table
     $pdo->exec("CREATE TABLE products (
@@ -33,6 +42,9 @@ try {
         name_en VARCHAR(100) NOT NULL,
         name_de VARCHAR(100) NOT NULL,
         name_ar VARCHAR(100) NOT NULL,
+        description_de TEXT,
+        description_en TEXT,
+        description_ar TEXT,
         price DECIMAL(10, 2) NOT NULL,
         production_date DATE DEFAULT NULL,
         expiry DATE NOT NULL,
@@ -62,10 +74,12 @@ try {
         FOREIGN KEY (product_id) REFERENCES products(id)
     )");
 
-    echo "Tables created successfully.<br>";
+    echo "<span style='color: #2e7d32;'>✔ Tables created successfully.</span></div>";
 
     // 2. Insert/Reset Sample Data
-    echo "Resetting product data...<br>";
+    echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";
+    echo "<strong>Step 3: Seeding Data</strong><br>";
+    echo "<span style='color: #555;'>Resetting product data... </span>";
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
     $pdo->exec("TRUNCATE TABLE products");
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
@@ -97,17 +111,20 @@ try {
             ['canned', 'images/كامشن_خضروات_12X450_Gr__.jpg', 'Mixed Vegetables', 'Mischgemüse', 'خضروات مشكلة', 2.10, '2024-08-08', '2026-08-08']
         ];
 
-        $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, production_date, expiry) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, production_date, expiry, description_de, description_en, description_ar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Leckeres Produkt', 'Delicious product', 'منتج لذيذ')");
         
         foreach ($products as $p) {
             $stmt->execute($p);
         }
-        echo "Sample data inserted successfully.<br>";
+        echo "<span style='color: #2e7d32;'>✔ Sample data inserted successfully.</span></div>";
     } else {
-        echo "Products table already has data.<br>";
+        echo "<div style='color: #f57f17;'>Products table already has data.</div>";
     }
+    
+    echo "<div style='text-align: center; margin-top: 30px;'><a href='index.html' style='background: #fdd835; color: #333; padding: 12px 25px; text-decoration: none; border-radius: 50px; font-weight: 800; box-shadow: 0 4px 0 #fbc02d;'>ZURÜCK ZUM SHOP</a></div>";
+    echo "</div>";
 
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo "<div style='color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2;'><strong>Error:</strong> " . $e->getMessage() . "</div>";
 }
 ?>

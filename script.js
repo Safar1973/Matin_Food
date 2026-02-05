@@ -6,17 +6,90 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 // Constants
 const API_URL = 'backend/api/get_products.php';
 
-// Initialize
+// Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
-    // Load saved language or default to 'de'
+    // 1. Core Site Initialization
     currentLanguage = localStorage.getItem('lang') || 'de';
-
     checkProtocol();
-    setLanguage(currentLanguage); // This will load products and update UI
+    setLanguage(currentLanguage);
     updateCartUI();
     setupNavigation();
     setupFilters();
+
+    // 2. AI Chat Widget Initialization
+    initAiChat();
 });
+
+// AI Chat Widget Logic
+function initAiChat() {
+    const aiToggleBtn = document.getElementById('ai-toggle-btn');
+    const aiCloseBtn = document.getElementById('ai-close-btn');
+    const aiChatBox = document.getElementById('ai-chat-box');
+    const aiInput = document.getElementById('ai-input');
+    const aiSendBtn = document.getElementById('ai-send-btn');
+    const aiMessages = document.getElementById('ai-messages');
+
+    if (!aiToggleBtn) return;
+
+    // Toggle Chat
+    function toggleChat() {
+        aiChatBox.classList.toggle('d-none');
+        if (!aiChatBox.classList.contains('d-none')) {
+            aiInput.focus();
+        }
+    }
+
+    aiToggleBtn.addEventListener('click', toggleChat);
+    aiCloseBtn.addEventListener('click', toggleChat);
+
+    // Send Message
+    async function sendMessage() {
+        const text = aiInput.value.trim();
+        if (!text) return;
+
+        // Add User Message
+        addMessage(text, 'user');
+        aiInput.value = '';
+
+        // Simulate Typing
+        const typingId = addMessage('...', 'bot');
+
+        // Simple Heuristic Response
+        setTimeout(() => {
+            const typingMsg = document.getElementById(typingId);
+            if (typingMsg) typingMsg.remove();
+
+            const response = getSimpleResponse(text);
+            addMessage(response, 'bot');
+        }, 1000);
+    }
+
+    aiSendBtn.addEventListener('click', sendMessage);
+    aiInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    function addMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        const id = 'msg-' + Date.now();
+        msgDiv.id = id;
+        msgDiv.className = `ai-msg ai-msg-${sender}`;
+        msgDiv.textContent = text;
+        aiMessages.appendChild(msgDiv);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+        return id;
+    }
+
+    function getSimpleResponse(input) {
+        const lower = input.toLowerCase();
+        if (lower.includes('hallo') || lower.includes('hi')) return 'Hallo! Wie kann ich Ihnen heute helfen?';
+        if (lower.includes('rezept') || lower.includes('kochen')) return 'Wir haben tolle Zutaten für orientalische Gerichte! Probieren Sie unser Makdous oder die Weinblätter.';
+        if (lower.includes('lieferung') || lower.includes('versand')) return 'Ab 50€ liefern wir versandkostenfrei! Sonst beträgt der Versand 4,90€.';
+        if (lower.includes('öffnung')) return 'Unser Online-Shop ist 24/7 für Sie geöffnet!';
+        if (lower.includes('kontakt')) return 'Sie erreichen uns unter info@matinfood.de oder +49 (0) 123 456 789.';
+        return 'Das ist eine interessante Frage! Stöbern Sie doch mal in unseren Kategorien, da finden Sie sicher das Richtige.';
+    }
+}
 
 function checkProtocol() {
     if (window.location.protocol === 'file:') {
@@ -598,7 +671,10 @@ function openProductModal(productId) {
     document.getElementById('modal-details-content').innerHTML = `
         <strong>${dict['category_label']}:</strong> ${dict[product.category] || product.category}<br>
         <strong>${dict['expiry_label']}:</strong> ${product.expiry}<br>
-        <strong>${dict['description_label']}:</strong> ${dict['description_val']}
+        <div class="mt-2">
+            <strong>${dict['description_label']}:</strong><br>
+            ${product['description_' + currentLanguage] || dict['description_val']}
+        </div>
     `;
     document.getElementById('modal-btn').onclick = () => {
         addToCart(product.id);
