@@ -16,7 +16,8 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     echo "<div style='font-family: sans-serif; padding: 40px; line-height: 1.6; max-width: 800px; margin: 0 auto; background: #f1f8e9; border-radius: 12px; border: 1px solid #c5e1a5;'>";
-    echo "<h2 style='color: #2e7d32; text-align: center; font-weight: 800;'>🌿 Matin Food Database Setup</h2>";
+    echo "<div style='text-align: center; margin-bottom: 20px;'><img src='images/logo-1694787094.jpg' alt='Logo' style='height: 60px; border-radius: 10px;'></div>";
+    echo "<h2 style='color: #2e7d32; text-align: center; font-weight: 800;'>Database Setup</h2>";
     echo "<hr style='border: 0; border-top: 1px solid #c5e1a5; margin-bottom: 20px;'>";
     
     // 0. Drop Tables (to ensure clean schema)

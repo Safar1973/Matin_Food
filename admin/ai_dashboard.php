@@ -72,8 +72,8 @@ while ($p = mysqli_fetch_assoc($res)) {
     <div class="admin-wrapper">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-title">
-                <span>🌿</span> MATIN FOOD
+            <div class="sidebar-title" style="padding: 1rem;">
+                <img src="../images/logo-1694787094.jpg" alt="Logo" style="height: 40px; border-radius: 6px;">
             </div>
             <nav>
                 <a href="index.php" class="nav-link">📦 Lagerverwaltung</a>

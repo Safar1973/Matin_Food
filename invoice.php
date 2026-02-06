@@ -94,7 +94,9 @@ $items_result = mysqli_query($conn, $items_query);
             <div class="invoice-card">
                 <div class="invoice-header d-flex justify-content-between align-items-center">
                     <div>
-                        <a href="index.html" class="logo">Matin Food</a>
+                        <a href="index.html">
+                            <img src="images/logo-1694787094.jpg" alt="Matin Food" style="height: 50px; border-radius: 8px;">
+                        </a>
                         <p class="text-muted mb-0">Frische und hochwertige Produkte</p>
                     </div>
                     <div class="text-end">
@@ -168,8 +170,8 @@ $items_result = mysqli_query($conn, $items_query);
                 </div>
             </div>
             
-            <div class="text-center text-muted mb-5 small no-print">
-                Vielen Dank für Ihren Einkauf bei <strong>Matin Food</strong>!
+            <div class="text-center text-muted mb-5 small no-print d-flex align-items-center justify-content-center gap-2">
+                Vielen Dank für Ihren Einkauf bei <img src="images/logo-1694787094.jpg" alt="Logo" style="height: 20px; border-radius: 4px;">!
             </div>
         </div>
     </div>

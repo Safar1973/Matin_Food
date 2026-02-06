@@ -6,7 +6,7 @@ include_once dirname(__FILE__) . "/../db.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Hilfe (AI) | Matin Food</title>
+    <title>Admin Hilfe & Assistenz | Matin Food</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin-style.css">
@@ -32,7 +32,7 @@ include_once dirname(__FILE__) . "/../db.php";
             flex-grow: 1;
             padding: 20px;
             overflow-y: auto;
-            background: #f8fafc;
+            background: #228d1eff;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -77,13 +77,13 @@ include_once dirname(__FILE__) . "/../db.php";
     <div class="admin-wrapper">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-title">
-                <span>🌿</span> MATIN FOOD
+            <div class="sidebar-title" style="padding: 1rem;">
+                <img src="../images/logo-1694787094.jpg" alt="Logo" style="height: 40px; border-radius: 6px;">
             </div>
             <nav>
                 <a href="index.php" class="nav-link">📦 Lagerverwaltung</a>
                 <a href="ai_dashboard.php" class="nav-link">✨ AI Generator</a>
-                <a href="help.php" class="nav-link active">📚 Hilfe (AI)</a>
+                <a href="help.php" class="nav-link active">📚 Hilfe & Assistenz</a>
                 <a href="../setup.php" class="nav-link" onclick="return confirm('Datenbank wirklich zurücksetzen?')">⚙️ DB Setup</a>
                 <a href="../index.html" class="nav-link mt-5">🌐 Zum Shop</a>
             </nav>
@@ -93,7 +93,7 @@ include_once dirname(__FILE__) . "/../db.php";
         <main class="main-content">
             <div class="header-actions mb-4">
                 <div>
-                    <h2 class="fw-bold mb-0">Hilfe & Support</h2>
+                    <h2 class="fw-bold mb-0">Hilfe & Assistenz</h2>
                     <p class="text-muted">Ihr persönlicher System-Assistent</p>
                 </div>
             </div>
@@ -116,6 +116,23 @@ include_once dirname(__FILE__) . "/../db.php";
                                 <button onclick="askQuestion('Wie setze ich die Datenbank zurück?')" class="btn btn-light text-start py-3 px-3 rounded-3 border">
                                     ⚙️ Datenbank Reset
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Guide Card -->
+                    <div class="card border-0 shadow-sm rounded-4 mb-4">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-3">📖 Anleitung: AI Generator</h5>
+                            <ol class="list-group list-group-numbered list-group-flush small mb-3">
+                                <li class="list-group-item px-0"><strong>API Key</strong> eingeben (einmalig).</li>
+                                <li class="list-group-item px-0"><strong>Produkt</strong> auswählen.</li>
+                                <li class="list-group-item px-0">Auf <strong>✨ Generieren</strong> klicken.</li>
+                                <li class="list-group-item px-0">Texte prüfen (DE/EN/AR).</li>
+                                <li class="list-group-item px-0"><strong>💾 Speichern</strong> für Shop-Update.</li>
+                            </ol>
+                            <div class="alert alert-info py-2 small mb-0">
+                                <strong>Tipp:</strong> Texte sind vor dem Speichern bearbeitbar!
                             </div>
                         </div>
                     </div>

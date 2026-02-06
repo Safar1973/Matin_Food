@@ -2,6 +2,7 @@
 let currentLanguage = 'de';
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cartTimer = null;
 
 // Constants
 const API_URL = 'backend/api/get_products.php';
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartUI();
     setupNavigation();
     setupFilters();
+    setupCartBackdrop();
 
     // 2. AI Chat Widget Initialization
     initAiChat();
@@ -28,6 +30,8 @@ function initAiChat() {
     const aiInput = document.getElementById('ai-input');
     const aiSendBtn = document.getElementById('ai-send-btn');
     const aiMessages = document.getElementById('ai-messages');
+
+    let chatHistory = [];
 
     if (!aiToggleBtn) return;
 
@@ -51,17 +55,40 @@ function initAiChat() {
         addMessage(text, 'user');
         aiInput.value = '';
 
-        // Simulate Typing
-        const typingId = addMessage('...', 'bot');
+        // Typing Indicator
+        const typingId = addMessage('...', 'bot typing');
 
-        // Simple Heuristic Response
-        setTimeout(() => {
-            const typingMsg = document.getElementById(typingId);
-            if (typingMsg) typingMsg.remove();
+        try {
+            // Get Key from Cookies
+            const apiKeyMatch = document.cookie.match(/openai_key=([^;]+)/);
+            const apiKey = apiKeyMatch ? apiKeyMatch[1] : null;
 
-            const response = getSimpleResponse(text);
-            addMessage(response, 'bot');
-        }, 1000);
+            const response = await fetch('backend/api/ai_chat_handler.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    query: text,
+                    history: chatHistory,
+                    api_key: apiKey
+                })
+            });
+
+            const result = await response.json();
+            document.getElementById(typingId).remove();
+
+            if (result.success) {
+                addMessage(result.response, 'bot');
+                chatHistory.push({ role: 'user', content: text });
+                chatHistory.push({ role: 'assistant', content: result.response });
+                // Keep history reasonable
+                if (chatHistory.length > 10) chatHistory.shift();
+            } else {
+                addMessage('Fehler: ' + result.error, 'bot text-danger');
+            }
+        } catch (error) {
+            document.getElementById(typingId).remove();
+            addMessage('Verbindungsfehler zur KI.', 'bot text-danger');
+        }
     }
 
     aiSendBtn.addEventListener('click', sendMessage);
@@ -74,20 +101,19 @@ function initAiChat() {
         const id = 'msg-' + Date.now();
         msgDiv.id = id;
         msgDiv.className = `ai-msg ai-msg-${sender}`;
-        msgDiv.textContent = text;
+
+        // Simple Markdown support
+        if (sender === 'bot') {
+            let formatted = text.replace(/\n/g, '<br>');
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            msgDiv.innerHTML = formatted;
+        } else {
+            msgDiv.textContent = text;
+        }
+
         aiMessages.appendChild(msgDiv);
         aiMessages.scrollTop = aiMessages.scrollHeight;
         return id;
-    }
-
-    function getSimpleResponse(input) {
-        const lower = input.toLowerCase();
-        if (lower.includes('hallo') || lower.includes('hi')) return 'Hallo! Wie kann ich Ihnen heute helfen?';
-        if (lower.includes('rezept') || lower.includes('kochen')) return 'Wir haben tolle Zutaten für orientalische Gerichte! Probieren Sie unser Makdous oder die Weinblätter.';
-        if (lower.includes('lieferung') || lower.includes('versand')) return 'Ab 50€ liefern wir versandkostenfrei! Sonst beträgt der Versand 4,90€.';
-        if (lower.includes('öffnung')) return 'Unser Online-Shop ist 24/7 für Sie geöffnet!';
-        if (lower.includes('kontakt')) return 'Sie erreichen uns unter info@matinfood.de oder +49 (0) 123 456 789.';
-        return 'Das ist eine interessante Frage! Stöbern Sie doch mal in unseren Kategorien, da finden Sie sicher das Richtige.';
     }
 }
 
@@ -500,12 +526,68 @@ function addToCart(productId) {
 
     saveCart();
     updateCartUI();
+
+    // Automatically open cart and set auto-close timer
+    const panel = document.getElementById('cart-panel');
+    if (!panel.classList.contains('active')) {
+        toggleCart();
+    } else {
+        // Reset timer if already open
+        startCartTimer();
+    }
+
     showToast(`${product.name} hinzugefügt`);
+}
+
+function startCartTimer() {
+    clearTimeout(cartTimer);
+    cartTimer = setTimeout(() => {
+        const panel = document.getElementById('cart-panel');
+        if (panel.classList.contains('active')) {
+            toggleCart();
+        }
+    }, 3000);
 }
 
 function toggleCart() {
     const panel = document.getElementById('cart-panel');
+    const backdrop = document.getElementById('cart-backdrop');
+
+    clearTimeout(cartTimer);
     panel.classList.toggle('active');
+
+    if (backdrop) {
+        if (panel.classList.contains('active')) {
+            backdrop.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            startCartTimer(); // Start timer when opened
+        } else {
+            backdrop.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+}
+
+function setupCartBackdrop() {
+    let backdrop = document.getElementById('cart-backdrop');
+    let panel = document.getElementById('cart-panel');
+
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.id = 'cart-backdrop';
+        backdrop.className = 'cart-backdrop';
+        document.body.appendChild(backdrop);
+
+        backdrop.addEventListener('click', () => {
+            if (panel.classList.contains('active')) toggleCart();
+        });
+    }
+
+    if (panel) {
+        // Stop timer if user interacts with the cart
+        panel.addEventListener('mouseenter', () => clearTimeout(cartTimer));
+        panel.addEventListener('click', () => clearTimeout(cartTimer));
+    }
 }
 
 function updateCartUI() {
@@ -560,6 +642,10 @@ function openCheckout() {
     }
     const panel = document.getElementById('cart-panel');
     panel.classList.remove('active');
+    const backdrop = document.getElementById('cart-backdrop');
+    if (backdrop) backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+
     goToSection('checkout-section');
 }
 
