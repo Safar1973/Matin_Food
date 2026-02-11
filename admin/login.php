@@ -97,7 +97,7 @@ if ($_POST) {
 
 <div class="login-card">
     <div class="logo">
-        <img src="../images/logo-1694787094.jpg" alt="Logo" style="height: 50px; border-radius: 8px;">
+        <img src="../images/logo-1694787094.jpg" alt="Logo" style="height: 70px; border-radius: 15px;">
     </div>
     <form method="post">
         <input name="username" placeholder="Benutzername" required>

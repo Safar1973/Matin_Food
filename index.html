@@ -89,8 +89,11 @@
                             <span class="icon">👤</span>
                             <span class="label" data-i18n="account">Konto</span>
                         </div>
-                        <div class="action-item mx-3">
-                            <span class="icon">❤️</span>
+                        <div class="action-item mx-3" onclick="filterByCategory('wishlist')">
+                            <div class="icon-wrapper">
+                                <span class="icon">❤️</span>
+                                <span class="badge" id="wishlist-count">0</span>
+                            </div>
                             <span class="label" data-i18n="wishlist">Merkzettel</span>
                         </div>
                         <div class="action-item cart-trigger" onclick="toggleCart()">
@@ -356,7 +359,11 @@
                         <h2 id="modal-title" class="mb-3 fw-bold"></h2>
                         <h3 id="modal-price" class="text-danger fw-bold mb-4"></h3>
                         <p id="modal-details-content" class="text-muted mb-4"></p>
-                        <button id="modal-btn" class="add-to-cart-btn btn-lg">In den Warenkorb</button>
+                        <div class="d-flex gap-2">
+                            <button id="modal-btn" class="add-to-cart-btn btn-lg flex-grow-1">In den Warenkorb</button>
+                            <button id="modal-wishlist-btn"
+                                class="btn btn-outline-danger btn-lg px-4 rounded-3">♡</button>
+                        </div>
                     </div>
                 </div>
             </div>

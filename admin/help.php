@@ -32,7 +32,7 @@ include_once dirname(__FILE__) . "/../db.php";
             flex-grow: 1;
             padding: 20px;
             overflow-y: auto;
-            background: #228d1eff;
+            background: #d2e3d2ff;
             display: flex;
             flex-direction: column;
             gap: 15px;

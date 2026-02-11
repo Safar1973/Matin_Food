@@ -330,6 +330,11 @@ header {
     object-fit: contain;
     padding: 10px;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.product-img:hover {
+    transform: scale(1.05);
 }
 
 .badge-container {
@@ -362,6 +367,17 @@ header {
     width: fit-content;
 }
 
+.badge-popular-pill {
+    background: #ffab00;
+    color: #333;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+    width: fit-content;
+}
+
 .wishlist-btn-ref {
     position: absolute;
     top: 50%;
@@ -383,7 +399,8 @@ header {
     transition: all 0.2s;
 }
 
-.wishlist-btn-ref:hover {
+.wishlist-btn-ref:hover,
+.wishlist-btn-ref.active {
     color: #e62117;
     transform: translateY(-50%) scale(1.1);
 }
@@ -685,6 +702,23 @@ header {
 
 .page-section.active {
     display: block;
+}
+
+/* Filter Active Hint */
+.filter-active-hint {
+    animation: fadeInDown 0.5s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .modal {

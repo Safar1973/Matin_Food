@@ -109,7 +109,10 @@ try {
             ['canned', 'images/الدرة_باذنجان_مشوي_تنك_4x2750g.jpg', 'Grilled Eggplant (Large Can)', 'Gegrillte Aubergine (Große Dose)', 'باذنجان مشوي (تنكة كبيرة)', 11.20, '2024-10-20', '2026-04-20'],
             ['canned', 'images/لارا_باذنجان_مشوي_مقطع_12x610g.jpg', 'Chopped Grilled Eggplant', 'Gegrillte Aubergine geschnitten', 'باذنجان مشوي مقطع', 3.40, '2024-10-20', '2026-04-20'],
             ['syrups', 'images/شتورة_غاردن_خل_تفاح_12X500ml.jpg', 'Apple Vinegar', 'Apfelessig', 'خل تفاح', 2.80, '2025-01-01', '2027-01-01'],
-            ['canned', 'images/كامشن_خضروات_12X450_Gr__.jpg', 'Mixed Vegetables', 'Mischgemüse', 'خضروات مشكلة', 2.10, '2024-08-08', '2026-08-08']
+            ['canned', 'images/كامشن_خضروات_12X450_Gr__.jpg', 'Mixed Vegetables', 'Mischgemüse', 'خضروات مشكلة', 2.10, '2024-08-08', '2026-08-08'],
+            ['misc', 'images/أراكيل_و_فحم.jpg', 'Shisha & Charcoal', 'Shishas & Kohle', 'أراكيل وفحم', 25.00, '2025-01-01', '2027-01-01'],
+            ['canned', 'images/grilled_eggplant_jar.jpg', 'Grilled Eggplant (Premium Jar)', 'Gegrillte Aubergine (Premium Glas)', 'باذنجان مشوي (بريميوم)', 3.80, '2024-10-20', '2026-10-20'],
+            ['canned', 'images/grilled_eggplant_can.jpg', 'Grilled Eggplant (Premium Can)', 'Gegrillte Aubergine (Premium Dose)', 'باذنجان مشوي (بريميوم تنك)', 12.50, '2024-10-20', '2026-10-20']
         ];
 
         $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, production_date, expiry, description_de, description_en, description_ar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Leckeres Produkt', 'Delicious product', 'منتج لذيذ')");

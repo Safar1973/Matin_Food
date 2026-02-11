@@ -2,6 +2,7 @@
 let currentLanguage = 'de';
 let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 let cartTimer = null;
 
 // Constants
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     checkProtocol();
     setLanguage(currentLanguage);
     updateCartUI();
+    updateWishlistUI();
     setupNavigation();
     setupFilters();
     setupCartBackdrop();
@@ -84,6 +86,13 @@ function initAiChat() {
                 if (chatHistory.length > 10) chatHistory.shift();
             } else {
                 addMessage('Fehler: ' + result.error, 'bot text-danger');
+                if (result.error.toLowerCase().includes('quota') || result.error.toLowerCase().includes('billing') || result.error.toLowerCase().includes('api key')) {
+                    const newKey = prompt('Es scheint ein Problem mit dem API-Key vorzuliegen (Quota überschritten). Möchten Sie einen neuen OpenAI API-Key eingeben?');
+                    if (newKey) {
+                        document.cookie = `openai_key=${newKey}; path=/; max-age=31536000`;
+                        addMessage('API-Key wurde aktualisiert. Bitte versuchen Sie es erneut.', 'bot text-success');
+                    }
+                }
             }
         } catch (error) {
             document.getElementById(typingId).remove();
@@ -207,11 +216,14 @@ function renderProducts(productsToRender = products) {
                 <div class="badge-container">
                     <span class="badge-discount">-${discount}%</span>
                     ${product.id % 4 === 0 ? '<span class="badge-neu-pill">Neu</span>' : ''}
+                    ${product.id % 5 === 0 ? '<span class="badge-popular-pill">Beliebt</span>' : ''}
                 </div>
-                <button class="wishlist-btn-ref" title="Auf den Merkzettel">
-                    ♡
+                <button class="wishlist-btn-ref ${wishlist.includes(product.id) ? 'active' : ''}" 
+                        onclick="toggleWishlist(${product.id}, event)" 
+                        title="Auf den Merkzettel">
+                    ${wishlist.includes(product.id) ? '❤️' : '♡'}
                 </button>
-                <img src="${product.img}" alt="${product.name}" class="product-img" onclick="openProductModal(${product.id})">
+                <img src="${product.img}" alt="${product.name}" class="product-img" onclick="toggleWishlist(${product.id}, event)" title="Klicken, zum Merkzettel hinzufügen">
             </div>
             <div class="product-info-ref text-center">
                 <div class="product-price-ref">${parseFloat(product.price).toFixed(2)} €</div>
@@ -248,7 +260,7 @@ const translations = {
         'categories': 'Kategorien',
         'welcome_title': 'Willkommen bei MATIN FOOD',
         'welcome_text': 'Entdecken Sie authentische orientalische Spezialitäten und frische Lebensmittel in bester Qualität.',
-        'all_products': 'Alle Produkte',
+        'all_products': 'Alle Produkte anzeigen',
         'popular': 'Beliebt',
         'new_in_shop': 'Neu im Shop',
         'bestseller': 'Bestseller',
@@ -494,10 +506,14 @@ function filterByCategory(category) {
         filtered = products;
     } else if (category === 'neu') {
         filtered = products.filter(p => p.id % 4 === 0);
+    } else if (category === 'beliebt') {
+        filtered = products.filter(p => p.id % 5 === 0);
     } else if (category === 'bestseller') {
         filtered = products.filter(p => p.price > 4);
     } else if (category === 'ausverkauft') {
         filtered = products.filter(p => p.id % 7 === 0);
+    } else if (category === 'wishlist') {
+        filtered = products.filter(p => wishlist.includes(p.id));
     } else {
         filtered = products.filter(p => p.category.toLowerCase() === category.toLowerCase());
     }
@@ -505,6 +521,65 @@ function filterByCategory(category) {
     renderProducts(filtered);
     goToSection('home-section');
 }
+
+function extractKeyword(name) {
+    // 1. Remove weight info like (1kg)
+    let clean = name.split('(')[0].trim();
+
+    // 2. Specific multi-word keywords that should stay together
+    const multiWords = ['Tomato Paste', 'Apple Vinegar', 'Stuffed Grape Leaves', 'Mixed Vegetables', 'Pomegranate Molasses', 'Arabic Bread', 'Oriental Sweets'];
+    for (const mw of multiWords) {
+        if (clean.toLowerCase().includes(mw.toLowerCase())) return mw;
+    }
+
+    // 3. For German/English: usually the last word is the main category if multi-word
+    // e.g. "Ägyptischer Reis" -> "Reis"
+    // For Arabic: usually the first word
+    // e.g. "رز مصري" -> "رز"
+
+    let words = clean.split(' ');
+    if (currentLanguage === 'ar') {
+        return words[0];
+    } else {
+        // Return last word if multiple, otherwise the word itself
+        return words.length > 1 ? words[words.length - 1] : words[0];
+    }
+}
+
+function filterByVariety(productName, event) {
+    if (event) event.stopPropagation();
+
+    const keyword = extractKeyword(productName);
+    console.log(`Filtering for variety of: ${productName}, keyword: ${keyword}`);
+
+    const filtered = products.filter(p => {
+        const nameInLang = (p['name_' + currentLanguage] || p.name).toLowerCase();
+        return nameInLang.includes(keyword.toLowerCase());
+    });
+
+    renderProducts(filtered);
+
+    // Show a small UI hint about the filter
+    const grid = document.getElementById('product-grid');
+    if (grid && filtered.length > 0) {
+        const filterInfo = document.createElement('div');
+        filterInfo.className = 'col-12 mb-4 filter-active-hint';
+        filterInfo.innerHTML = `
+            <div class="alert alert-info d-flex justify-content-between align-items-center shadow-sm" style="border-radius: 15px; background: rgba(227, 242, 253, 0.9);">
+                <span>
+                    <span class="fs-5">🔍</span> 
+                    Zeige alle Ergebnisse für: <strong>"${keyword}"</strong> (${filtered.length} Artikel)
+                </span>
+                <button class="btn btn-sm btn-outline-primary rounded-pill px-3" onclick="renderProducts()">Alle Produkte anzeigen</button>
+            </div>
+        `;
+        grid.prepend(filterInfo);
+    }
+
+    goToSection('home-section');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 
 // Cart management
 function addToCart(productId) {
@@ -738,7 +813,49 @@ function updateLanguageSwitcherUI() {
     }
 }
 
-// UI Helpers
+// Wishlist handling
+function toggleWishlist(productId, event) {
+    if (event) event.stopPropagation();
+
+    const index = wishlist.indexOf(productId);
+    if (index === -1) {
+        wishlist.push(productId);
+        showToast('Zum Merkzettel hinzugefügt ❤️');
+    } else {
+        wishlist.splice(index, 1);
+        showToast('Vom Merkzettel entfernt');
+    }
+
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    renderProducts();
+    updateWishlistUI();
+
+    // Update modal button if it's open for this product
+    const modalWishlistBtn = document.getElementById('modal-wishlist-btn');
+    if (modalWishlistBtn) {
+        const isCurrentlyIn = wishlist.includes(productId);
+        modalWishlistBtn.innerText = isCurrentlyIn ? '❤️' : '♡';
+        modalWishlistBtn.classList.toggle('btn-danger', isCurrentlyIn);
+        modalWishlistBtn.classList.toggle('btn-outline-danger', !isCurrentlyIn);
+    }
+}
+
+function updateWishlistUI() {
+    // We could add a badge to the Merkzettel icon if desired
+    // For now, let's just make sure the header link works
+    const items = document.querySelectorAll('.action-item');
+    items.forEach(item => {
+        const labelEl = item.querySelector('.label');
+        if (labelEl && (labelEl.getAttribute('data-i18n') === 'wishlist' || labelEl.innerText.includes('Merkzettel'))) {
+            item.setAttribute('onclick', "filterByCategory('wishlist')");
+        }
+    });
+
+    const wishlistBadge = document.getElementById('wishlist-count');
+    if (wishlistBadge) {
+        wishlistBadge.innerText = wishlist.length;
+    }
+}
 function showToast(message) {
     console.log('Toast:', message);
 }
@@ -767,6 +884,15 @@ function openProductModal(productId) {
         const modal = bootstrap.Modal.getInstance(document.getElementById('product-modal'));
         if (modal) modal.hide();
     };
+
+    const modalWishlistBtn = document.getElementById('modal-wishlist-btn');
+    if (modalWishlistBtn) {
+        const isCurrentlyIn = wishlist.includes(product.id);
+        modalWishlistBtn.innerText = isCurrentlyIn ? '❤️' : '♡';
+        modalWishlistBtn.classList.toggle('btn-danger', isCurrentlyIn);
+        modalWishlistBtn.classList.toggle('btn-outline-danger', !isCurrentlyIn);
+        modalWishlistBtn.onclick = () => toggleWishlist(product.id);
+    }
 
     const productModal = new bootstrap.Modal(document.getElementById('product-modal'));
     productModal.show();

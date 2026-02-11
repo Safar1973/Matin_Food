@@ -51,11 +51,11 @@ $items_result = mysqli_query($conn, $items_query);
         .logo {
             font-size: 28px;
             font-weight: 800;
-            color: #2e7d32; /* Primary Green */
+            color: #d2d2d2ff; /* Primary Green */
             text-decoration: none;
         }
         .invoice-title {
-            color: #2e7d32;
+            color: #949494ff;
             font-weight: 800;
         }
         .table thead {
@@ -64,12 +64,12 @@ $items_result = mysqli_query($conn, $items_query);
         .total-row {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #2e7d32;
+            color: #f8fff8ff;
             background-color: #fffde7; /* Soft Yellow */
         }
         .btn-primary {
-            background-color: #2e7d32 !important;
-            border-color: #2e7d32 !important;
+            background-color: #e6e6e6ff !important;
+            border-color: #ffffffff !important;
         }
         @media print {
             .no-print {
