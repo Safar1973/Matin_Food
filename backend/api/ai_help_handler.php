@@ -63,7 +63,8 @@ if (curl_errno($ch)) {
         echo json_encode(['success' => true, 'response' => $response['choices'][0]['message']['content']]);
     } else {
         $err = isset($response['error']['message']) ? $response['error']['message'] : 'Unknown AI Error';
-        echo json_encode(['success' => false, 'error' => $err]);
+        if (!$response && $result) $err = 'Invalid Server Response (Bad Request?): ' . substr($result, 0, 150);
+        echo json_encode(['success' => false, 'error' => $err, 'raw' => $response ? $response : $result]);
     }
 }
 curl_close($ch);

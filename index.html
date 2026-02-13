@@ -85,16 +85,16 @@
 
                     <!-- Actions -->
                     <div class="col-auto d-flex header-actions">
-                        <div class="action-item" onclick="goToSection('account-section')">
-                            <span class="icon">👤</span>
-                            <span class="label" data-i18n="account">Konto</span>
-                        </div>
-                        <div class="action-item mx-3" onclick="filterByCategory('wishlist')">
+                        <div class="action-item" onclick="filterByCategory('wishlist')">
                             <div class="icon-wrapper">
                                 <span class="icon">❤️</span>
                                 <span class="badge" id="wishlist-count">0</span>
                             </div>
                             <span class="label" data-i18n="wishlist">Merkzettel</span>
+                        </div>
+                        <div class="action-item mx-3" onclick="goToSection('account-section')">
+                            <span class="icon">👤</span>
+                            <span class="label" data-i18n="account">My Account</span>
                         </div>
                         <div class="action-item cart-trigger" onclick="toggleCart()">
                             <div class="icon-wrapper">
@@ -118,7 +118,24 @@
                     <li><a href="#" onclick="filterByCategory('canned')" data-i18n="cat_canned">Konserven</a></li>
                     <li><a href="#" onclick="filterByCategory('syrups')" data-i18n="cat_syrups">Sirupe & Saucen</a></li>
                     <li><a href="#" onclick="filterByCategory('Angebote')" class="text-danger fw-bold"
-                            data-i18n="offers">ANGEBOTE %</a>
+                            data-i18n="offers">ANGEBOTE</a>
+                    </li>
+                    <li class="nav-item-hover">
+                        <a href="#" style="cursor: default;" data-i18n="opening_hours">Öffnungszeiten</a>
+                        <div class="dropdown-menu">
+                            <ul class="opening-hours-list">
+                                <li><span class="day" data-i18n="monday">Montag</span> <span>08:00 - 19:00</span></li>
+                                <li><span class="day" data-i18n="tuesday">Dienstag</span> <span>08:00 - 19:00</span>
+                                </li>
+                                <li><span class="day" data-i18n="wednesday">Mittwoch</span> <span>08:00 - 19:00</span>
+                                </li>
+                                <li><span class="day" data-i18n="thursday">Donnerstag</span> <span>08:00 - 19:00</span>
+                                </li>
+                                <li><span class="day" data-i18n="friday">Freitag</span> <span>08:00 - 19:00</span></li>
+                                <li><span class="day" data-i18n="saturday">Samstag</span> <span>08:00 - 19:00</span>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -399,23 +416,50 @@
 
 
                 <!-- Newsletter -->
-                <div class="col-lg-6">
+                <!-- Newsletter -->
+                <div class="col-lg-3">
                     <h4 class="fw-bold mb-3">Newsletter</h4>
-                    <p class="small text-muted mb-4">Abonnieren Sie den kostenlosen MATIN FOOD Newsletter und verpassen
-                        Sie keine Neuigkeiten und Aktionen in unserem Shop.</p>
+                    <p class="small text-muted mb-4">Abonnieren Sie den kostenlosen MATIN FOOD Newsletter.</p>
                     <form>
                         <input type="email" class="form-control rounded-pill mb-3" placeholder="Ihre E-Mail Adresse">
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" id="footer-privacy" required>
                             <label class="form-check-label x-small text-muted" for="footer-privacy"
                                 style="font-size: 0.8rem;">
-                                Ich habe die <a href="#" class="text-danger">Datenschutzbestimmungen</a> zur Kenntnis
-                                genommen und gelesen und bin mit ihnen einverstanden. *
+                                Ich habe die <a href="#" class="text-danger">BS</a> gelesen. *
                             </label>
                         </div>
                         <button class="btn btn-primary rounded-pill w-100 fw-bold"
                             style="background: var(--primary-color); border: none;">Abonnieren</button>
                     </form>
+                </div>
+
+                <!-- Opening Hours -->
+                <div class="col-lg-3">
+                    <h4 class="fw-bold mb-3">Öffnungszeiten</h4>
+                    <p class="small text-muted mb-3">Hier finden Sie die Öffnungszeiten von Matin Food in Oberhausen,
+                        Rheinland.</p>
+                    <ul class="list-unstyled small text-muted">
+                        <li class="d-flex justify-content-between mb-1"><span data-i18n="monday">Montag</span>
+                            <span>08:00 - 19:00</span>
+                        </li>
+                        <li class="d-flex justify-content-between mb-1"><span data-i18n="tuesday">Dienstag</span>
+                            <span>08:00 - 19:00</span>
+                        </li>
+                        <li class="d-flex justify-content-between mb-1"><span data-i18n="wednesday">Mittwoch</span>
+                            <span>08:00 - 19:00</span>
+                        </li>
+                        <li class="d-flex justify-content-between mb-1"><span data-i18n="thursday">Donnerstag</span>
+                            <span>08:00 -
+                                19:00</span>
+                        </li>
+                        <li class="d-flex justify-content-between mb-1"><span data-i18n="friday">Freitag</span>
+                            <span>08:00 - 19:00</span>
+                        </li>
+                        <li class="d-flex justify-content-between mb-1"><span data-i18n="saturday">Samstag</span>
+                            <span>08:00 - 19:00</span>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- Links Sections -->

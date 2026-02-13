@@ -86,11 +86,22 @@ function initAiChat() {
                 if (chatHistory.length > 10) chatHistory.shift();
             } else {
                 addMessage('Fehler: ' + result.error, 'bot text-danger');
-                if (result.error.toLowerCase().includes('quota') || result.error.toLowerCase().includes('billing') || result.error.toLowerCase().includes('api key')) {
-                    const newKey = prompt('Es scheint ein Problem mit dem API-Key vorzuliegen (Quota überschritten). Möchten Sie einen neuen OpenAI API-Key eingeben?');
-                    if (newKey) {
-                        document.cookie = `openai_key=${newKey}; path=/; max-age=31536000`;
-                        addMessage('API-Key wurde aktualisiert. Bitte versuchen Sie es erneut.', 'bot text-success');
+
+                // Enhanced error handling for common OpenAI issues
+                const errorText = result.error.toLowerCase();
+                if (errorText.includes('quota') || errorText.includes('billing') || errorText.includes('api key') || errorText.includes('limit')) {
+                    const message = `⚠️ Es scheint ein Problem mit dem AI-Dienst vorzuliegen.\n\n` +
+                        `Mögliche Ursachen:\n` +
+                        `1. Ihr OpenAI Guthaben ist aufgebraucht (Quota exceeded).\n` +
+                        `2. Der API-Key ist ungültig.\n\n` +
+                        `Möchten Sie jetzt einen neuen OpenAI API-Key eingeben?`;
+
+                    const newKey = prompt(message);
+                    if (newKey && newKey.trim().startsWith('sk-')) {
+                        document.cookie = `openai_key=${newKey.trim()}; path=/; max-age=31536000`; // 1 year
+                        addMessage('✅ API-Key wurde aktualisiert. Sie können es jetzt erneut versuchen.', 'bot text-success');
+                    } else if (newKey) {
+                        addMessage('❌ Ungültiges Key-Format. Ein OpenAI Key beginnt normalerweise mit "sk-".', 'bot text-warning');
                     }
                 }
             }
@@ -248,7 +259,7 @@ const translations = {
         'about_us': 'Über uns',
         'contact': 'Kontakt',
         'all_categories': 'Alle Kategorien',
-        'account': 'Konto',
+        'account': 'Mein Konto',
         'wishlist': 'Merkzettel',
         'cart': 'Warenkorb',
         'home': 'Startseite',
@@ -286,6 +297,14 @@ const translations = {
         'total_sum': 'Gesamtsumme',
         'checkout_btn': 'Zur Kasse gehen',
         'clear_cart': 'Warenkorb leeren',
+        'opening_hours': 'Öffnungszeiten',
+        'monday': 'Montag',
+        'tuesday': 'Dienstag',
+        'wednesday': 'Mittwoch',
+        'thursday': 'Donnerstag',
+        'friday': 'Freitag',
+        'saturday': 'Samstag',
+        'sunday': 'Sonntag',
         'login': 'Anmelden',
         'register': 'Registrieren',
         'email': 'E-Mail Adresse',
@@ -320,7 +339,7 @@ const translations = {
         'about_us': 'About Us',
         'contact': 'Contact',
         'all_categories': 'All Categories',
-        'account': 'Account',
+        'account': 'My Account',
         'wishlist': 'Wishlist',
         'cart': 'Cart',
         'home': 'Home',
@@ -358,6 +377,14 @@ const translations = {
         'total_sum': 'Total Sum',
         'checkout_btn': 'Go to Checkout',
         'clear_cart': 'Clear Cart',
+        'opening_hours': 'Opening Hours',
+        'monday': 'Monday',
+        'tuesday': 'Tuesday',
+        'wednesday': 'Wednesday',
+        'thursday': 'Thursday',
+        'friday': 'Friday',
+        'saturday': 'Saturday',
+        'sunday': 'Sunday',
         'login': 'Login',
         'register': 'Register',
         'email': 'Email Address',
@@ -430,6 +457,14 @@ const translations = {
         'total_sum': 'المجموع الإجمالي',
         'checkout_btn': 'الذهاب للدفع',
         'clear_cart': 'تفريغ العربة',
+        'opening_hours': 'ساعات العمل',
+        'monday': 'الاثنين',
+        'tuesday': 'الثلاثاء',
+        'wednesday': 'الأربعاء',
+        'thursday': 'الخميس',
+        'friday': 'الجمعة',
+        'saturday': 'السبت',
+        'sunday': 'الأحد',
         'login': 'تسجيل الدخول',
         'register': 'إنشاء حساب',
         'email': 'البريد الإلكتروني',

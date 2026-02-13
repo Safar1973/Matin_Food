@@ -931,3 +931,132 @@ header {
     border-radius: 12px 12px 0 12px;
     align-self: flex-end;
 }
+
+/* Opening Hours Hover Dropdown */
+.nav-item-hover {
+    position: relative;
+    padding-bottom: 0;
+}
+
+.nav-item-hover:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-item-hover .dropdown-menu {
+    display: block;
+    /* Required for layout */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
+}
+
+.nav-item-hover .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: transparent;
+}
+
+.opening-hours-list {
+    list-style: none;
+    padding: 15px;
+    margin: 0;
+}
+
+.opening-hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 14px;
+    color: var(--text-main);
+    border-bottom: 1px dotted #eee;
+}
+
+.opening-hours-list li:last-child {
+    border-bottom: none;
+}
+
+.opening-hours-list span.day {
+    font-weight: 600;
+}
+
+/* Mega Dropdown for Startpage */
+.nav-item-hover .dropdown-mega {
+    min-width: 500px;
+    padding: 20px;
+    display: block;
+    /* Required for layout, visibility handles hide/show */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    left: 0;
+}
+
+.nav-item-hover:hover .dropdown-mega {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    margin-top: 0;
+}
+
+.dropdown-mega-content {
+    display: flex;
+    gap: 30px;
+}
+
+.dropdown-col {
+    flex: 1;
+}
+
+.dropdown-col h6 {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.dropdown-link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-link-list li {
+    margin-bottom: 8px;
+}
+
+.dropdown-link-list a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 14px;
+    transition: color 0.2s;
+    display: block;
+    padding: 4px 0;
+}
+
+.dropdown-link-list a:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
+}

@@ -16,7 +16,7 @@ $prompt = "Write a short, appetizing product description (max 2 sentences) for a
 $ch = curl_init();
 
 $postData = [
-    'model' => 'gpt-3.5-turbo', // or gpt-4o-mini if available to user
+    'model' => 'gpt-3.5-turbo',
     'messages' => [
         ['role' => 'system', 'content' => 'You are a helpful assistant for a grocery shop. You output only JSON.'],
         ['role' => 'user', 'content' => $prompt]
@@ -62,7 +62,11 @@ if (curl_errno($ch)) {
         if (isset($response['error']['message'])) {
             $errorMsg = $response['error']['message'];
         }
-        echo json_encode(['success' => false, 'error' => 'OpenAI API Error: ' . $errorMsg, 'raw' => $response]);
+        // Specific debug info for "Bad Request" or similar
+        if (!$response && $result) {
+            $errorMsg = 'Ungültige Server-Antwort (evtl. Bad Request): ' . substr($result, 0, 150);
+        }
+        echo json_encode(['success' => false, 'error' => 'OpenAI API Error: ' . $errorMsg, 'raw' => $response ? $response : $result]);
     }
 }
 
