@@ -8,31 +8,20 @@ set_time_limit(60);
 $data = json_decode(file_get_contents('php://input'), true);
 
 // Get API Key from request or cookie
-$apiKey = isset($data['api_key']) ? $data['api_key'] : (isset($_COOKIE['openai_key']) ? $_COOKIE['openai_key'] : null);
+$apiKey = isset($data['api_key']) ? $data['api_key'] : (isset($_COOKIE['gemini_key']) ? $_COOKIE['gemini_key'] : null);
 $apiKey = $apiKey ? trim($apiKey) : null;
 
 if (!$apiKey) {
-    echo json_encode(['success' => false, 'error' => 'Kein API Key konfiguriert. Bitte geben Sie Ihren OpenAI Key ein.']);
+    echo json_encode(['success' => false, 'error' => 'Kein Gemini API Key konfiguriert. Bitte geben Sie Ihren Google API Key ein.']);
     exit;
 }
 
 $userQuery = isset($data['query']) ? $data['query'] : 'Hallo';
 $history = isset($data['history']) ? $data['history'] : [];
 
-// --- ENHANCEMENT: Fetch Product Context (Optimized) ---
+// --- Fetch Product Context (Optimized) ---
 $productContext = "";
 try {
-    $categories = [];
-    $catRes = $conn->query("SELECT DISTINCT category FROM products WHERE category IS NOT NULL AND category != ''");
-    if ($catRes) {
-        while ($row = $catRes->fetch_assoc()) {
-            if (!empty(trim($row['category']))) {
-                $categories[] = trim($row['category']);
-            }
-        }
-    }
-
-    // Fetch products grouped by category for better organization and token efficiency
     $productsByCategory = [];
     $prodRes = $conn->query("SELECT name_de, price, category FROM products WHERE name_de IS NOT NULL AND name_de != '' ORDER BY category, price");
     if ($prodRes) {
@@ -49,7 +38,6 @@ try {
         }
     }
 
-    // Build compact product list
     if (!empty($productsByCategory)) {
         $productContext = "Sortiment:\n";
         foreach ($productsByCategory as $cat => $products) {
@@ -60,7 +48,7 @@ try {
     // Silent fail for context
 }
 
-// System Prompt for Customer Support (Optimized)
+// System Prompt
 $systemPrompt = "Du bist Matin AI, der Einkaufsassistent für Matin Food (orientalische Lebensmittel, Oberhausen).
 
 WICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.
@@ -73,76 +61,74 @@ Regeln:
 - Versand: ab 50€ gratis, sonst 4,90€
 - Sei höflich und prägnant";
 
-$messages = [['role' => 'system', 'content' => $systemPrompt]];
+// Build Gemini conversation format (v1beta compatible)
+$contents = [];
 
-// Add history (filter and validate)
+// Add history
 foreach ($history as $msg) {
     if (isset($msg['role']) && isset($msg['content']) && !empty($msg['content'])) {
-        // OpenAI expects 'assistant' not 'bot'
-        $role = ($msg['role'] === 'bot' || $msg['role'] === 'assistant') ? 'assistant' : 'user';
-        $messages[] = ['role' => $role, 'content' => $msg['content']];
+        $role = ($msg['role'] === 'bot' || $msg['role'] === 'model') ? 'model' : 'user';
+        $contents[] = [
+            'role' => $role,
+            'parts' => [['text' => $msg['content']]]
+        ];
     }
 }
 
 // Add current query
-$messages[] = ['role' => 'user', 'content' => $userQuery];
-
-// Call OpenAI API
-$ch = curl_init();
-$postData = [
-    'model' => 'gpt-3.5-turbo', // Reverting to 3.5-turbo for maximum compatibility
-    'messages' => $messages,
-    'temperature' => 0.7
+$contents[] = [
+    'role' => 'user',
+    'parts' => [['text' => $userQuery]]
 ];
 
-// Final check of messages for invalid characters
-$jsonPost = json_encode($postData);
+// Call Google Gemini API
+$ch = curl_init();
+$postData = [
+    'system_instruction' => [
+        'parts' => [['text' => $systemPrompt]]
+    ],
+    'contents' => $contents,
+    'generationConfig' => [
+        'temperature' => 0.7,
+        'maxOutputTokens' => 1000
+    ]
+];
 
-// --- DEBUG LOGGING ---
-$logFile = dirname(__FILE__) . '/ai_debug.log';
-$logData = date('[Y-m-d H:i:s] ') . "Request: " . $jsonPost . "\n";
-file_put_contents($logFile, $logData, FILE_APPEND);
+// Use v1beta for system_instruction support and gemini-flash-latest (as seen in the model list)
+$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=" . urlencode($apiKey);
 
-curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/chat/completions');
+curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonPost);
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Content-Type: application/json',
-    'Authorization: Bearer ' . $apiKey
-]);
-
-// XAMPP Fix: Disable SSL Check
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
 $result = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-$logData = date('[Y-m-d H:i:s] ') . "Response (HTTP $httpCode): " . $result . "\n\n";
-file_put_contents($logFile, $logData, FILE_APPEND);
-
 if (curl_errno($ch)) {
-    $curlError = curl_error($ch);
-    file_put_contents($logFile, "cURL Error: $curlError\n\n", FILE_APPEND);
-    echo json_encode(['success' => false, 'error' => 'cURL Fehler: ' . $curlError]);
+    echo json_encode(['success' => false, 'error' => 'cURL Fehler: ' . curl_error($ch)]);
 } else {
     $response = json_decode($result, true);
-    if (isset($response['choices'][0]['message']['content'])) {
-        echo json_encode(['success' => true, 'response' => $response['choices'][0]['message']['content']]);
+    
+    if (isset($response['candidates'][0]['content']['parts'][0]['text'])) {
+        $aiResponse = $response['candidates'][0]['content']['parts'][0]['text'];
+        echo json_encode(['success' => true, 'response' => $aiResponse]);
     } else {
-        $err = 'Unbekannter KI-Fehler';
+        $err = 'Unbekannter Gemini-Fehler';
         if (isset($response['error']['message'])) {
             $err = $response['error']['message'];
         } elseif ($httpCode !== 200) {
-            $err = "OpenAI API Fehler (HTTP $httpCode)";
+            $err = "Gemini API Fehler (HTTP $httpCode)";
         }
         
         echo json_encode([
             'success' => false, 
-            'error' => $err, 
+            'error' => $err,
             'debug_code' => $httpCode,
-            'log_hint' => 'Check ai_debug.log for details'
+            'raw_response' => $response
         ]);
     }
 }

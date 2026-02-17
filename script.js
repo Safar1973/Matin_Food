@@ -58,14 +58,14 @@ function initAiChat() {
         aiInput.value = '';
 
         // Typing Indicator
-        const typingId = addMessage('...', 'bot typing');
+        const typingId = addMessage('<div class="typing-dots"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>', 'bot typing');
 
         try {
-            // Get Key from Cookies
-            const apiKeyMatch = document.cookie.match(/openai_key=([^;]+)/);
+            // Get Key from Cookies (Gemini)
+            const apiKeyMatch = document.cookie.match(/gemini_key=([^;]+)/);
             const apiKey = apiKeyMatch ? apiKeyMatch[1] : null;
 
-            const response = await fetch('backend/api/ai_chat_handler.php', {
+            const response = await fetch('backend/api/gemini_chat_handler.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -76,38 +76,43 @@ function initAiChat() {
             });
 
             const result = await response.json();
-            document.getElementById(typingId).remove();
+            const typingEl = document.getElementById(typingId);
+            if (typingEl) typingEl.remove();
 
             if (result.success) {
                 addMessage(result.response, 'bot');
+                // Gemini uses 'model' role
                 chatHistory.push({ role: 'user', content: text });
-                chatHistory.push({ role: 'assistant', content: result.response });
+                chatHistory.push({ role: 'model', content: result.response });
                 // Keep history reasonable
                 if (chatHistory.length > 10) chatHistory.shift();
             } else {
-                addMessage('Fehler: ' + result.error, 'bot text-danger');
+                let errorMsg = result.error || 'Ein unbekannter Fehler ist aufgetreten.';
+                if (result.debug_code) errorMsg += ` (HTTP ${result.debug_code})`;
 
-                // Enhanced error handling for common OpenAI issues
-                const errorText = result.error.toLowerCase();
-                if (errorText.includes('quota') || errorText.includes('billing') || errorText.includes('api key') || errorText.includes('limit')) {
-                    const message = `⚠️ Es scheint ein Problem mit dem AI-Dienst vorzuliegen.\n\n` +
-                        `Mögliche Ursachen:\n` +
-                        `1. Ihr OpenAI Guthaben ist aufgebraucht (Quota exceeded).\n` +
-                        `2. Der API-Key ist ungültig.\n\n` +
-                        `Möchten Sie jetzt einen neuen OpenAI API-Key eingeben?`;
+                addMessage('❌ ' + errorMsg, 'bot text-danger');
+
+                // Enhanced error handling for Gemini API issues
+                const errorStr = errorMsg.toLowerCase();
+                if (errorStr.includes('api key') || errorStr.includes('invalid') || errorStr.includes('403') || errorStr.includes('401')) {
+                    const message = `⚠️ Es scheint ein Problem mit dem Gemini API-Key vorzuliegen.\n\n` +
+                        `Möchten Sie jetzt einen neuen Google Gemini API-Key eingeben?\n\n` +
+                        `Holen Sie sich einen Key unter: https://aistudio.google.com/app/apikey`;
 
                     const newKey = prompt(message);
-                    if (newKey && newKey.trim().startsWith('sk-')) {
-                        document.cookie = `openai_key=${newKey.trim()}; path=/; max-age=31536000`; // 1 year
-                        addMessage('✅ API-Key wurde aktualisiert. Sie können es jetzt erneut versuchen.', 'bot text-success');
+                    if (newKey && newKey.trim().startsWith('AIza')) {
+                        document.cookie = `gemini_key=${newKey.trim()}; path=/; max-age=31536000`; // 1 year
+                        addMessage('✅ API-Key wurde aktualisiert. Bitte versuchen Sie es erneut.', 'bot text-success');
                     } else if (newKey) {
-                        addMessage('❌ Ungültiges Key-Format. Ein OpenAI Key beginnt normalerweise mit "sk-".', 'bot text-warning');
+                        addMessage('❌ Ungültiges Key-Format. Ein Gemini Key beginnt normalerweise mit "AIza".', 'bot text-warning');
                     }
                 }
             }
         } catch (error) {
-            document.getElementById(typingId).remove();
-            addMessage('Verbindungsfehler zur KI.', 'bot text-danger');
+            const typingEl = document.getElementById(typingId);
+            if (typingEl) typingEl.remove();
+            console.error('AI Chat Error:', error);
+            addMessage('Verbindungsfehler zur KI. Bitte prüfen Sie Ihre Internetverbindung.', 'bot text-danger');
         }
     }
 
@@ -118,12 +123,12 @@ function initAiChat() {
 
     function addMessage(text, sender) {
         const msgDiv = document.createElement('div');
-        const id = 'msg-' + Date.now();
+        const id = 'msg-' + Date.now() + Math.random().toString(36).substr(2, 5);
         msgDiv.id = id;
-        msgDiv.className = `ai-msg ai-msg-${sender}`;
+        msgDiv.className = `ai-msg ai-msg-${sender.split(' ')[0]}`; // Handle 'bot typing' case
 
-        // Simple Markdown support
-        if (sender === 'bot') {
+        if (sender.includes('bot')) {
+            // Simple Markdown support
             let formatted = text.replace(/\n/g, '<br>');
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             msgDiv.innerHTML = formatted;
@@ -135,6 +140,12 @@ function initAiChat() {
         aiMessages.scrollTop = aiMessages.scrollHeight;
         return id;
     }
+
+    // Expose clear function
+    window.clearAiChat = () => {
+        aiMessages.innerHTML = '<div class="ai-msg ai-msg-bot">Chat-Verlauf gelöscht. Wie kann ich Ihnen helfen?</div>';
+        chatHistory = [];
+    };
 }
 
 function checkProtocol() {

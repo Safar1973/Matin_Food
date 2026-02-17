@@ -78,7 +78,7 @@ $messages = [
 // Call OpenAI API
 $ch = curl_init();
 $postData = [
-    'model' => 'gpt-3.5-turbo',
+    'model' => 'gpt-4o-mini',
     'messages' => $messages,
     'temperature' => 0.7
 ];
@@ -91,20 +91,27 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Content-Type: application/json',
     'Authorization: Bearer ' . $apiKey
 ]);
+
+// XAMPP Fix: Disable SSL Check
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
 $result = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 if (curl_errno($ch)) {
-    echo json_encode(['success' => false, 'error' => 'cURL Error: ' . curl_error($ch)]);
+    echo json_encode(['success' => false, 'error' => 'cURL Fehler: ' . curl_error($ch)]);
 } else {
     $response = json_decode($result, true);
     if (isset($response['choices'][0]['message']['content'])) {
         echo json_encode(['success' => true, 'response' => $response['choices'][0]['message']['content']]);
     } else {
-        $err = isset($response['error']['message']) ? $response['error']['message'] : 'Unknown AI Error';
-        if (!$response && $result) $err = 'Invalid Server Response: ' . substr($result, 0, 100);
+        $err = 'Unbekannter KI-Fehler';
+        if (isset($response['error']['message'])) {
+            $err = $response['error']['message'];
+        } elseif ($httpCode !== 200) {
+            $err = "API Fehler (HTTP $httpCode): " . substr($result, 0, 100);
+        }
         echo json_encode(['success' => false, 'error' => $err, 'raw' => $response ? $response : $result]);
     }
 }

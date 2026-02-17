@@ -1,0 +1,176 @@
+[2026-02-17 10:30:06] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist der freundliche KI-Assistent von Matin Food. \r\nDeine Aufgabe ist es, Kunden im Online-Shop zu beraten.\r\nInformationen \u00fcber Matin Food:\r\n- Wir verkaufen hochwertige orientalische Lebensmittel, Gew\u00fcrze, Reis und Spezialit\u00e4ten.\r\n- Versandkosten: Ab 50\u20ac kostenlos, darunter 4,90\u20ac.\r\n- Zahlungsmethoden: PayPal, Visa, Mastercard.\r\n- Standort: Oberhausen, Rheinland.\r\n- Tonfall: Sehr h\u00f6flich, hilfsbereit und professionell.\r\n- Sprache: Antworte immer in der Sprache des Kunden (meist Deutsch, Englisch oder Arabisch).\r\n\r\nAktuelles Sortiment:\r\nKategorien: grains, canned, syrups, bakery, fresh, sweets, misc, Food. Produkte: Reis, , Gegrillte Aubergine (Premium Dose), Gegrillte Aubergine (Premium Glas), Shishas & Kohle, Mischgem\u00fcse, Apfelessig, Gegrillte Aubergine geschnitten, Gegrillte Aubergine (Gro\u00dfe Dose), Gegrillte Aubergine (Glas).\r\n\r\nWenn der Kunde nach Empfehlungen fragt, schlage konkrete Produkte aus dem Sortiment vor. Halte deine Antworten pr\u00e4gnant."},{"role":"user","content":"Hallo"}],"temperature":0.7}
+[2026-02-17 10:30:07] Response (HTTP 400): {
+  "error": {
+    "message": "Bad Request",
+    "type": null,
+    "code": null,
+    "param": null
+  },
+  "status": 400
+}
+
+[2026-02-17 10:39:27] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist der freundliche KI-Assistent von Matin Food. \r\nDeine Aufgabe ist es, Kunden im Online-Shop zu beraten.\r\nInformationen \u00fcber Matin Food:\r\n- Wir verkaufen hochwertige orientalische Lebensmittel, Gew\u00fcrze, Reis und Spezialit\u00e4ten.\r\n- Versandkosten: Ab 50\u20ac kostenlos, darunter 4,90\u20ac.\r\n- Zahlungsmethoden: PayPal, Visa, Mastercard.\r\n- Standort: Oberhausen, Rheinland.\r\n- Tonfall: Sehr h\u00f6flich, hilfsbereit und professionell.\r\n- Sprache: Antworte immer in der Sprache des Kunden (meist Deutsch, Englisch oder Arabisch).\r\n\r\nAktuelles Sortiment:\r\nKategorien: grains, canned, syrups, bakery, fresh, sweets, misc, Food. Produkte: Reis, Gegrillte Aubergine (Premium Dose), Gegrillte Aubergine (Premium Glas), Shishas & Kohle, Mischgem\u00fcse, Apfelessig, Gegrillte Aubergine geschnitten, Gegrillte Aubergine (Gro\u00dfe Dose), Gegrillte Aubergine (Glas), Gef\u00fcllte Weinbl\u00e4tter.\r\n\r\nWenn der Kunde nach Empfehlungen fragt, schlage konkrete Produkte aus dem Sortiment vor. Halte deine Antworten pr\u00e4gnant."},{"role":"user","content":"reis4,5"}],"temperature":0.7}
+[2026-02-17 10:39:27] Response (HTTP 400): {
+  "error": {
+    "message": "Bad Request",
+    "type": null,
+    "code": null,
+    "param": null
+  },
+  "status": 400
+}
+
+[2026-02-17 10:41:25] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist der freundliche KI-Assistent von Matin Food. \r\nDeine Aufgabe ist es, Kunden im Online-Shop zu beraten.\r\nInformationen \u00fcber Matin Food:\r\n- Wir verkaufen hochwertige orientalische Lebensmittel, Gew\u00fcrze, Reis und Spezialit\u00e4ten.\r\n- Versandkosten: Ab 50\u20ac kostenlos, darunter 4,90\u20ac.\r\n- Zahlungsmethoden: PayPal, Visa, Mastercard.\r\n- Standort: Oberhausen, Rheinland.\r\n- Tonfall: Sehr h\u00f6flich, hilfsbereit und professionell.\r\n- Sprache: Antworte immer in der Sprache des Kunden (meist Deutsch, Englisch oder Arabisch).\r\n\r\nAktuelles Sortiment:\r\nKategorien: grains, canned, syrups, bakery, fresh, sweets, misc, Food. Produkte: Reis, Gegrillte Aubergine (Premium Dose), Gegrillte Aubergine (Premium Glas), Shishas & Kohle, Mischgem\u00fcse, Apfelessig, Gegrillte Aubergine geschnitten, Gegrillte Aubergine (Gro\u00dfe Dose), Gegrillte Aubergine (Glas), Gef\u00fcllte Weinbl\u00e4tter.\r\n\r\nWenn der Kunde nach Empfehlungen fragt, schlage konkrete Produkte aus dem Sortiment vor. Halte deine Antworten pr\u00e4gnant."},{"role":"user","content":"reis 4,5"}],"temperature":0.7}
+[2026-02-17 10:41:25] Response (HTTP 400): {
+  "error": {
+    "message": "Bad Request",
+    "type": null,
+    "code": null,
+    "param": null
+  },
+  "status": 400
+}
+
+[2026-02-17 10:45:19] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist der freundliche KI-Assistent von Matin Food. \r\nDeine Aufgabe ist es, Kunden im Online-Shop zu beraten.\r\n\r\nInformationen \u00fcber Matin Food:\r\n- Wir verkaufen hochwertige orientalische Lebensmittel, Gew\u00fcrze, Reis und Spezialit\u00e4ten.\r\n- Versandkosten: Ab 50\u20ac kostenlos, darunter 4,90\u20ac.\r\n- Zahlungsmethoden: PayPal, Visa, Mastercard.\r\n- Standort: Oberhausen, Rheinland.\r\n- Tonfall: Sehr h\u00f6flich, hilfsbereit und professionell.\r\n- Sprache: Antworte immer in der Sprache des Kunden (meist Deutsch, Englisch oder Arabisch).\r\n\r\nWICHTIG: Du hast Zugriff auf unser KOMPLETTES Sortiment (siehe unten). Wenn ein Kunde nach einem Produkt fragt, durchsuche die gesamte Liste und nenne konkrete Produkte mit Preisen.\r\n\r\nVerf\u00fcgbare Kategorien: grains, canned, syrups, bakery, fresh, sweets, misc, Food.\n\nKomplettes Sortiment (27 Produkte):\nArabisches Brot (1.20\u20ac, bakery), Ackerbohnen (Moudammas) (1.90\u20ac, canned), Fava-Bohnen (Syr. Art) (1.80\u20ac, canned), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac, canned), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac, canned), Gegrillte Aubergine (Glas) (3.20\u20ac, canned), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac, canned), Gegrillte Aubergine (Premium Dose) (12.50\u20ac, canned), Gegrillte Aubergine (Premium Glas) (3.80\u20ac, canned), Gegrillte Aubergine geschnitten (3.40\u20ac, canned), Hummus mit Tahini (185g) (0.90\u20ac, canned), Hummus mit Tahini (850g) (2.20\u20ac, canned), Makdous (Al Durra) 1.25kg (9.50\u20ac, canned), Makdous (Lara) 600g (5.50\u20ac, canned), Mischgem\u00fcse (2.10\u20ac, canned), Tomatenmark (1.1kg) (2.80\u20ac, canned), Tomatenmark (650g) (1.50\u20ac, canned), Reis (2.50\u20ac, Food), Frisches Gem\u00fcse (3.50\u20ac, fresh), \u00c4gyptischer Reis (1kg) (3.00\u20ac, grains), \u00c4gyptischer Reis (5kg) (13.50\u20ac, grains), Bulgur (2.50\u20ac, grains), Bulgursalat (4.50\u20ac, grains), Shishas & Kohle (25.00\u20ac, misc), Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac, sweets), Apfelessig (2.80\u20ac, syrups), Granatapfelsirup (4.50\u20ac, syrups).\r\n\r\nWenn der Kunde nach Empfehlungen oder bestimmten Produkten fragt, durchsuche die Liste und schlage passende Artikel vor. Nenne immer den Preis und die Kategorie."},{"role":"user","content":"reis 4,5"}],"temperature":0.7}
+[2026-02-17 10:45:19] Response (HTTP 400): {
+  "error": {
+    "message": "Bad Request",
+    "type": null,
+    "code": null,
+    "param": null
+  },
+  "status": 400
+}
+
+[2026-02-17 10:50:13] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"Welchen Reis habt ihr"}],"temperature":0.7}
+[2026-02-17 10:50:13] Response (HTTP 400): {
+  "error": {
+    "message": "Bad Request",
+    "type": null,
+    "code": null,
+    "param": null
+  },
+  "status": 400
+}
+
+[2026-02-17 10:50:33] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"Zeig mir Konserven"}],"temperature":0.7}
+[2026-02-17 10:50:33] Response (HTTP 400): {
+  "error": {
+    "message": "Bad Request",
+    "type": null,
+    "code": null,
+    "param": null
+  },
+  "status": 400
+}
+
+[2026-02-17 10:50:49] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"Was kostet Bulgur"}],"temperature":0.7}
+[2026-02-17 10:50:50] Response (HTTP 400): {
+  "error": {
+    "message": "Bad Request",
+    "type": null,
+    "code": null,
+    "param": null
+  },
+  "status": 400
+}
+
+[2026-02-17 10:53:21] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"welche Reis habt ihr"}],"temperature":0.7}
+[2026-02-17 10:53:21] Response (HTTP 400): {
+  "error": {
+    "message": "Bad Request",
+    "type": null,
+    "code": null,
+    "param": null
+  },
+  "status": 400
+}
+
+[2026-02-17 10:59:04] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"hallo"}],"temperature":0.7}
+[2026-02-17 10:59:05] Response (HTTP 429): {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+
+[2026-02-17 10:59:27] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"hallo"}],"temperature":0.7}
+[2026-02-17 10:59:28] Response (HTTP 429): {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+
+[2026-02-17 11:01:32] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"welche reis habt ihr"}],"temperature":0.7}
+[2026-02-17 11:01:32] Response (HTTP 429): {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+
+[2026-02-17 11:24:55] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"Reis"}],"temperature":0.7}
+[2026-02-17 11:24:55] Response (HTTP 401): {
+  "error": {
+    "message": "Incorrect API key provided: sk-proj-********************************************************************************************************************************************************ArQA. You can find your API key at https://platform.openai.com/account/api-keys.",
+    "type": "invalid_request_error",
+    "code": "invalid_api_key",
+    "param": null
+  },
+  "status": 401
+}
+
+[2026-02-17 11:25:23] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"welche res hat ihr"}],"temperature":0.7}
+[2026-02-17 11:25:23] Response (HTTP 429): {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+
+[2026-02-17 11:25:41] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"welche res hat ihr"}],"temperature":0.7}
+[2026-02-17 11:25:41] Response (HTTP 429): {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+
+[2026-02-17 11:43:03] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"welche Reis habtihr"}],"temperature":0.7}
+[2026-02-17 11:43:03] Response (HTTP 429): {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+
+[2026-02-17 11:44:06] Request: {"model":"gpt-3.5-turbo","messages":[{"role":"system","content":"Du bist Matin AI, der Einkaufsassistent f\u00fcr Matin Food (orientalische Lebensmittel, Oberhausen).\r\n\r\nWICHTIG: Durchsuche das Sortiment und empfehle passende Produkte mit Preisen.\r\n\r\nSortiment:\n[bakery]: Arabisches Brot (1.20\u20ac).\n[canned]: Hummus mit Tahini (185g) (0.90\u20ac), Tomatenmark (650g) (1.50\u20ac), Fava-Bohnen (Syr. Art) (1.80\u20ac), Fava-Bohnen mit Kreuzk\u00fcmmel (1.80\u20ac), Ackerbohnen (Moudammas) (1.90\u20ac), Mischgem\u00fcse (2.10\u20ac), Hummus mit Tahini (850g) (2.20\u20ac), Tomatenmark (1.1kg) (2.80\u20ac), Gegrillte Aubergine (Glas) (3.20\u20ac), Gegrillte Aubergine geschnitten (3.40\u20ac), Gef\u00fcllte Weinbl\u00e4tter (3.50\u20ac), Gegrillte Aubergine (Premium Glas) (3.80\u20ac), Makdous (Lara) 600g (5.50\u20ac), Makdous (Al Durra) 1.25kg (9.50\u20ac), Gegrillte Aubergine (Gro\u00dfe Dose) (11.20\u20ac), Gegrillte Aubergine (Premium Dose) (12.50\u20ac).\n[Food]: Reis (2.50\u20ac).\n[fresh]: Frisches Gem\u00fcse (3.50\u20ac).\n[grains]: Bulgur (2.50\u20ac), \u00c4gyptischer Reis (1kg) (3.00\u20ac), Bulgursalat (4.50\u20ac), \u00c4gyptischer Reis (5kg) (13.50\u20ac).\n[misc]: Shishas & Kohle (25.00\u20ac).\n[sweets]: Orientalische S\u00fc\u00dfigkeiten (12.50\u20ac).\n[syrups]: Apfelessig (2.80\u20ac), Granatapfelsirup (4.50\u20ac).\n\r\n\r\nRegeln:\r\n- Antworte in der Sprache des Kunden (DE\/EN\/AR)\r\n- Nenne immer Produktnamen und Preise\r\n- Versand: ab 50\u20ac gratis, sonst 4,90\u20ac\r\n- Sei h\u00f6flich und pr\u00e4gnant"},{"role":"user","content":"welche Reis habt ihr"}],"temperature":0.7}
+[2026-02-17 11:44:07] Response (HTTP 429): {
+    "error": {
+        "message": "You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.",
+        "type": "insufficient_quota",
+        "param": null,
+        "code": "insufficient_quota"
+    }
+}
+
+
