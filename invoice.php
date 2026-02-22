@@ -32,44 +32,65 @@ $items_result = mysqli_query($conn, $items_query);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
-            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6;
+            font-family: 'Outfit', 'Inter', sans-serif;
+            color: #2c3e50;
         }
         .invoice-card {
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            padding: 50px;
             margin-top: 50px;
             margin-bottom: 50px;
+            border: 1px solid #e0e0e0;
         }
         .invoice-header {
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
+            border-bottom: 2px solid #f1f8e9;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
         }
-        .logo {
+        .logo-text {
             font-size: 28px;
             font-weight: 800;
-            color: #d2d2d2ff; /* Primary Green */
+            color: #2e7d32; /* Primary Green */
             text-decoration: none;
+            letter-spacing: -1px;
         }
         .invoice-title {
-            color: #949494ff;
-            font-weight: 800;
+            color: #2e7d32;
+            font-weight: 900;
+            letter-spacing: 2px;
         }
-        .table thead {
+        .table thead th {
             background-color: #f1f8e9; /* Light Green */
+            color: #2e7d32;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 13px;
+            border: none;
+        }
+        .table tbody td {
+            padding: 15px 10px;
+            border-bottom: 1px solid #f0f0f0;
         }
         .total-row {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #f8fff8ff;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #2e7d32;
             background-color: #fffde7; /* Soft Yellow */
         }
         .btn-primary {
-            background-color: #e6e6e6ff !important;
-            border-color: #ffffffff !important;
+            background: linear-gradient(135deg, #2e7d32, #43a047) !important;
+            border: none !important;
+            border-radius: 50px !important;
+            font-weight: 700 !important;
+            padding: 12px 30px !important;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2) !important;
+        }
+        .btn-outline-secondary {
+            border-radius: 50px !important;
+            padding: 12px 30px !important;
         }
         @media print {
             .no-print {
@@ -79,6 +100,7 @@ $items_result = mysqli_query($conn, $items_query);
                 box-shadow: none;
                 margin-top: 0;
                 padding: 0;
+                border: none;
             }
             body {
                 background-color: white;

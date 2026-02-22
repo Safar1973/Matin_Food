@@ -70,29 +70,33 @@ Keep answers professional, concise, and helpful. Language: German.";
 
 $context = "Current Inventory Stats:\n" . json_encode($stats) . "\n\nProblematic Items (Sample):\n" . json_encode(array_slice($inventoryData, 0, 50));
 
-$messages = [
-    ['role' => 'system', 'content' => $systemPrompt],
-    ['role' => 'user', 'content' => "Here is the current inventory situation:\n" . $context . "\n\nUser Question: " . $userQuery]
+$contents = [
+    [
+        'role' => 'user',
+        'parts' => [['text' => "Here is the current inventory situation:\n" . $context . "\n\nUser Question: " . $userQuery]]
+    ]
 ];
 
-// Call OpenAI API
+// Call Google Gemini API
 $ch = curl_init();
 $postData = [
-    'model' => 'gpt-4o-mini',
-    'messages' => $messages,
-    'temperature' => 0.7
+    'system_instruction' => [
+        'parts' => [['text' => $systemPrompt]]
+    ],
+    'contents' => $contents,
+    'generationConfig' => [
+        'temperature' => 0.7,
+        'maxOutputTokens' => 1000
+    ]
 ];
 
-curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/chat/completions');
+$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=" . urlencode($apiKey);
+
+curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Content-Type: application/json',
-    'Authorization: Bearer ' . $apiKey
-]);
-
-// XAMPP Fix: Disable SSL Check
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
@@ -103,16 +107,24 @@ if (curl_errno($ch)) {
     echo json_encode(['success' => false, 'error' => 'cURL Fehler: ' . curl_error($ch)]);
 } else {
     $response = json_decode($result, true);
-    if (isset($response['choices'][0]['message']['content'])) {
-        echo json_encode(['success' => true, 'response' => $response['choices'][0]['message']['content']]);
+    
+    if (isset($response['candidates'][0]['content']['parts'][0]['text'])) {
+        $aiResponse = $response['candidates'][0]['content']['parts'][0]['text'];
+        echo json_encode(['success' => true, 'response' => $aiResponse]);
     } else {
-        $err = 'Unbekannter KI-Fehler';
+        $err = 'Unbekannter Gemini-Fehler';
         if (isset($response['error']['message'])) {
             $err = $response['error']['message'];
         } elseif ($httpCode !== 200) {
-            $err = "API Fehler (HTTP $httpCode): " . substr($result, 0, 100);
+            $err = "Gemini API Fehler (HTTP $httpCode)";
         }
-        echo json_encode(['success' => false, 'error' => $err, 'raw' => $response ? $response : $result]);
+        
+        echo json_encode([
+            'success' => false, 
+            'error' => $err,
+            'debug_code' => $httpCode,
+            'raw_response' => $response
+        ]);
     }
 }
 curl_close($ch);

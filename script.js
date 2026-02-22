@@ -219,6 +219,9 @@ function renderProducts(productsToRender = products) {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
+    // Sort by ID to ensure consistency
+    productsToRender.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+
     if (productsToRender.length === 0) {
         grid.innerHTML = `
             <div class="col-12 text-center py-5" style="grid-column: 1 / -1;">
@@ -238,29 +241,33 @@ function renderProducts(productsToRender = products) {
                 <div class="badge-container">
                     <span class="badge-discount">-${discount}%</span>
                     ${product.id % 4 === 0 ? '<span class="badge-neu-pill">Neu</span>' : ''}
-                    ${product.id % 5 === 0 ? '<span class="badge-popular-pill">Beliebt</span>' : ''}
+                    <span class="badge-nr">Nr. ${product.id}</span>
                 </div>
                 <button class="wishlist-btn-ref ${wishlist.includes(product.id) ? 'active' : ''}" 
                         onclick="toggleWishlist(${product.id}, event)" 
                         title="Auf den Merkzettel">
                     ${wishlist.includes(product.id) ? '❤️' : '♡'}
                 </button>
-                <img src="${product.img}" alt="${product.name}" class="product-img" onclick="toggleWishlist(${product.id}, event)" title="Klicken, zum Merkzettel hinzufügen">
+                <img src="${product.img}" alt="${product.name}" class="product-img" onclick="openProductModal(${product.id})">
             </div>
             <div class="product-info-ref text-center">
-                <div class="product-price-ref">${parseFloat(product.price).toFixed(2)} €</div>
-                <div class="product-tax-info" data-i18n="tax_info">${translations[currentLanguage]['tax_info']}</div>
-                <h3 class="product-name-ref" onclick="openProductModal(${product.id})">${product.name}</h3>
-                <div class="product-weight-price">${weightPrice} €/kg</div>
-                
-                <div class="mt-3">
-                    <button class="add-to-cart-pill" onclick="addToCart(${product.id})">
-                        <span data-i18n="in_cart">${translations[currentLanguage]['in_cart']}</span> 🛒
-                    </button>
+                <span class="product-cat-ref">${product.category}</span>
+                <h3 class="product-title-ref" onclick="openProductModal(${product.id})">${product['name_' + currentLanguage] || product.name}</h3>
+                <div class="price-container-ref">
+                    <span class="current-price-ref">${parseFloat(product.price).toFixed(2)} €</span>
+                    <span class="old-price-ref">${(product.price * 1.2).toFixed(2)} €</span>
                 </div>
+                <div class="weight-info-ref">
+                    750g (${weightPrice} € / 1kg)
+                </div>
+                <button class="add-to-cart-btn-ref w-100" onclick="addToCart(${product.id})">
+                    <span data-i18n="add_to_cart">In den Warenkorb</span>
+                </button>
             </div>
-        </div>
-    `}).join('');
+        </div>`;
+    }).join('');
+
+    updateStaticText();
 }
 
 // i18n Dictionary
@@ -903,7 +910,55 @@ function updateWishlistUI() {
     }
 }
 function showToast(message) {
-    console.log('Toast:', message);
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.style.cssText = `
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        `;
+        document.body.appendChild(toastContainer);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.style.cssText = `
+        background: rgba(46, 125, 50, 0.95);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        backdrop-filter: blur(5px);
+        animation: toast-in 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28), toast-out 0.4s 2.6s forwards;
+        pointer-events: auto;
+        white-space: nowrap;
+        border: 1px solid rgba(255,255,255,0.2);
+    `;
+    toast.innerText = message;
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 3000);
+}
+
+// Add CSS for toast animations if not present
+if (!document.getElementById('toast-styles')) {
+    const styleContent = `
+        @keyframes toast-in { from { opacity: 0; transform: translateY(-20px) scale(0.9); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes toast-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-20px) scale(0.9); } }
+    `;
+    const styleEl = document.createElement('style');
+    styleEl.id = 'toast-styles';
+    styleEl.textContent = styleContent;
+    document.head.appendChild(styleEl);
 }
 
 function openProductModal(productId) {
@@ -925,6 +980,7 @@ function openProductModal(productId) {
             ${product['description_' + currentLanguage] || dict['description_val']}
         </div>
     `;
+    document.getElementById('modal-btn').innerText = dict['in_cart'] + ' ' + (dict['cart'] || 'Warenkorb');
     document.getElementById('modal-btn').onclick = () => {
         addToCart(product.id);
         const modal = bootstrap.Modal.getInstance(document.getElementById('product-modal'));

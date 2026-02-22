@@ -15,10 +15,11 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    echo "<div style='font-family: sans-serif; padding: 40px; line-height: 1.6; max-width: 800px; margin: 0 auto; background: #f1f8e9; border-radius: 12px; border: 1px solid #c5e1a5;'>";
-    echo "<div style='text-align: center; margin-bottom: 20px;'><img src='images/logo-1694787094.jpg' alt='Logo' style='height: 60px; border-radius: 10px;'></div>";
-    echo "<h2 style='color: #2e7d32; text-align: center; font-weight: 800;'>Database Setup</h2>";
-    echo "<hr style='border: 0; border-top: 1px solid #c5e1a5; margin-bottom: 20px;'>";
+    echo "<div style='font-family: \"Outfit\", sans-serif; padding: 50px; line-height: 1.6; max-width: 850px; margin: 40px auto; background: #ffffff; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid #e0e0e0;'>";
+    echo "<div style='text-align: center; margin-bottom: 30px;'><img src='images/logo-1694787094.jpg' alt='Logo' style='height: 80px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);'></div>";
+    echo "<h1 style='color: #2e7d32; text-align: center; font-weight: 900; letter-spacing: -1px; margin-bottom: 10px;'>System Installation</h1>";
+    echo "<p style='text-align: center; color: #7f8c8d; margin-bottom: 40px;'>Matin Food Database & Environment Setup</p>";
+    echo "<hr style='border: 0; border-top: 2px solid #f1f8e9; margin-bottom: 30px;'>";
     
     // 0. Drop Tables (to ensure clean schema)
     echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";
@@ -112,7 +113,10 @@ try {
             ['canned', 'images/كامشن_خضروات_12X450_Gr__.jpg', 'Mixed Vegetables', 'Mischgemüse', 'خضروات مشكلة', 2.10, '2024-08-08', '2026-08-08'],
             ['misc', 'images/أراكيل_و_فحم.jpg', 'Shisha & Charcoal', 'Shishas & Kohle', 'أراكيل وفحم', 25.00, '2025-01-01', '2027-01-01'],
             ['canned', 'images/grilled_eggplant_jar.jpg', 'Grilled Eggplant (Premium Jar)', 'Gegrillte Aubergine (Premium Glas)', 'باذنجان مشوي (بريميوم)', 3.80, '2024-10-20', '2026-10-20'],
-            ['canned', 'images/grilled_eggplant_can.jpg', 'Grilled Eggplant (Premium Can)', 'Gegrillte Aubergine (Premium Dose)', 'باذنجان مشوي (بريميوم تنك)', 12.50, '2024-10-20', '2026-10-20']
+            ['canned', 'images/grilled_eggplant_can.jpg', 'Grilled Eggplant (Premium Dose)', 'Gegrillte Aubergine (Premium Dose)', 'باذنجان مشوي (بريميوم تنك)', 12.50, '2024-10-20', '2026-10-20'],
+            ['grains', 'images/4,5 Kg Al Wazah Indien Premium Basmati Reis.webp', 'Al Wazah Basmati Rice (4.5kg)', 'Al Wazah Basmati Reis (4.5kg)', 'رز الوزة (4.5 كيلو)', 15.90, '2024-11-01', '2026-11-01'],
+            ['grains', 'images/Mahmood Reis.webp', 'Mahmood Basmati Rice', 'Mahmood Basmati Reis', 'رز محمود', 14.50, '2024-10-15', '2026-10-15'],
+            ['grains', 'images/Mahmud Reis.jpg', 'Mahmud Rice', 'Mahmud Reis', 'رز محمود (1 كيلو)', 2.90, '2024-10-15', '2026-10-15']
         ];
 
         $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, production_date, expiry, description_de, description_en, description_ar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Leckeres Produkt', 'Delicious product', 'منتج لذيذ')");
@@ -125,10 +129,10 @@ try {
         echo "<div style='color: #f57f17;'>Products table already has data.</div>";
     }
     
-    echo "<div style='text-align: center; margin-top: 30px;'><a href='index.html' style='background: #fdd835; color: #333; padding: 12px 25px; text-decoration: none; border-radius: 50px; font-weight: 800; box-shadow: 0 4px 0 #fbc02d;'>ZURÜCK ZUM SHOP</a></div>";
+    echo "<div style='text-align: center; margin-top: 40px;'><a href='index.html' style='background: linear-gradient(135deg, #2e7d32, #43a047); color: #ffffff; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(46, 125, 50, 0.2); transition: all 0.3s; display: inline-block;'>ZURÜCK ZUM SHOP</a></div>";
     echo "</div>";
 
 } catch (PDOException $e) {
-    echo "<div style='color: #d32f2f; background: #ffebee; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2;'><strong>Error:</strong> " . $e->getMessage() . "</div>";
+    echo "<div style='color: #d32f2f; background: #181717ff; padding: 15px; border-radius: 8px; border: 1px solid #ffcdd2;'><strong>Error:</strong> " . $e->getMessage() . "</div>";
 }
 ?>

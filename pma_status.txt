@@ -1,0 +1,28 @@
+--- Table Check ---
+[OK] pma__bookmark exists.
+[OK] pma__relation exists.
+[OK] pma__table_info exists.
+[OK] pma__table_coords exists.
+[OK] pma__pdf_pages exists.
+[OK] pma__column_info exists.
+[OK] pma__history exists.
+[OK] pma__tracking exists.
+[OK] pma__userconfig exists.
+[OK] pma__recent exists.
+[OK] pma__table_uiprefs exists.
+[OK] pma__users exists.
+[OK] pma__usergroups exists.
+[OK] pma__navigationhiding exists.
+[OK] pma__savedsearches exists.
+[OK] pma__central_columns exists.
+[OK] pma__designer_settings exists.
+[OK] pma__export_templates exists.
+[OK] pma__favorite exists.
+
+--- Control User Check ---
+[INFO] Found user 'pma'@'localhost'.
+
+--- Attempting Connection as 'pma' ---
+[SUCCESS] Connected as 'pma'.
+[SUCCESS] 'pma' has access to 'phpmyadmin' database.
+[INFO] 'pma' sees 19 tables in 'phpmyadmin'.

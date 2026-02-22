@@ -218,12 +218,16 @@ while ($p = mysqli_fetch_assoc($res)) {
                 const typingId = addMessage('Analysiere Lagerdaten...', 'bot');
 
                 // Get API Key from Cookie
-                const apiKeyMatch = document.cookie.match(/openai_key=([^;]+)/);
+                const apiKeyMatch = document.cookie.match(/gemini_key=([^;]+)/);
                 const apiKey = apiKeyMatch ? apiKeyMatch[1] : null;
 
                 if (!apiKey) {
                     document.getElementById(typingId).remove();
-                    addMessage('⚠️ Kein API Key gefunden. Bitte gehen Sie zuerst zum "AI Generator" und speichern Sie dort Ihren Key.', 'bot text-danger');
+                    addMessage('⚠️ Kein API Key gefunden. Bitte gehen Sie zuerst zum "AI Setup" und speichern Sie dort Ihren Key.', 'bot text-danger');
+                    
+                    if (confirm('Möchten Sie jetzt zum AI Setup gehen?')) {
+                        window.location.href = 'ai_setup.html';
+                    }
                     return;
                 }
 

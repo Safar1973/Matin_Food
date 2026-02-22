@@ -1,15 +1,15 @@
 :root {
-    --primary: #2e7d32;
+    --primary: hsl(0, 0%, 100%);
     /* Deep Green */
     --secondary: #8bc34a;
     /* Light Green */
-    --accent: #fdd835;
+    --accent: #4989a8;
     /* Yellow */
-    --bg-light: #f1f8e9;
+    --bg-light: #27914e;
     /* Minty background */
-    --success: #388e3c;
-    --warning: #fbc02d;
-    --danger: #d32f2f;
+    --success: #8ea68f;
+    --warning: #f0efeb;
+    --danger: #d16c6c;
     /* Keep red for critical errors, or change if requested */
     --sidebar-width: 250px;
 }
@@ -18,7 +18,7 @@ body {
     font-family: 'Outfit', sans-serif;
     background-color: var(--bg-light);
     margin: 0;
-    color: #333;
+    color: #938787;
 }
 
 .admin-wrapper {
@@ -83,7 +83,7 @@ body {
 }
 
 .kpi-card {
-    background: white;
+    background: rgb(244, 244, 244);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
