@@ -115,7 +115,7 @@ try {
             ['canned', 'images/grilled_eggplant_jar.jpg', 'Grilled Eggplant (Premium Jar)', 'Gegrillte Aubergine (Premium Glas)', 'باذنجان مشوي (بريميوم)', 3.80, '2024-10-20', '2026-10-20'],
             ['canned', 'images/grilled_eggplant_can.jpg', 'Grilled Eggplant (Premium Dose)', 'Gegrillte Aubergine (Premium Dose)', 'باذنجان مشوي (بريميوم تنك)', 12.50, '2024-10-20', '2026-10-20'],
             ['grains', 'images/4,5 Kg Al Wazah Indien Premium Basmati Reis.webp', 'Al Wazah Basmati Rice (4.5kg)', 'Al Wazah Basmati Reis (4.5kg)', 'رز الوزة (4.5 كيلو)', 15.90, '2024-11-01', '2026-11-01'],
-            ['grains', 'images/Mahmood Reis.webp', 'Mahmood Basmati Rice', 'Mahmood Basmati Reis', 'رز محمود', 14.50, '2024-10-15', '2026-10-15'],
+            ['grains', 'images/Mahmood Reis.webp', 'Mahmood Basmati Rice', 'Mahmood Basmati Reis' , 'رز محمود', 14.50, '2024-10-15', '2026-10-15'],
             ['grains', 'images/Mahmud Reis.jpg', 'Mahmud Rice', 'Mahmud Reis', 'رز محمود (1 كيلو)', 2.90, '2024-10-15', '2026-10-15']
         ];
 

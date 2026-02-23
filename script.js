@@ -726,7 +726,7 @@ function updateCartUI() {
     if (itemsContainer) {
         itemsContainer.innerHTML = cart.map(item => `
             <div class="d-flex align-items-center mb-4 gap-3">
-                <img src="${item.img}" alt="${item.name}" style="width: 70px; height: 70px; object-fit: contain; border-radius: 8px; background: #fdfdfd; border: 1px solid #eee;">
+                <img src="${item.img}" alt="${item.name}" style="width: 70px; height: 70px; object-fit: contain; border-radius: 8px; background: #f1f8e9; border: 1px solid #eee;">
                 <div class="flex-grow-1">
                     <div class="fw-bold d-block text-truncate" style="max-width: 180px;">${item.name}</div>
                     <div class="text-danger fw-bold">${parseFloat(item.price).toFixed(2)} €</div>
@@ -931,7 +931,7 @@ function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     toast.style.cssText = `
-        background: rgba(46, 125, 50, 0.95);
+        background: rgba(14, 146, 20, 0.95);
         color: white;
         padding: 12px 30px;
         border-radius: 50px;

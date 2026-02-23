@@ -1,29 +1,29 @@
 :root {
-    --primary-color: #2e7d32;
+    --primary-color: #099410;
     /* Deep Green */
-    --primary-hover: #1b5e20;
-    --secondary-color: #8bc34a;
+    --primary-hover: #35b13d;
+    --secondary-color: #8ee975b8;
     /* Green */
-    --secondary-hover: #7cb342;
-    --light-green: #f1f8e9;
+    --secondary-hover: #5ad651d4;
+    --light-green: #2a954ca8;
     /* Very Light Green */
-    --accent-yellow: #fdd835;
+    --accent-yellow: #e7daa0;
     /* Bright Yellow */
-    --accent-hover: #fbc02d;
-    --text-main: #2c3e50;
+    --accent-hover: #ffe5a2;
+    --text-main: #090b0c;
     /* Professional Dark Blue/Gray */
-    --text-muted: #7f8c8d;
+    --text-muted: #080808;
     /* Professional Muted Gray */
-    --bg-light: #f9fbf7;
+    --bg-light: #0a090961;
     /* Very Soft Minty background */
-    --bg-white: #ffffff;
+    --bg-white: #141313;
     /* Actual White */
-    --header-bg: #ffffff;
+    --header-bg: #a4b8b1;
     /* Header should probably be white for premium look */
-    --border-color: #e0e0e0;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --border-color: #0d0d0d78;
+    --shadow-sm: 0 2px 4px rgba(165, 90, 90, 0.05);
     --shadow-md: 0 4px 12px rgba(46, 125, 50, 0.08);
-    --shadow-lg: 0 8px 24px rgba(46, 125, 50, 0.12);
+    --shadow-lg: 0 8px 24px rgba(255, 255, 255, 0.12);
     --header-height: 140px;
     --font-heading: 'Outfit', 'Inter', sans-serif;
     --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -34,7 +34,7 @@ body {
     color: var(--text-main);
     margin: 0;
     line-height: 1.6;
-    background-image: linear-gradient(rgba(241, 248, 233, 0.92), rgba(255, 253, 231, 0.92)), url('images/warehouse_bg.jpg');
+    background-image: linear-gradient(#ffffff61, rgb(255, 255, 255)), url('images/warehouse_bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -268,7 +268,7 @@ header {
 
 /* Hero Section */
 .hero-banner {
-    background: linear-gradient(135deg, rgba(220, 237, 200, 0.9), rgba(253, 216, 53, 0.7)), url('images/background.jpg');
+    background: linear-gradient(135deg, rgba(246, 238, 171, 0.9), rgba(253, 253, 253, 0.7)), url('images/background.jpg');
     background-size: cover;
     background-position: center;
     backdrop-filter: blur(5px);
@@ -321,7 +321,8 @@ header {
 }
 
 .product-card {
-    background: var(--bg-white);
+    background: #f1f8e9;
+    /* Light green background for products */
     border-radius: 12px;
     padding: 20px;
     box-shadow: none;
@@ -421,7 +422,7 @@ header {
 
 .wishlist-btn-ref:hover,
 .wishlist-btn-ref.active {
-    color: #e62117;
+    color: #ffa5a0;
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -537,7 +538,7 @@ header {
 
 .ai-toggle-btn {
     background: linear-gradient(135deg, var(--primary-color), #43a047);
-    border: 3px solid rgba(255, 255, 255, 0.8);
+    border: 3px solid rgb(255, 255, 255);
     border-radius: 50px;
     padding: 12px 28px;
     color: white;
@@ -547,13 +548,13 @@ header {
     gap: 12px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 30px rgba(46, 125, 50, 0.3);
+    box-shadow: 0 10px 30px rgba(32, 210, 41, 0.766);
     animation: pulse-glow 3s infinite;
 }
 
 @keyframes pulse-glow {
     0% {
-        box-shadow: 0 10px 30px rgba(46, 125, 50, 0.3);
+        box-shadow: 0 10px 30px rgba(7, 200, 17, 0.818);
     }
 
     50% {
@@ -602,7 +603,7 @@ header {
 }
 
 .ai-chat-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #1b5e20 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #33963a 100%);
     color: white;
     padding: 20px;
     display: flex;
@@ -851,6 +852,10 @@ header {
     z-index: 3000;
     justify-content: center;
     align-items: center;
+}
+
+.modal-content {
+    background: #268713 !important;
 }
 
 /* Responsive */
