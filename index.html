@@ -484,7 +484,8 @@
                         <li><a href="#" class="text-muted text-decoration-none">Teilnahmebedingungen</a></li>
                         <li><a href="#" class="text-muted text-decoration-none">Datenschutz</a></li>
                         <li><a href="#" class="text-muted text-decoration-none">Impressum</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Cookie Einstellungen</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none" onclick="showCookieBanner(event)">Cookie
+                                Einstellungen</a></li>
                         <li><a href="#" class="text-muted text-decoration-none">Jugendschutz</a></li>
                         <li><a href="#" class="text-muted text-decoration-none">Food-Blog</a></li>
                     </ul>
@@ -545,6 +546,22 @@
                 <div class="text-center mt-2" style="font-size: 9px; color: #bbb; letter-spacing: 0.5px;">POWERED BY
                     MATIN INTELLIGENCE</div>
             </div>
+        </div>
+    </div>
+
+    <!-- Cookie Banner -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <h4 data-i18n="cookie_title">🍪 Cookie-Einstellungen</h4>
+            <p data-i18n="cookie_text">Wir verwenden Cookies, um Ihr Einkaufserlebnis zu verbessern, personalisierte
+                Inhalte anzuzeigen und unseren Datenverkehr zu analysieren. Mit Klick auf "Alle akzeptieren" stimmen Sie
+                der Verwendung aller Cookies zu.</p>
+        </div>
+        <div class="cookie-actions">
+            <button class="cookie-btn cookie-btn-settings" onclick="closeCookieBanner()"
+                data-i18n="cookie_only_essential">Nur Essenzielle</button>
+            <button class="cookie-btn cookie-btn-accept" onclick="acceptAllCookies()" data-i18n="cookie_accept_all">Alle
+                akzeptieren</button>
         </div>
     </div>
 

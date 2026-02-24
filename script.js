@@ -22,6 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. AI Chat Widget Initialization
     initAiChat();
+
+    // 3. Cookie Banner Initialization
+    initCookieBanner();
 });
 
 // AI Chat Widget Logic
@@ -350,7 +353,11 @@ const translations = {
         'expiry_label': 'Haltbarkeit',
         'description_label': 'Beschreibung',
         'description_val': 'Authentische Qualität für Ihre Küche. Premium-Import.',
-        'cart_title': 'Ihr Warenkorb'
+        'cart_title': 'Ihr Warenkorb',
+        'cookie_title': '🍪 Cookie-Einstellungen',
+        'cookie_text': 'Wir verwenden Cookies, um Ihr Einkaufserlebnis zu verbessern, personalisierte Inhalte anzuzeigen und unseren Datenverkehr zu analysieren. Mit Klick auf "Alle akzeptieren" stimmen Sie der Verwendung aller Cookies zu.',
+        'cookie_accept_all': 'Alle akzeptieren',
+        'cookie_only_essential': 'Nur Essenzielle'
     },
     'en': {
         'help': 'Help',
@@ -430,7 +437,11 @@ const translations = {
         'expiry_label': 'Expiry',
         'description_label': 'Description',
         'description_val': 'Authentic quality for your kitchen. Premium import.',
-        'cart_title': 'Your Cart'
+        'cart_title': 'Your Cart',
+        'cookie_title': '🍪 Cookie Settings',
+        'cookie_text': 'We use cookies to improve your shopping experience, show personalized content and analyze our traffic. By clicking "Accept All", you agree to the use of all cookies.',
+        'cookie_accept_all': 'Accept All',
+        'cookie_only_essential': 'Essential Only'
     },
     'ar': {
         'help': 'مساعدة',
@@ -510,7 +521,11 @@ const translations = {
         'expiry_label': 'الصلاحية',
         'description_label': 'الوصف',
         'description_val': 'جودة أصيلة لمطبخك. استيراد ممتاز.',
-        'cart_title': 'عربة تسوقك'
+        'cart_title': 'عربة تسوقك',
+        'cookie_title': '🍪 إعدادات ملفات تعريف الارتباط',
+        'cookie_text': 'نحن نستخدم ملفات تعريف الارتباط لتحسين تجربة التسوق الخاصة بك، وعرض محتوى مخصص وتحليل حركة المرور لدينا. بالنقر فوق "قبول الكل"، فإنك توافق على استخدام جميع ملفات تعريف الارتباط.',
+        'cookie_accept_all': 'قبول الكل',
+        'cookie_only_essential': 'الضرورية فقط'
     }
 };
 
@@ -1023,4 +1038,59 @@ function switchAccountView(view) {
         loginTab.classList.remove('active');
         registerTab.classList.add('active');
     }
+}
+
+// Cookie Banner Logic
+function initCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    const cookieConsent = localStorage.getItem('cookie-consent');
+
+    if (!cookieConsent && banner) {
+        setTimeout(() => {
+            banner.style.display = 'block';
+        }, 2000);
+    }
+}
+
+function showCookieBanner(e) {
+    if (e) e.preventDefault();
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+        banner.style.display = 'block';
+        banner.style.animation = 'slideInUp 0.5s cubic-bezier(0.19, 1, 0.22, 1)';
+    }
+}
+
+function acceptAllCookies() {
+    localStorage.setItem('cookie-consent', 'all');
+    hideCookieBanner();
+    showToast('✅ Cookies akzeptiert');
+}
+
+function closeCookieBanner() {
+    localStorage.setItem('cookie-consent', 'essential');
+    hideCookieBanner();
+}
+
+function hideCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+        banner.style.animation = 'slideOutDown 0.5s forwards';
+        setTimeout(() => {
+            banner.style.display = 'none';
+        }, 500);
+    }
+}
+
+// Add slideOutDown animation to styles if not already there
+if (!document.getElementById('cookie-extra-styles')) {
+    const style = document.createElement('style');
+    style.id = 'cookie-extra-styles';
+    style.textContent = `
+        @keyframes slideOutDown {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(100%); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
 }
