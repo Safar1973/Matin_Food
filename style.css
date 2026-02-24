@@ -321,7 +321,7 @@ header {
 }
 
 .product-card {
-    background: #f1f8e9;
+    background: #8cc290a2;
     /* Light green background for products */
     border-radius: 12px;
     padding: 20px;
@@ -378,7 +378,7 @@ header {
 }
 
 .badge-neu-pill {
-    background: #73cf5e7e;
+    background: #1b9300d3;
     color: white;
     padding: 2px 12px;
     border-radius: 20px;
@@ -430,11 +430,20 @@ header {
     padding-top: 5px;
 }
 
-.product-price-ref {
+.product-price-ref,
+.current-price-ref {
     color: var(--primary-color);
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 900;
     margin-bottom: 2px;
+    display: block;
+}
+
+.old-price-ref {
+    text-decoration: line-through;
+    color: #0f0c0c;
+    font-size: 14px;
+    margin-left: 10px;
 }
 
 .product-tax-info {
@@ -443,10 +452,11 @@ header {
     margin-bottom: 12px;
 }
 
+.product-title-ref,
 .product-name-ref {
     font-size: 15px;
     font-weight: 600;
-    color: #333;
+    color: #875656;
     margin-bottom: 15px;
     height: 42px;
     overflow: hidden;
@@ -454,14 +464,26 @@ header {
     cursor: pointer;
 }
 
+.product-title-ref:hover,
 .product-name-ref:hover {
     color: #e62117;
 }
 
-.product-weight-price {
+.product-weight-price,
+.weight-info-ref {
     font-size: 12px;
-    color: #999;
+    color: #080808;
     margin-bottom: 15px;
+}
+
+.product-cat-ref {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    display: block;
 }
 
 /* 3D Pill Button */
@@ -501,9 +523,11 @@ header {
 }
 
 /* Button & Text Overrides for new theme */
-.add-to-cart-btn {
+.add-to-cart-btn,
+.add-to-cart-btn-ref {
     background: var(--primary-color);
     color: white;
+    /* Hier die Textfarbe anpassen */
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
@@ -512,7 +536,8 @@ header {
     cursor: pointer;
 }
 
-.add-to-cart-btn:hover {
+.add-to-cart-btn:hover,
+.add-to-cart-btn-ref:hover {
     background: var(--primary-hover);
     color: white;
 }
@@ -781,7 +806,7 @@ header {
     top: 0;
     width: 450px;
     height: 100%;
-    background: white;
+    background: rgb(229, 227, 227);
     box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
     z-index: 2000;
     transition: right 0.3s ease;
@@ -855,7 +880,7 @@ header {
 }
 
 .modal-content {
-    background: #29dc44cb !important;
+    background: #fefffff3 !important;
 
 }
 
@@ -1157,7 +1182,7 @@ header {
     text-transform: uppercase;
     font-size: 13px;
     letter-spacing: 0.5px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #921010;
     padding-bottom: 8px;
 }
 
