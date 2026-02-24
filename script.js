@@ -931,7 +931,7 @@ function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
     toast.style.cssText = `
-        background: rgba(14, 146, 20, 0.95);
+        background: rgba(80, 130, 82, 0.66);
         color: white;
         padding: 12px 30px;
         border-radius: 50px;

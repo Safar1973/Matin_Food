@@ -76,7 +76,7 @@ try {
         FOREIGN KEY (product_id) REFERENCES products(id)
     )");
 
-    echo "<span style='color: #2e7d32;'>✔ Tables created successfully.</span></div>";
+    echo "<span style='color: #45804898;'>✔ Tables created successfully.</span></div>";
 
     // 2. Insert/Reset Sample Data
     echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";
@@ -87,7 +87,7 @@ try {
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
 
     if (true) { // Always insert fresh data
-        $products = [
+        $baseProducts = [
             ['grains', 'images/bulgur.png', 'Bulgur', 'Bulgur', 'برغل', 2.50, '2024-06-01', '2025-12-01'],
             ['grains', 'images/شتورة_رز_مصري_10X1_KG.jpg', 'Egyptian Rice (1kg)', 'Ägyptischer Reis (1kg)', 'رز مصري (1 كيلو)', 3.00, '2024-07-15', '2026-01-15'],
             ['grains', 'images/شتورة_رز_مصري_4X5_KG.jpg', 'Egyptian Rice (5kg)', 'Ägyptischer Reis (5kg)', 'رز مصري (5 كيلو)', 13.50, '2024-07-15', '2026-01-15'],
@@ -121,10 +121,20 @@ try {
 
         $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, production_date, expiry, description_de, description_en, description_ar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Leckeres Produkt', 'Delicious product', 'منتج لذيذ')");
         
-        foreach ($products as $p) {
+        $totalToInsert = 500;
+        $originalCount = count($baseProducts);
+        
+        for ($i = 0; $i < $totalToInsert; $i++) {
+            $p = $baseProducts[$i % $originalCount];
+            // Make name unique
+            if ($i >= $originalCount) {
+                $p[2] .= " (" . ($i + 1) . ")";
+                $p[3] .= " (" . ($i + 1) . ")";
+                $p[4] .= " (" . ($i + 1) . ")";
+            }
             $stmt->execute($p);
         }
-        echo "<span style='color: #2e7d32;'>✔ Sample data inserted successfully.</span></div>";
+        echo "<span style='color: #2e7d32;'>✔ $totalToInsert products inserted successfully.</span></div>";
     } else {
         echo "<div style='color: #f57f17;'>Products table already has data.</div>";
     }
