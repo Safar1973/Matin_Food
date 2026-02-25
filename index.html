@@ -20,9 +20,13 @@
     <header>
         <div class="header-top-bar d-none d-lg-block">
             <div class="container d-flex justify-content-between">
-                <div class="top-bar-left">
+                <div class="top-bar-left d-flex align-items-center">
                     <span>📞 Support: +49 (0) 123 456 789</span>
                     <span class="ms-3">🚚 Kostenloser Versand ab 50€</span>
+                    <button class="btn btn-sm ms-3 shop-status-btn" onclick="refreshShopStatus()">
+                        <span class="status-dot"></span>
+                        <span id="db-product-count">Ladend...</span> Produkte live
+                    </button>
                 </div>
                 <div class="top-bar-right d-flex align-items-center">
                     <a href="#" data-i18n="help">Hilfe</a>
@@ -31,6 +35,10 @@
                         <span class="me-1">📍</span> <span data-i18n="location_header">Filialen & Maps</span>
                     </a>
                     <a href="#" class="ms-3" onclick="goToSection('locations-section')" data-i18n="contact">Kontakt</a>
+                    <button class="btn btn-sm btn-link text-muted ms-3 p-0" onclick="window.print()"
+                        title="Seite drucken">
+                        <span>🖨️ Drucken</span>
+                    </button>
 
                     <!-- Language Switcher -->
                     <div class="dropdown ms-4">

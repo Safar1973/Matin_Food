@@ -25,7 +25,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Cookie Banner Initialization
     initCookieBanner();
+
+    // 4. Shop Status Initialization
+    refreshShopStatus();
 });
+
+async function refreshShopStatus() {
+    const countEl = document.getElementById('db-product-count');
+    if (!countEl) return;
+
+    try {
+        const res = await fetch('backend/api/get_count.php');
+        const data = await res.json();
+        if (data.success) {
+            countEl.innerText = data.count;
+        } else {
+            countEl.innerText = '?';
+        }
+    } catch (e) {
+        countEl.innerText = '?';
+    }
+}
 
 // AI Chat Widget Logic
 function initAiChat() {
