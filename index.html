@@ -27,6 +27,9 @@
                 <div class="top-bar-right d-flex align-items-center">
                     <a href="#" data-i18n="help">Hilfe</a>
                     <a href="#" class="ms-3" onclick="goToSection('about-section')" data-i18n="about_us">Über uns</a>
+                    <a href="#" class="ms-3" onclick="goToSection('locations-section')">
+                        <span class="me-1">📍</span> <span data-i18n="location_header">Filialen & Maps</span>
+                    </a>
                     <a href="#" class="ms-3" onclick="goToSection('locations-section')" data-i18n="contact">Kontakt</a>
 
                     <!-- Language Switcher -->
@@ -359,6 +362,72 @@
                 </div>
             </section>
 
+            <!-- Locations Section -->
+            <section id="locations-section" class="page-section">
+                <div class="container py-5">
+                    <h2 class="fw-bold mb-5 text-center" data-i18n="locations_title">Unsere Standorte</h2>
+
+                    <div class="row g-5">
+                        <!-- Oberhausen Branch -->
+                        <div class="col-lg-6">
+                            <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+                                <div class="p-4 bg-white">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="location-icon me-3">🏢</div>
+                                        <h3 class="fw-bold mb-0">Oberhausen</h3>
+                                    </div>
+                                    <p class="text-muted mb-1">Matin Food GmbH</p>
+                                    <p class="text-muted mb-4">Allee Str. 4, 46049 Oberhausen</p>
+
+                                    <div class="d-flex gap-2 mb-4">
+                                        <a href="https://www.google.com/maps/dir/?api=1&destination=Allee+Str.+4+46049+Oberhausen"
+                                            target="_blank"
+                                            class="btn btn-outline-primary flex-grow-1 rounded-pill">Route planen</a>
+                                        <a href="tel:+490123456789" class="btn btn-light rounded-circle">📞</a>
+                                    </div>
+
+                                    <div class="rounded-3 overflow-hidden" style="height: 250px;">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.9876543210!2d6.852345!3d51.470123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8eaf396555555%3A0x5555555555555555!2sAllee+Str.+4%2C+46049+Oberhausen!5e0!3m2!1sde!2sde!4v1700000000000"
+                                            width="100%" height="100%" style="border:0;" allowfullscreen=""
+                                            loading="lazy">
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Wuppertal Branch -->
+                        <div class="col-lg-6">
+                            <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+                                <div class="p-4 bg-white">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="location-icon me-3">🏢</div>
+                                        <h3 class="fw-bold mb-0">Wuppertal</h3>
+                                    </div>
+                                    <p class="text-muted mb-1">Matin Food GmbH - Filiale Wuppertal</p>
+                                    <p class="text-muted mb-4">Wuppertaler Str. 123, 42103 Wuppertal</p>
+
+                                    <div class="d-flex gap-2 mb-4">
+                                        <a href="https://www.google.com/maps/dir/?api=1&destination=Wuppertaler+Str.+123+42103+Wuppertal"
+                                            target="_blank"
+                                            class="btn btn-outline-primary flex-grow-1 rounded-pill">Route planen</a>
+                                        <a href="tel:+490123456789" class="btn btn-light rounded-circle">📞</a>
+                                    </div>
+
+                                    <div class="rounded-3 overflow-hidden" style="height: 250px;">
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2516.2345678901!2d7.14321!3d51.25678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b925b396555555%3A0x5555555555555555!2sWuppertaler+Str.+123%2C+42103+Wuppertal!5e0!3m2!1sde!2sde!4v1700000000000"
+                                            width="100%" height="100%" style="border:0;" allowfullscreen=""
+                                            loading="lazy">
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 

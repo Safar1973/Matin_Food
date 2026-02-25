@@ -357,7 +357,9 @@ const translations = {
         'cookie_title': '🍪 Cookie-Einstellungen',
         'cookie_text': 'Wir verwenden Cookies, um Ihr Einkaufserlebnis zu verbessern, personalisierte Inhalte anzuzeigen und unseren Datenverkehr zu analysieren. Mit Klick auf "Alle akzeptieren" stimmen Sie der Verwendung aller Cookies zu.',
         'cookie_accept_all': 'Alle akzeptieren',
-        'cookie_only_essential': 'Nur Essenzielle'
+        'cookie_only_essential': 'Nur Essenzielle',
+        'location_header': 'Filialen & Maps',
+        'locations_title': 'Unsere Standorte'
     },
     'en': {
         'help': 'Help',
@@ -441,7 +443,9 @@ const translations = {
         'cookie_title': '🍪 Cookie Settings',
         'cookie_text': 'We use cookies to improve your shopping experience, show personalized content and analyze our traffic. By clicking "Accept All", you agree to the use of all cookies.',
         'cookie_accept_all': 'Accept All',
-        'cookie_only_essential': 'Essential Only'
+        'cookie_only_essential': 'Essential Only',
+        'location_header': 'Branches & Maps',
+        'locations_title': 'Our Locations'
     },
     'ar': {
         'help': 'مساعدة',
@@ -525,7 +529,9 @@ const translations = {
         'cookie_title': '🍪 إعدادات ملفات تعريف الارتباط',
         'cookie_text': 'نحن نستخدم ملفات تعريف الارتباط لتحسين تجربة التسوق الخاصة بك، وعرض محتوى مخصص وتحليل حركة المرور لدينا. بالنقر فوق "قبول الكل"، فإنك توافق على استخدام جميع ملفات تعريف الارتباط.',
         'cookie_accept_all': 'قبول الكل',
-        'cookie_only_essential': 'الضرورية فقط'
+        'cookie_only_essential': 'الضرورية فقط',
+        'location_header': 'الفروع والخرائط',
+        'locations_title': 'مواقعنا'
     }
 };
 

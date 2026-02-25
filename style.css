@@ -779,7 +779,38 @@ header {
     color: var(--primary-color);
 }
 
-/* Cart Panel & Sections Visibility */
+.location-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--light-green);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.page-section {
+    display: none;
+}
+
+.page-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .cart-backdrop {
     position: fixed;
     top: 0;
