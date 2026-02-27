@@ -8,6 +8,7 @@ $name_en = 'Japanese Rice';
 $name_de = 'Japanische Reis';
 $name_ar = 'أرز ياباني';
 $price = 5.90;
+$weight = '1kg';
 $production_date = '2024-02-01';
 $expiry = '2026-02-01';
 $description_de = 'Hochwertiger japanischer Reis, ideal für Sushi und Beilagen.';
@@ -21,14 +22,14 @@ try {
     if (mysqli_num_rows($check) > 0) {
         echo "Das Produkt '$name_de' existiert bereits in der Datenbank.";
     } else {
-        $sql = "INSERT INTO products (category, img, name_en, name_de, name_ar, description_de, description_en, description_ar, price, production_date, expiry, stock) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO products (category, img, name_en, name_de, name_ar, description_de, description_en, description_ar, price, weight, production_date, expiry, stock) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "sssssssssssi", 
+        mysqli_stmt_bind_param($stmt, "sssssssssdssi", 
             $category, $img, $name_en, $name_de, $name_ar, 
             $description_de, $description_en, $description_ar, 
-            $price, $production_date, $expiry, $stock
+            $price, $weight, $production_date, $expiry, $stock
         );
 
         if (mysqli_stmt_execute($stmt)) {

@@ -237,6 +237,24 @@ async function loadProducts() {
     }
 }
 
+// Helper for weight formatting
+function formatWeightToKg(weightStr) {
+    if (!weightStr) return '0,75 kg';
+    const wMatch = weightStr.match(/(\d+(?:\.\d+)?)\s*(kg|g|Gr|gr|ml|l)/i);
+    if (!wMatch) return weightStr;
+
+    const val = parseFloat(wMatch[1]);
+    const unit = wMatch[2].toLowerCase();
+
+    let inKg = val;
+    if (unit === 'g' || unit === 'gr' || unit === 'ml') {
+        inKg = val / 1000;
+    }
+
+    // Format to 2 decimals if needed, replace dot with comma
+    return inKg.toString().replace('.', ',') + ' kg';
+}
+
 // Render product grid
 function renderProducts(productsToRender = products) {
     const grid = document.getElementById('product-grid');
@@ -256,7 +274,9 @@ function renderProducts(productsToRender = products) {
 
     grid.innerHTML = productsToRender.map(product => {
         const discount = Math.floor(Math.random() * 20) + 15;
-        const weightPrice = (product.price / 0.75).toFixed(2); // Mocked weight price
+
+        // Dynamic Weight Logic (Converted to KG)
+        const dispWeight = formatWeightToKg(product.weight);
 
         return `
         <div class="product-card">
@@ -281,7 +301,7 @@ function renderProducts(productsToRender = products) {
                     <span class="old-price-ref">${(product.price * 1.2).toFixed(2)} €</span>
                 </div>
                 <div class="weight-info-ref">
-                    750g (${weightPrice} € / 1kg)
+                    ${dispWeight}
                 </div>
                 <button class="add-to-cart-btn-ref w-100" onclick="addToCart(${product.id})">
                     <span data-i18n="add_to_cart">In den Warenkorb</span>
@@ -370,6 +390,7 @@ const translations = {
         'order_btn': 'Jetzt zahlungspflichtig bestellen',
         'added_to_cart': 'hinzugefügt',
         'category_label': 'Kategorie',
+        'weight_label': 'Gewicht',
         'expiry_label': 'Haltbarkeit',
         'description_label': 'Beschreibung',
         'description_val': 'Authentische Qualität für Ihre Küche. Premium-Import.',
@@ -456,6 +477,7 @@ const translations = {
         'order_btn': 'Order Now (Commit to Pay)',
         'added_to_cart': 'added',
         'category_label': 'Category',
+        'weight_label': 'Weight',
         'expiry_label': 'Expiry',
         'description_label': 'Description',
         'description_val': 'Authentic quality for your kitchen. Premium import.',
@@ -542,6 +564,7 @@ const translations = {
         'order_btn': 'طلب الآن (التزام بالدفع)',
         'added_to_cart': 'تمت الإضافة',
         'category_label': 'الفئة',
+        'weight_label': 'الوزن',
         'expiry_label': 'الصلاحية',
         'description_label': 'الوصف',
         'description_val': 'جودة أصيلة لمطبخك. استيراد ممتاز.',
@@ -1015,6 +1038,7 @@ function openProductModal(productId) {
     const dict = translations[currentLanguage];
     document.getElementById('modal-details-content').innerHTML = `
         <strong>${dict['category_label']}:</strong> ${dict[product.category] || product.category}<br>
+        <strong>${dict['weight_label']}:</strong> ${formatWeightToKg(product.weight)}<br>
         <strong>${dict['expiry_label']}:</strong> ${product.expiry}<br>
         <div class="mt-2">
             <strong>${dict['description_label']}:</strong><br>

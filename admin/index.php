@@ -29,6 +29,17 @@ while ($p = mysqli_fetch_assoc($res)) {
     
     $products[] = $p;
 }
+
+function formatWeight($w) {
+    if (!$w) return "0,75 kg";
+    if (preg_match('/(\d+(?:\.\d+)?)\s*(kg|g|Gr|gr|ml|l|gr\.)/i', $w, $m)) {
+        $val = (float)$m[1];
+        $unit = strtolower($m[2]);
+        $inKg = ($unit === 'g' || $unit === 'gr' || $unit === 'gr.' || $unit === 'ml') ? $val / 1000 : $val;
+        return str_replace('.', ',', (string)$inKg) . ' kg';
+    }
+    return $w;
+}
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -96,6 +107,7 @@ while ($p = mysqli_fetch_assoc($res)) {
                             <tr>
                                 <th>Bild</th>
                                 <th>Name (DE/AR)</th>
+                                <th>Gewicht</th>
                                 <th>Preis</th>
                                 <th>Lager</th>
                                 <th>Herstellung</th>
@@ -132,6 +144,9 @@ while ($p = mysqli_fetch_assoc($res)) {
                                     <div class="fw-bold"><?= htmlspecialchars($p['name_de']) ?></div>
                                     <div class="text-muted small"><?= htmlspecialchars($p['name_ar']) ?></div>
                                     <span class="badge-cat mt-1"><?= htmlspecialchars($p['category']) ?></span>
+                                </td>
+                                <td>
+                                    <span class="text-muted"><?= htmlspecialchars(formatWeight($p['weight'])) ?></span>
                                 </td>
                                 <td>
                                     <span class="fw-bold"><?= number_format($p['price'], 2) ?> €</span>

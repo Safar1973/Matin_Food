@@ -10,7 +10,7 @@ if (!in_array($lang, $valid_langs)) {
 
 $nameField = "name_" . $lang;
 
-$query = "SELECT id, category, img, name_en, name_de, name_ar, description_de, description_en, description_ar, $nameField AS name, price, expiry, stock FROM products";
+$query = "SELECT id, category, img, name_en, name_de, name_ar, description_de, description_en, description_ar, $nameField AS name, price, weight, expiry, stock FROM products";
 $res = mysqli_query($conn, $query);
 
 if ($res === false) {
