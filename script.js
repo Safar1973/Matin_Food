@@ -11,7 +11,7 @@ const API_URL = 'backend/api/get_products.php';
 // Initialize Application
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Core Site Initialization
-    currentLanguage = localStorage.getItem('lang') || 'de';
+    currentLanguage = getCookie('lang') || 'de';
     checkProtocol();
     setLanguage(currentLanguage);
     updateCartUI();
@@ -29,6 +29,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Shop Status Initialization
     refreshShopStatus();
 });
+
+// Cookie Helper Functions
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
+}
+
+function getCookie(name) {
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
 
 async function refreshShopStatus() {
     const countEl = document.getElementById('db-product-count');
@@ -84,9 +106,8 @@ function initAiChat() {
         const typingId = addMessage('<div class="typing-dots"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>', 'bot typing');
 
         try {
-            // Get Key from Cookies (Gemini)
-            const apiKeyMatch = document.cookie.match(/gemini_key=([^;]+)/);
-            const apiKey = apiKeyMatch ? apiKeyMatch[1] : null;
+            // Get Key from Cookies (Gemini) using helper
+            const apiKey = getCookie('gemini_key');
 
             const response = await fetch('backend/api/gemini_chat_handler.php', {
                 method: 'POST',
@@ -124,7 +145,7 @@ function initAiChat() {
 
                     const newKey = prompt(message);
                     if (newKey && newKey.trim().startsWith('AIza')) {
-                        document.cookie = `gemini_key=${newKey.trim()}; path=/; max-age=31536000`; // 1 year
+                        setCookie('gemini_key', newKey.trim(), 365); // 1 year using helper
                         addMessage('✅ API-Key wurde aktualisiert. Bitte versuchen Sie es erneut.', 'bot text-success');
                     } else if (newKey) {
                         addMessage('❌ Ungültiges Key-Format. Ein Gemini Key beginnt normalerweise mit "AIza".', 'bot text-warning');
@@ -900,9 +921,9 @@ async function submitOrder(event) {
 // Language management
 function setLanguage(lang) {
     currentLanguage = lang;
-    localStorage.setItem('lang', lang);
+    setCookie('lang', lang, 365); // 1 year using helper
 
-    // Update HTML attributes
+    // Update active dropdown item
     document.documentElement.lang = lang;
     document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
 
@@ -1093,12 +1114,12 @@ function switchAccountView(view) {
 // Cookie Banner Logic
 function initCookieBanner() {
     const banner = document.getElementById('cookie-banner');
-    const cookieConsent = localStorage.getItem('cookie-consent');
+    const cookieConsent = getCookie('cookie-consent');
 
     if (!cookieConsent && banner) {
         setTimeout(() => {
             banner.style.display = 'block';
-        }, 2000);
+        }, 1500);
     }
 }
 
@@ -1112,13 +1133,13 @@ function showCookieBanner(e) {
 }
 
 function acceptAllCookies() {
-    localStorage.setItem('cookie-consent', 'all');
+    setCookie('cookie-consent', 'all', 365);
     hideCookieBanner();
     showToast('✅ Cookies akzeptiert');
 }
 
 function closeCookieBanner() {
-    localStorage.setItem('cookie-consent', 'essential');
+    setCookie('cookie-consent', 'essential', 365);
     hideCookieBanner();
 }
 

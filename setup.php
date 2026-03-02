@@ -101,7 +101,7 @@ function formatWeight($w) {
 }
         $baseProducts = [
             ['grains', 'images/bulgur.png', 'Bulgur', 'Bulgur', 'برغل', 2.50, '2024-06-01', '2025-12-01'],
-            ['grains', 'images/شتورة_رز_مصري_10X1_KG.jpg', 'Egyptian Rice (1kg)', 'Ägyptischer Reis (1kg)', 'رز مصري (1 كيلو)', 3.00, '2024-07-15', '2026-06-15'],
+            ['grains', 'images/Ägyptische Reis.jpg', 'Egyptian Rice (1kg)', 'Ägyptischer Reis (1kg)', 'رز مصري (1 كيلو)', 3.00, '2024-07-15', '2026-06-15'],
             ['grains', 'images/شتورة_رز_مصري_4X5_KG.jpg', 'Egyptian Rice (5kg)', 'Ägyptischer Reis (5kg)', 'رز مصري (5 كيلو)', 13.50, '2024-07-15', '2026-06-15'],
             ['grains', 'images/bulgur_salad.jpg', 'Bulgur Salad', 'Bulgursalat', 'سلطة برغل', 4.50, '2024-05-30', '2025-11-30'],
             ['canned', 'images/شتورة_غاردن_دبس_بندورة_12X650g.jpg', 'Tomato Paste (650g)', 'Tomatenmark (650g)', 'دبس بندورة (650غ)', 1.50, '2024-01-20', '2025-06-20'],
