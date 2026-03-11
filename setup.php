@@ -18,7 +18,8 @@ try {
     echo "<div style='font-family: \"Outfit\", sans-serif; padding: 50px; line-height: 1.6; max-width: 850px; margin: 40px auto; background: #ffffff; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.08); border: 1px solid #e0e0e0;'>";
     echo "<div style='text-align: center; margin-bottom: 30px;'><img src='images/logo-1694787094.jpg' alt='Logo' style='height: 80px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);'></div>";
     echo "<h1 style='color: #2e7d32; text-align: center; font-weight: 900; letter-spacing: -1px; margin-bottom: 10px;'>System Installation</h1>";
-    echo "<p style='text-align: center; color: #7f8c8d; margin-bottom: 40px;'>Matin Food Database & Environment Setup</p>";
+    echo "<p style='text-align: center; color: #7f8c8d; margin-bottom: 20px;'>Matin Food Database & Environment Setup</p>";
+    echo "<p style='text-align: center; color: #2e7d32; font-weight: 600; font-size: 0.9rem; margin-bottom: 40px;'>Lagerverwaltung Pro: 1. Zentrale Bestandsführung | 2. Automatisiert Verfallsüberwachung und Bestandswarnungen</p>";
     echo "<hr style='border: 0; border-top: 2px solid #f1f8e9; margin-bottom: 30px;'>";
     
     // 0. Drop Tables (to ensure clean schema)
@@ -51,7 +52,8 @@ try {
         weight VARCHAR(50) DEFAULT '0,75 kg',
         production_date DATE DEFAULT NULL,
         expiry DATE NOT NULL,
-        stock INT DEFAULT 100
+        stock INT DEFAULT 100,
+        discount INT DEFAULT 0
     )");
 
     // Orders Table
@@ -131,7 +133,7 @@ function formatWeight($w) {
             ['grains', 'images/Mahmud Reis.jpg', 'Mahmud Rice', 'Mahmud Reis', 'رز محمود (1 كيلو)', 2.90, '2024-10-15', '2026-10-15']
         ];
 
-        $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, weight, production_date, expiry, description_de, description_en, description_ar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Leckeres Produkt', 'Delicious product', 'منتج لذيذ')");
+        $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, weight, production_date, expiry, description_de, description_en, description_ar, discount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Leckeres Produkt', 'Delicious product', 'منتج لذيذ', ?)");
         
         $totalToInsert = 500;
         $originalCount = count($baseProducts);
@@ -160,7 +162,8 @@ function formatWeight($w) {
                 $p[5], // price
                 $weightStr,
                 $p[6], // production
-                $p[7]  // expiry
+                $p[7], // expiry
+                ($i % 5 === 0) ? 20 : 0 // Add 20% discount to every 5th product
             ]);
         }
         echo "<span style='color: #2e7d32;'>✔ $totalToInsert products inserted successfully.</span></div>";

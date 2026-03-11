@@ -78,7 +78,7 @@ while ($p = mysqli_fetch_assoc($res)) {
             <nav>
                 <a href="index.php" class="nav-link">📦 Lagerverwaltung</a>
                 <a href="ai_dashboard.php" class="nav-link active">✨ AI Generator</a>
-                <a href="help.php" class="nav-link">📚 Hilfe (AI)</a>
+                <a href="help.php" class="nav-link">📚 Hilfe & Assistenz</a>
                 <a href="../setup.php" class="nav-link" onclick="return confirm('Datenbank wirklich zurücksetzen?')">⚙️ DB Setup</a>
                 <a href="../index.html" class="nav-link mt-5">🌐 Zum Shop</a>
             </nav>
@@ -100,8 +100,8 @@ while ($p = mysqli_fetch_assoc($res)) {
             <div class="ai-card">
                 <div class="row g-3 align-items-end">
                     <div class="col-md-4">
-                        <label class="form-label fw-bold">OpenAI API Key</label>
-                        <input type="password" id="apiKey" class="form-control" placeholder="sk-..." value="<?php echo isset($_COOKIE['openai_key']) ? $_COOKIE['openai_key'] : ''; ?>">
+                        <label class="form-label fw-bold">Google Gemini API Key</label>
+                        <input type="password" id="apiKey" class="form-control" placeholder="AIza..." value="<?php echo isset($_COOKIE['gemini_key']) ? $_COOKIE['gemini_key'] : ''; ?>">
                         <div class="form-text">Wird lokal im Browser gespeichert.</div>
                     </div>
                     <div class="col-md-5">
@@ -208,7 +208,7 @@ while ($p = mysqli_fetch_assoc($res)) {
             }
 
             // Save API Key to cookie for 7 days
-            document.cookie = `openai_key=${apiKey}; max-age=604800; path=/`;
+            document.cookie = `gemini_key=${apiKey}; max-age=604800; path=/`;
 
             document.getElementById('loading').classList.remove('d-none');
             document.getElementById('resultsArea').classList.add('d-none');
@@ -229,7 +229,8 @@ while ($p = mysqli_fetch_assoc($res)) {
                     document.getElementById('desc_de').value = result.data.description_de;
                     document.getElementById('desc_en').value = result.data.description_en;
                     document.getElementById('desc_ar').value = result.data.description_ar;
-                    
+                    // Check API Key
+                    const apiKeyMatch = document.cookie.match(/gemini_key=([^;]+)/);
                     document.getElementById('loading').classList.add('d-none');
                     document.getElementById('resultsArea').classList.remove('d-none');
                 } else {

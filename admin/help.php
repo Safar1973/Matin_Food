@@ -104,8 +104,11 @@ include_once dirname(__FILE__) . "/../db.php";
                         <div class="card-body p-4">
                             <h5 class="fw-bold mb-3">Schnelle Fragen</h5>
                             <div class="d-grid gap-2 quick-actions">
+                                <button onclick="askQuestion('Was bietet die Lagerverwaltung Pro?')" class="btn btn-light text-start py-3 px-3 rounded-3 border">
+                                    📦 Lagerverwaltung Pro
+                                </button>
                                 <button onclick="askQuestion('Wie füge ich ein neues Produkt hinzu?')" class="btn btn-light text-start py-3 px-3 rounded-3 border">
-                                    📦 Produkt hinzufügen
+                                    ➕ Produkt hinzufügen
                                 </button>
                                 <button onclick="askQuestion('Wie nutze ich den AI Generator?')" class="btn btn-light text-start py-3 px-3 rounded-3 border">
                                     ✨ AI Texte erstellen
@@ -120,7 +123,18 @@ include_once dirname(__FILE__) . "/../db.php";
                         </div>
                     </div>
 
-                    <!-- New Guide Card -->
+                    <!-- New Inventory Guide Card -->
+                    <div class="card border-0 shadow-sm rounded-4 mb-4">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold mb-3">📦 Lagerverwaltung Pro</h5>
+                            <ol class="list-group list-group-numbered list-group-flush small mb-0">
+                                <li class="list-group-item px-0"><strong>Zentrale Bestandsführung</strong> für alle Artikel.</li>
+                                <li class="list-group-item px-0"><strong>Automatisiert Verfallsüberwachung</strong> und Bestandswarnungen.</li>
+                                <li class="list-group-item px-0"><strong>Kritische Alarme</strong> bei MHD-Ablauf oder Ausverkauf.</li>
+                            </ol>
+                        </div>
+                    </div>
+
                     <div class="card border-0 shadow-sm rounded-4 mb-4">
                         <div class="card-body p-4">
                             <h5 class="fw-bold mb-3">📖 Anleitung: AI Generator</h5>
@@ -197,7 +211,7 @@ include_once dirname(__FILE__) . "/../db.php";
                 userInput.value = '';
 
                 // Check API Key
-                const apiKeyMatch = document.cookie.match(/openai_key=([^;]+)/);
+                const apiKeyMatch = document.cookie.match(/gemini_key=([^;]+)/);
                 const apiKey = apiKeyMatch ? apiKeyMatch[1] : null;
 
                 if (!apiKey) {

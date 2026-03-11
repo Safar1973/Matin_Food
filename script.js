@@ -294,7 +294,7 @@ function renderProducts(productsToRender = products) {
     }
 
     grid.innerHTML = productsToRender.map(product => {
-        const discount = Math.floor(Math.random() * 20) + 15;
+        const discount = parseInt(product.discount) || 0;
 
         // Dynamic Weight Logic (Converted to KG)
         const dispWeight = formatWeightToKg(product.weight);
@@ -303,7 +303,7 @@ function renderProducts(productsToRender = products) {
         <div class="product-card">
             <div class="product-image-container">
                 <div class="badge-container">
-                    <span class="badge-discount">-${discount}%</span>
+                    ${discount > 0 ? `<span class="badge-discount">-${discount}%</span>` : ''}
                     ${product.id % 4 === 0 ? '<span class="badge-neu-pill">Neu</span>' : ''}
                     <span class="badge-nr">Nr. ${product.id}</span>
                 </div>
@@ -319,7 +319,7 @@ function renderProducts(productsToRender = products) {
                 <h3 class="product-title-ref" onclick="openProductModal(${product.id})">${product['name_' + currentLanguage] || product.name}</h3>
                 <div class="price-container-ref">
                     <span class="current-price-ref">${parseFloat(product.price).toFixed(2)} €</span>
-                    <span class="old-price-ref">${(product.price * 1.2).toFixed(2)} €</span>
+                    ${discount > 0 ? `<span class="old-price-ref">${(product.price / (1 - (discount / 100))).toFixed(2)} €</span>` : ''}
                 </div>
                 <div class="weight-info-ref">
                     ${dispWeight}
@@ -652,6 +652,8 @@ function filterByCategory(category) {
         filtered = products.filter(p => p.id % 7 === 0);
     } else if (category === 'wishlist') {
         filtered = products.filter(p => wishlist.includes(p.id));
+    } else if (category === 'offers') {
+        filtered = products.filter(p => parseInt(p.discount) > 0);
     } else {
         filtered = products.filter(p => p.category.toLowerCase() === category.toLowerCase());
     }

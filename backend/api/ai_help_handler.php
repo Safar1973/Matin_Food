@@ -12,44 +12,47 @@ if (!isset($data['api_key'])) {
 $apiKey = $data['api_key'];
 $userQuery = isset($data['query']) ? $data['query'] : 'How does this system work?';
 
-// System Prompt for Admin Help
 $systemPrompt = "You are the expert Administrator Guide for the Matin Food Admin Panel.
 Your goal is to help the admin understand how to use the system.
 
 System Capabilities:
-1. **Lagerverwaltung (Inventory)**: View stock, see expired items (red cards), low stock (yellow cards).
-2. **AI Generator**: Generate product descriptions in DE/EN/AR automatically.
-3. **Database Setup**: Reset the database (use with caution).
-4. **Help (this page)**: Ask questions about the system.
+1. **Lagerverwaltung Pro**: Zentrale Bestandsführung, automatisierte Verfallsüberwachung und Bestandswarnungen.
+2. **AI Generator**: Erstellt Produktbeschreibungen in DE/EN/AR automatisch.
+3. **Database Setup**: Zurücksetzen der Datenbank.
+4. **Hilfe & Assistenz**: Dieses Modul für Fragen zum System.
 
-Common Tasks:
-- **Add Product**: Go to Lagerverwaltung -> Click '+ Neues Produkt'.
-- **Edit Product**: Currently need to edit directly in DB or use future edit features.
-- **Generate Text**: Go to AI Generator -> Select Product -> Click Generate -> Save.
+Wichtige Funktionen:
+- **MHD-Überwachung**: Rote Karten bedeuten abgelaufen, gelb bedeutet bald abgelaufen (30 Tage).
+- **Bestandswarnung**: Automatischer Alarm bei niedrigem Bestand (<10 Stück).
 
-Tone: Professional, helpful, concise. Language: German.";
+Tonfall: Professionell, hilfreich, kurz gefasst. Sprache: Deutsch.";
 
-$messages = [
-    ['role' => 'system', 'content' => $systemPrompt],
-    ['role' => 'user', 'content' => $userQuery]
+$contents = [
+    [
+        'role' => 'user',
+        'parts' => [['text' => $userQuery]]
+    ]
 ];
 
-// Call OpenAI API
-$ch = curl_init();
 $postData = [
-    'model' => 'gpt-3.5-turbo',
-    'messages' => $messages,
-    'temperature' => 0.5
+    'system_instruction' => [
+        'parts' => [['text' => $systemPrompt]]
+    ],
+    'contents' => $contents,
+    'generationConfig' => [
+        'temperature' => 0.4,
+        'maxOutputTokens' => 1000
+    ]
 ];
 
-curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/chat/completions');
+$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" . urlencode($apiKey);
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    'Content-Type: application/json',
-    'Authorization: Bearer ' . $apiKey
-]);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 
@@ -59,12 +62,11 @@ if (curl_errno($ch)) {
     echo json_encode(['success' => false, 'error' => 'cURL Error: ' . curl_error($ch)]);
 } else {
     $response = json_decode($result, true);
-    if (isset($response['choices'][0]['message']['content'])) {
-        echo json_encode(['success' => true, 'response' => $response['choices'][0]['message']['content']]);
+    if (isset($response['candidates'][0]['content']['parts'][0]['text'])) {
+        echo json_encode(['success' => true, 'response' => $response['candidates'][0]['content']['parts'][0]['text']]);
     } else {
-        $err = isset($response['error']['message']) ? $response['error']['message'] : 'Unknown AI Error';
-        if (!$response && $result) $err = 'Invalid Server Response (Bad Request?): ' . substr($result, 0, 150);
-        echo json_encode(['success' => false, 'error' => $err, 'raw' => $response ? $response : $result]);
+        $err = isset($response['error']['message']) ? $response['error']['message'] : 'Unbekannter Gemini Fehler';
+        echo json_encode(['success' => false, 'error' => $err]);
     }
 }
 curl_close($ch);

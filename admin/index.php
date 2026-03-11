@@ -62,7 +62,7 @@ function formatWeight($w) {
             <nav>
                 <a href="index.php" class="nav-link active">📦 Lagerverwaltung</a>
                 <a href="ai_dashboard.php" class="nav-link">✨ AI Generator</a>
-                <a href="help.php" class="nav-link">📚 Hilfe (AI)</a>
+                <a href="help.php" class="nav-link">📚 Hilfe & Assistenz</a>
                 <a href="../setup.php" class="nav-link" onclick="return confirm('Datenbank wirklich zurücksetzen?')">⚙️ DB Setup</a>
                 <a href="../index.html" class="nav-link mt-5">🌐 Zum Shop</a>
             </nav>
@@ -72,13 +72,29 @@ function formatWeight($w) {
         <main class="main-content">
             <div class="header-actions">
                 <div>
-                    <h2 class="fw-bold mb-0">Bestandsübersicht</h2>
-                    <p class="text-muted">Lagerbestand und MHD-Überwachung</p>
+                    <h2 class="fw-bold mb-0">Lagerverwaltung Pro</h2>
+                    <p class="text-muted small">1. Zentrale Bestandsführung | 2. Automatisiert Verfallsüberwachung und Bestandswarnungen</p>
                 </div>
-                <button class="btn btn-primary rounded-pill px-4 fw-bold" style="background: var(--primary); border: none;">
-                    + Neues Produkt
-                </button>
+                <div class="d-flex gap-2">
+                    <a href="add_product.php" class="btn btn-primary rounded-pill px-4 fw-bold" style="background: var(--primary); border: none;">
+                        + Neues Produkt
+                    </a>
+                </div>
             </div>
+
+            <!-- Critical Alerts Section -->
+            <?php if ($expired > 0 || $out_of_stock > 0): ?>
+            <div class="alert alert-danger alert-pulse-danger border-0 shadow-sm rounded-4 p-4 mb-4 d-flex align-items-center gap-4">
+                <div class="fs-1">🚨</div>
+                <div>
+                    <h5 class="fw-bold mb-1">Kritische Warnungen</h5>
+                    <p class="mb-0 small">
+                        Es gibt <strong><?= $expired ?></strong> abgelaufene Produkte und <strong><?= $out_of_stock ?></strong> ausverkaufte Artikel, die sofortige Aufmerksamkeit erfordern.
+                    </p>
+                </div>
+                <button class="btn btn-danger btn-sm ms-auto rounded-pill px-3 fw-bold" onclick="window.scrollTo(0, document.body.scrollHeight/2)">Details ansehen</button>
+            </div>
+            <?php endif; ?>
 
             <!-- KPI Row -->
             <div class="kpi-row">
@@ -100,7 +116,19 @@ function formatWeight($w) {
                 </div>
             </div>
 
-            <div class="content-card">
+            <!-- New Inventory Guide Card -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">📦 Lagerverwaltung Pro</h5>
+                    <ol class="list-group list-group-numbered list-group-flush small mb-0">
+                        <li class="list-group-item px-0"><strong>Zentrale Bestandsführung</strong> für alle Artikel.</li>
+                        <li class="list-group-item px-0"><strong>Automatisiert Verfallsüberwachung</strong> und Bestandswarnungen.</li>
+                        <li class="list-group-item px-0"><strong>Kritische Alarme</strong> bei MHD-Ablauf oder Ausverkauf.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="content-card" id="inventory-table">
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
@@ -122,10 +150,10 @@ function formatWeight($w) {
                                 $stock_text = $p['stock'];
                                 if ($p['stock'] == 0) {
                                     $stock_class = "status-danger";
-                                    $stock_text = "Out of Stock";
+                                    $stock_text = "Ausverkauft";
                                 } elseif ($p['stock'] < 10) {
                                     $stock_class = "status-warning";
-                                    $stock_text = $p['stock'] . " (Low)";
+                                    $stock_text = $p['stock'] . " (Niedrig)";
                                 }
 
                                 // MHD Status logic
