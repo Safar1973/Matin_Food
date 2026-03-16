@@ -248,6 +248,12 @@ header {
     margin: 0;
     padding: 0;
     gap: 30px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+[dir="rtl"] .nav-list {
+    flex-direction: row-reverse;
 }
 
 .nav-list a {

@@ -30,7 +30,6 @@
                 </div>
                 <div class="top-bar-right d-flex align-items-center">
                     <a href="#" data-i18n="help">Hilfe</a>
-                    <a href="#" class="ms-3" onclick="goToSection('about-section')" data-i18n="about_us">Über uns</a>
                     <a href="#" class="ms-3" onclick="goToSection('locations-section')">
                         <span class="me-1">📍</span> <span data-i18n="location_header">Filialen & Maps</span>
                     </a>
@@ -101,7 +100,7 @@
                                 <span class="icon">❤️</span>
                                 <span class="badge" id="wishlist-count">0</span>
                             </div>
-                            <span class="label" data-i18n="wishlist">Merkzettel</span>
+                            <span class="label" data-i18n="wishlist">Lieblingsprodukte</span>
                         </div>
                         <div class="action-item mx-3" onclick="goToSection('account-section')">
                             <span class="icon">👤</span>
@@ -131,6 +130,7 @@
                     <li><a href="#" onclick="filterByCategory('offers')" class="text-danger fw-bold"
                             data-i18n="offers">ANGEBOTE</a>
                     </li>
+                    <li><a href="#" onclick="goToSection('about-section')" data-i18n="about_us">Über uns</a></li>
                     <li class="nav-item-hover">
                         <a href="#" style="cursor: default;" data-i18n="opening_hours">Öffnungszeiten</a>
                         <div class="dropdown-menu">
@@ -293,19 +293,71 @@
 
             <!-- About Us Section -->
             <section id="about-section" class="page-section">
-                <div class="container py-5">
+                <div class="container py-5 mt-5">
                     <div class="row justify-content-center">
-                        <div class="col-lg-8 text-center">
-                            <h2 class="fw-bold mb-4">MATIN FOOD</h2>
-                            <h4 class="text-primary mb-4">MATIN FOOD ist 4 Jahre Computerbild Trendshop in Folge!</h4>
-                            <p class="lead text-muted mb-4">
-                                Als wir im Jahr 2016 die ersten Onlineverkäufe starteten, konnten wir uns nicht
-                                vorstellen, dass dies ein solcher Erfolg wird. Wir danken unseren treuen Kunden für
-                                dieses Vertrauen.
-                            </p>
-                            <div class="alert alert-light border small text-muted mt-5">
-                                * Alle Preise inkl. gesetzl. Mehrwertsteuer zzgl. Versandkosten und ggf.
-                                Nachnahmegebühren, wenn nicht anders angegeben.
+                        <div class="col-lg-10">
+                            <div class="bg-white p-5 rounded-4 shadow-sm">
+                                <h1 class="fw-bold mb-4 text-center text-primary" data-i18n="about_title">Willkommen bei Metin Food</h1>
+                                
+                                <p class="lead text-muted mb-5" style="text-align: justify; line-height: 1.8;" data-i18n="about_text_1">
+                                    Metin Food wurde im Jahr 2016 gegründet und hat sich seitdem als zuverlässiger Partner für hochwertige Lebensmittel etabliert. Unser Ziel ist es, unseren Kunden eine breite Auswahl an sorgfältig ausgewählten Produkten anzubieten – von haltbaren Lebensmitteln bis hin zu frischem Obst und Gemüse.<br><br>
+                                    Mit unserer Erfahrung im Lebensmittelhandel legen wir großen Wert auf Qualität, Frische und Vertrauen. Diese Werte bilden die Grundlage unserer täglichen Arbeit und unserer langfristigen Beziehungen zu unseren Kunden und Partnern.
+                                </p>
+
+                                <div class="row g-5 mb-5">
+                                    <div class="col-md-6">
+                                        <h3 class="fw-bold mb-4" data-i18n="about_assortment_title">Unser Sortiment</h3>
+                                        <p class="text-muted" style="text-align: justify;" data-i18n="about_assortment_text">
+                                            Bei Metin Food finden unsere Kunden eine vielfältige Auswahl an Lebensmitteln für den täglichen Bedarf. Unser Sortiment umfasst unter anderem:
+                                        </p>
+                                        <ul class="text-muted" style="line-height: 2;" data-i18n="about_assortment_list">
+                                            <li>Lebensmittel verschiedener Art</li>
+                                            <li>Konserven und haltbare Produkte</li>
+                                            <li>Getränke</li>
+                                            <li>Frisches Obst und Gemüse</li>
+                                        </ul>
+                                        <p class="text-muted mt-3" style="text-align: justify;" data-i18n="about_assortment_end">
+                                            Wir achten darauf, Produkte anzubieten, die sowohl qualitativ hochwertig als auch preislich attraktiv sind.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3 class="fw-bold mb-4" data-i18n="about_b2b_title">Großhandel und Einzelhandel</h3>
+                                        <p class="text-muted" style="text-align: justify;" data-i18n="about_b2b_text">
+                                            Unser Unternehmen beliefert sowohl Großhandelskunden wie Restaurants, Geschäfte und Händler als auch Privatkunden.<br><br>
+                                            Darüber hinaus bieten wir unseren Kunden die Möglichkeit, unsere Produkte online zu bestellen, sodass sie bequem und schnell auf unser Sortiment zugreifen können.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="bg-light p-4 rounded-4 mb-5">
+                                    <h3 class="fw-bold mb-4 text-center" data-i18n="about_values_title">Unsere Werte</h3>
+                                    <p class="text-center text-muted mb-4" data-i18n="about_values_intro">Bei Metin Food stehen folgende Prinzipien im Mittelpunkt:</p>
+                                    <div class="row text-center g-4" data-i18n="about_values_list">
+                                        <div class="col-md-3">
+                                            <div class="fs-1 mb-2">⭐</div>
+                                            <strong>Qualität:</strong><br>Sorgfältige Auswahl<br>unserer Produkte
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="fs-1 mb-2">🍎</div>
+                                            <strong>Frische:</strong><br>Besonders bei<br>Obst und Gemüse
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="fs-1 mb-2">🤝</div>
+                                            <strong>Vertrauen:</strong><br>Ehrlicher und<br>transparenter Handel
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="fs-1 mb-2">💎</div>
+                                            <strong>Service:</strong><br>Kundenzufriedenheit<br>hat höchste Priorität
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <h3 class="fw-bold mb-4" data-i18n="about_vision_title">Unsere Vision</h3>
+                                    <p class="text-muted mx-auto" style="max-width: 800px; text-align: justify;" data-i18n="about_vision_text">
+                                        Unsere Vision ist es, Metin Food kontinuierlich weiterzuentwickeln und unseren Kunden stets ein zuverlässiger Lieferant für hochwertige Lebensmittel zu sein. Wir möchten langfristige Partnerschaften aufbauen und unseren Service stetig verbessern.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

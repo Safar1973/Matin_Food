@@ -1,4 +1,0 @@
---- Grants for 'pma' ---
-User: 'pma'@'localhost'
-  GRANT USAGE ON *.* TO `pma`@`localhost`
-  GRANT SELECT, INSERT, UPDATE, DELETE ON `phpmyadmin`.* TO `pma`@`localhost`

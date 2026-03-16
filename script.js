@@ -277,7 +277,7 @@ function formatWeightToKg(weightStr) {
 }
 
 // Render product grid
-function renderProducts(productsToRender = products) {
+function renderProducts(productsToRender = products, category = 'all') {
     const grid = document.getElementById('product-grid');
     if (!grid) return;
 
@@ -287,9 +287,10 @@ function renderProducts(productsToRender = products) {
     if (productsToRender.length === 0) {
         grid.innerHTML = `
             <div class="col-12 text-center py-5" style="grid-column: 1 / -1;">
-                <p class="text-muted fs-5">Keine Produkte in dieser Kategorie gefunden.</p>
-                <button class="btn btn-outline-primary mt-2" onclick="filterByCategory('all')">Alle Produkte anzeigen</button>
+                <p class="text-muted fs-5" data-i18n="${category === 'wishlist' ? 'empty_wishlist_msg' : 'empty_category_msg'}">Keine Produkte gefunden.</p>
+                <button class="btn btn-outline-primary mt-2" onclick="filterByCategory('all')" data-i18n="show_all_products">Alle Produkte anzeigen</button>
             </div>`;
+        updateStaticText();
         return;
     }
 
@@ -307,10 +308,10 @@ function renderProducts(productsToRender = products) {
                     ${product.id % 4 === 0 ? '<span class="badge-neu-pill">Neu</span>' : ''}
                     <span class="badge-nr">Nr. ${product.id}</span>
                 </div>
-                <button class="wishlist-btn-ref ${wishlist.includes(product.id) ? 'active' : ''}" 
+                <button class="wishlist-btn-ref ${wishlist.some(w => w == product.id) ? 'active' : ''}" 
                         onclick="toggleWishlist(${product.id}, event)" 
-                        title="Auf den Merkzettel">
-                    ${wishlist.includes(product.id) ? '❤️' : '♡'}
+                        title="Zu Lieblingsprodukten">
+                    ${wishlist.some(w => w == product.id) ? '❤️' : '♡'}
                 </button>
                 <img src="${product.img}" alt="${product.name}" class="product-img" onclick="openProductModal(${product.id})">
             </div>
@@ -342,7 +343,7 @@ const translations = {
         'contact': 'Kontakt',
         'all_categories': 'Alle Kategorien',
         'account': 'Mein Konto',
-        'wishlist': 'Merkzettel',
+        'wishlist': 'Lieblingsprodukte',
         'cart': 'Warenkorb',
         'home': 'Startseite',
         'cat_grains': 'Getreide & Körner',
@@ -374,6 +375,7 @@ const translations = {
         'in_cart': 'In den',
         'empty_cart_msg': 'Ihr Warenkorb ist leer!',
         'empty_category_msg': 'Keine Produkte in dieser Kategorie gefunden.',
+        'empty_wishlist_msg': 'Ihre Liste der Lieblingsprodukte ist noch leer.',
         'show_all_products': 'Alle Produkte anzeigen',
         'order_summary': 'Bestellübersicht',
         'total_sum': 'Gesamtsumme',
@@ -421,7 +423,20 @@ const translations = {
         'cookie_accept_all': 'Alle akzeptieren',
         'cookie_only_essential': 'Nur Essenzielle',
         'location_header': 'Filialen & Maps',
-        'locations_title': 'Unsere Standorte'
+        'locations_title': 'Unsere Standorte',
+        'about_title': 'Willkommen bei Metin Food',
+        'about_text_1': 'Metin Food wurde im Jahr 2016 gegründet und hat sich seitdem als zuverlässiger Partner für hochwertige Lebensmittel etabliert. Unser Ziel ist es, unseren Kunden eine breite Auswahl an sorgfältig ausgewählten Produkten anzubieten – von haltbaren Lebensmitteln bis hin zu frischem Obst und Gemüse.<br><br>Mit unserer Erfahrung im Lebensmittelhandel legen wir großen Wert auf Qualität, Frische und Vertrauen. Diese Werte bilden die Grundlage unserer täglichen Arbeit und unserer langfristigen Beziehungen zu unseren Kunden und Partnern.',
+        'about_assortment_title': 'Unser Sortiment',
+        'about_assortment_text': 'Bei Metin Food finden unsere Kunden eine vielfältige Auswahl an Lebensmitteln für den täglichen Bedarf. Unser Sortiment umfasst unter anderem:',
+        'about_assortment_list': '<li>Lebensmittel verschiedener Art</li><li>Konserven und haltbare Produkte</li><li>Getränke</li><li>Frisches Obst und Gemüse</li>',
+        'about_assortment_end': 'Wir achten darauf, Produkte anzubieten, die sowohl qualitativ hochwertig als auch preislich attraktiv sind.',
+        'about_b2b_title': 'Großhandel und Einzelhandel',
+        'about_b2b_text': 'Unser Unternehmen beliefert sowohl Großhandelskunden wie Restaurants, Geschäfte und Händler als auch Privatkunden.<br><br>Darüber hinaus bieten wir unseren Kunden die Möglichkeit, unsere Produkte online zu bestellen, sodass sie bequem und schnell auf unser Sortiment zugreifen können.',
+        'about_values_title': 'Unsere Werte',
+        'about_values_intro': 'Bei Metin Food stehen folgende Prinzipien im Mittelpunkt:',
+        'about_values_list': '<div class="col-md-3"><div class="fs-1 mb-2">⭐</div><strong>Qualität:</strong><br>Sorgfältige Auswahl<br>unserer Produkte</div><div class="col-md-3"><div class="fs-1 mb-2">🍎</div><strong>Frische:</strong><br>Besonders bei<br>Obst und Gemüse</div><div class="col-md-3"><div class="fs-1 mb-2">🤝</div><strong>Vertrauen:</strong><br>Ehrlicher und<br>transparenter Handel</div><div class="col-md-3"><div class="fs-1 mb-2">💎</div><strong>Service:</strong><br>Kundenzufriedenheit<br>hat höchste Priorität</div>',
+        'about_vision_title': 'Unsere Vision',
+        'about_vision_text': 'Unsere Vision ist es, Metin Food kontinuierlich weiterzuentwickeln und unseren Kunden stets ein zuverlässiger Lieferant für hochwertige Lebensmittel zu sein. Wir möchten langfristige Partnerschaften aufbauen und unseren Service stetig verbessern.'
     },
     'en': {
         'help': 'Help',
@@ -461,6 +476,7 @@ const translations = {
         'in_cart': 'Add to',
         'empty_cart_msg': 'Your cart is empty!',
         'empty_category_msg': 'No products found in this category.',
+        'empty_wishlist_msg': 'Your favorite products list is empty.',
         'show_all_products': 'Show all products',
         'order_summary': 'Order Summary',
         'total_sum': 'Total Sum',
@@ -508,7 +524,20 @@ const translations = {
         'cookie_accept_all': 'Accept All',
         'cookie_only_essential': 'Essential Only',
         'location_header': 'Branches & Maps',
-        'locations_title': 'Our Locations'
+        'locations_title': 'Our Locations',
+        'about_title': 'Welcome to Metin Food',
+        'about_text_1': 'Metin Food was founded in 2016 and has since established itself as a reliable partner for high-quality food. Our goal is to offer our customers a wide selection of carefully chosen products – from non-perishable foods to fresh fruit and vegetables.<br><br>With our experience in the grocery trade, we attach great importance to quality, freshness, and trust. These values form the basis of our daily work and our long-term relationships with our customers and partners.',
+        'about_assortment_title': 'Our Assortment',
+        'about_assortment_text': 'At Metin Food, our customers will find a diverse selection of everyday groceries. Our range includes, among other things:',
+        'about_assortment_list': '<li>Groceries of various kinds</li><li>Canned goods and non-perishables</li><li>Beverages</li><li>Fresh fruit and vegetables</li>',
+        'about_assortment_end': 'We take care to offer products that are both high in quality and attractively priced.',
+        'about_b2b_title': 'Wholesale and Retail',
+        'about_b2b_text': 'Our company supplies wholesale customers such as restaurants, shops, and dealers, as well as private customers.<br><br>Furthermore, we offer our customers the opportunity to order our products online, so they can access our assortment conveniently and quickly.',
+        'about_values_title': 'Our Values',
+        'about_values_intro': 'At Metin Food, the following principles are at the heart of what we do:',
+        'about_values_list': '<div class="col-md-3"><div class="fs-1 mb-2">⭐</div><strong>Quality:</strong><br>Careful selection<br>of our products</div><div class="col-md-3"><div class="fs-1 mb-2">🍎</div><strong>Freshness:</strong><br>Especially for<br>fruit and vegetables</div><div class="col-md-3"><div class="fs-1 mb-2">🤝</div><strong>Trust:</strong><br>Honest and<br>transparent trade</div><div class="col-md-3"><div class="fs-1 mb-2">💎</div><strong>Service:</strong><br>Customer satisfaction<br>is top priority</div>',
+        'about_vision_title': 'Our Vision',
+        'about_vision_text': 'Our vision is to continue developing Metin Food and to always be a reliable supplier of high-quality food for our customers. We want to build long-term partnerships and continuously improve our service.'
     },
     'ar': {
         'help': 'مساعدة',
@@ -548,6 +577,7 @@ const translations = {
         'in_cart': 'أضف إلى',
         'empty_cart_msg': 'عربة التسوق فارغة!',
         'empty_category_msg': 'لم يتم العثور على منتجات في هذه الفئة.',
+        'empty_wishlist_msg': 'قائمة منتجاتك المفضلة فارغة حاليا.',
         'show_all_products': 'عرض جميع المنتجات',
         'order_summary': 'ملخص الطلبية',
         'total_sum': 'المجموع الإجمالي',
@@ -595,7 +625,20 @@ const translations = {
         'cookie_accept_all': 'قبول الكل',
         'cookie_only_essential': 'الضرورية فقط',
         'location_header': 'الفروع والخرائط',
-        'locations_title': 'مواقعنا'
+        'locations_title': 'مواقعنا',
+        'about_title': 'مرحباً بكم في متين فود',
+        'about_text_1': 'تأسست متين فود في عام 2016 وأثبتت منذ ذلك الحين نفسها كشريك موثوق للأغذية عالية الجودة. هدفنا هو تقديم مجموعة واسعة من المنتجات المختارة بعناية لعملائنا - من الأطعمة غير القابلة للتلف إلى الفواكه والخضروات الطازجة.<br><br>من خلال خبرتنا في تجارة المواد الغذائية، نولي أهمية كبيرة للجودة والنضارة والثقة. تشكل هذه القيم أساس عملنا اليومي وعلاقاتنا طويلة الأمد مع عملائنا وشركائنا.',
+        'about_assortment_title': 'تشكيلتنا',
+        'about_assortment_text': 'في متين فود، سيجد عملاؤنا مجموعة متنوعة من البقالة اليومية. تشمل تشكيلتنا، من بين أمور أخرى:',
+        'about_assortment_list': '<li>مواد غذائية بأنواع مختلفة</li><li>معلبات ومنتجات طويلة الأمد</li><li>مشروبات</li><li>فواكه وخضروات طازجة</li>',
+        'about_assortment_end': 'نحرص على تقديم منتجات ذات جودة عالية وبأسعار جذابة.',
+        'about_b2b_title': 'البيع بالجملة والتجزئة',
+        'about_b2b_text': 'تزود شركتنا عملاء الجملة مثل المطاعم والمتاجر والتجار، وكذلك العملاء من الأفراد.<br><br>علاوة على ذلك، نقدم لعملائنا فرصة طلب منتجاتنا عبر الإنترنت، حتى يتمكنوا من الوصول إلى تشكيلتنا بسهولة وسرعة.',
+        'about_values_title': 'قيمنا',
+        'about_values_intro': 'في متين فود، نركز على المبادئ التالية:',
+        'about_values_list': '<div class="col-md-3"><div class="fs-1 mb-2">⭐</div><strong>الجودة:</strong><br>اختيار دقيق<br>لمنتجاتنا</div><div class="col-md-3"><div class="fs-1 mb-2">🍎</div><strong>النضارة:</strong><br>خاصة للفواكه<br>والخضروات</div><div class="col-md-3"><div class="fs-1 mb-2">🤝</div><strong>الثقة:</strong><br>تجارة صادقة<br>وشفافة</div><div class="col-md-3"><div class="fs-1 mb-2">💎</div><strong>الخدمة:</strong><br>رضا العملاء<br>أولويتنا القصوى</div>',
+        'about_vision_title': 'رؤيتنا',
+        'about_vision_text': 'رؤيتنا هي مواصلة تطوير متين فود وأن نكون دائمًا موردًا موثوقًا للأغذية عالية الجودة لعملائنا. نريد بناء شراكات طويلة الأمد وتحسين خدماتنا باستمرار.'
     }
 };
 
@@ -651,14 +694,14 @@ function filterByCategory(category) {
     } else if (category === 'ausverkauft') {
         filtered = products.filter(p => p.id % 7 === 0);
     } else if (category === 'wishlist') {
-        filtered = products.filter(p => wishlist.includes(p.id));
+        filtered = products.filter(p => wishlist.some(w => w == p.id));
     } else if (category === 'offers') {
         filtered = products.filter(p => parseInt(p.discount) > 0);
     } else {
         filtered = products.filter(p => p.category.toLowerCase() === category.toLowerCase());
     }
 
-    renderProducts(filtered);
+    renderProducts(filtered, category);
     goToSection('home-section');
 }
 
@@ -940,7 +983,7 @@ function updateStaticText() {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (dict[key]) {
-            el.innerText = dict[key];
+            el.innerHTML = dict[key];
         }
     });
 }
@@ -957,23 +1000,24 @@ function updateLanguageSwitcherUI() {
 function toggleWishlist(productId, event) {
     if (event) event.stopPropagation();
 
-    const index = wishlist.indexOf(productId);
+    const index = wishlist.findIndex(w => w == productId);
     if (index === -1) {
         wishlist.push(productId);
-        showToast('Zum Merkzettel hinzugefügt ❤️');
+        showToast('Zu Lieblingsprodukten hinzugefügt ❤️');
     } else {
         wishlist.splice(index, 1);
-        showToast('Vom Merkzettel entfernt');
+        showToast('Von Lieblingsprodukten entfernt');
     }
 
     localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    renderProducts();
+    // Provide explicit category 'wishlist' context if applicable, otherwise 'all'.
+    renderProducts(undefined, selectedSearchCategory || 'all');
     updateWishlistUI();
 
     // Update modal button if it's open for this product
     const modalWishlistBtn = document.getElementById('modal-wishlist-btn');
     if (modalWishlistBtn) {
-        const isCurrentlyIn = wishlist.includes(productId);
+        const isCurrentlyIn = wishlist.some(w => w == productId);
         modalWishlistBtn.innerText = isCurrentlyIn ? '❤️' : '♡';
         modalWishlistBtn.classList.toggle('btn-danger', isCurrentlyIn);
         modalWishlistBtn.classList.toggle('btn-outline-danger', !isCurrentlyIn);
@@ -981,12 +1025,12 @@ function toggleWishlist(productId, event) {
 }
 
 function updateWishlistUI() {
-    // We could add a badge to the Merkzettel icon if desired
+    // We could add a badge to the Lieblingsprodukte icon if desired
     // For now, let's just make sure the header link works
     const items = document.querySelectorAll('.action-item');
     items.forEach(item => {
         const labelEl = item.querySelector('.label');
-        if (labelEl && (labelEl.getAttribute('data-i18n') === 'wishlist' || labelEl.innerText.includes('Merkzettel'))) {
+        if (labelEl && (labelEl.getAttribute('data-i18n') === 'wishlist' || labelEl.innerText.includes('Lieblingsprodukte'))) {
             item.setAttribute('onclick', "filterByCategory('wishlist')");
         }
     });
@@ -1077,7 +1121,7 @@ function openProductModal(productId) {
 
     const modalWishlistBtn = document.getElementById('modal-wishlist-btn');
     if (modalWishlistBtn) {
-        const isCurrentlyIn = wishlist.includes(product.id);
+        const isCurrentlyIn = wishlist.some(w => w == product.id);
         modalWishlistBtn.innerText = isCurrentlyIn ? '❤️' : '♡';
         modalWishlistBtn.classList.toggle('btn-danger', isCurrentlyIn);
         modalWishlistBtn.classList.toggle('btn-outline-danger', !isCurrentlyIn);
