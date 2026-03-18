@@ -21,11 +21,11 @@
         <div class="header-top-bar d-none d-lg-block">
             <div class="container d-flex justify-content-between">
                 <div class="top-bar-left d-flex align-items-center">
-                    <span>📞 Support: +49 (0) 123 456 789</span>
-                    <span class="ms-3">🚚 Kostenloser Versand ab 50€</span>
+                    <span>📞 <span data-i18n="support_label">Support</span>: +49 (0) 123 456 789</span>
+                    <span class="ms-3">🚚 <span data-i18n="free_shipping">Kostenloser Versand ab 50€</span></span>
                     <button class="btn btn-sm ms-3 shop-status-btn" onclick="refreshShopStatus()">
                         <span class="status-dot"></span>
-                        <span id="db-product-count">Ladend...</span> Produkte live
+                        <span id="db-product-count" data-i18n="loading">Ladend...</span> <span data-i18n="live_status">Produkte live</span>
                     </button>
                 </div>
                 <div class="top-bar-right d-flex align-items-center">
@@ -36,7 +36,7 @@
                     <a href="#" class="ms-3" onclick="goToSection('locations-section')" data-i18n="contact">Kontakt</a>
                     <button class="btn btn-sm btn-link text-muted ms-3 p-0" onclick="window.print()"
                         title="Seite drucken">
-                        <span>🖨️ Drucken</span>
+                        <span>🖨️ <span data-i18n="print_label">Drucken</span></span>
                     </button>
 
                     <!-- Language Switcher -->

@@ -249,11 +249,6 @@ header {
     padding: 0;
     gap: 30px;
     display: flex;
-    justify-content: flex-start;
-}
-
-[dir="rtl"] .nav-list {
-    flex-direction: row-reverse;
 }
 
 .nav-list a {
@@ -1002,13 +997,8 @@ header {
     margin-left: 1rem !important;
 }
 
-[dir="rtl"] .top-bar-right {
-    flex-direction: row-reverse;
-}
+/* Removed row-reverse to allow natural RTL flow */
 
-[dir="rtl"] .header-search-box form {
-    flex-direction: row-reverse;
-}
 
 [dir="rtl"] .search-category-dropdown {
     border-right: none;
@@ -1028,18 +1018,21 @@ header {
 [dir="rtl"] .cart-panel {
     right: auto;
     left: -450px;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
 }
 
 [dir="rtl"] .cart-panel.active {
     left: 0;
 }
 
-[dir="rtl"] .sidebar {
-    order: 1;
+[dir="rtl"] #ai-chat-widget {
+    right: auto;
+    left: 30px;
 }
 
-[dir="rtl"] .main-content {
-    order: 0;
+[dir="rtl"] .ai-chat-box {
+    right: auto;
+    left: 0;
 }
 
 [dir="rtl"] .logo-text {
@@ -1047,7 +1040,7 @@ header {
 }
 
 [dir="rtl"] .nav-list {
-    flex-direction: row-reverse;
+    flex-direction: row; /* Default flex-direction in RTL flows R-to-L */
 }
 
 /* Arabic Font Override */
