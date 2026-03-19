@@ -6,16 +6,27 @@ if ($_POST) {
   $u = $_POST["username"];
   $p = $_POST["password"];
 
-  $res = mysqli_query($conn, "SELECT * FROM admins WHERE username='$u'");
-  $admin = mysqli_fetch_assoc($res);
+  $stmt = mysqli_prepare($conn, "SELECT * FROM admins WHERE username=?");
+  if (!$stmt) {
+    if (mysqli_errno($conn) == 1146) {
+        $error = "Tabelle 'admins' fehlt. Bitte führen Sie zuerst das <a href='../setup.php'>System-Setup</a> aus.";
+    } else {
+        $error = "Datenbankfehler: " . mysqli_error($conn);
+    }
+  } else {
+    mysqli_stmt_bind_param($stmt, "s", $u);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
+    $admin = mysqli_fetch_assoc($res);
 
-  if ($admin && password_verify($p, $admin["password"])) {
-    $_SESSION["admin"] = true;
-    header("Location: index.php");
-    exit;
+    if ($admin && password_verify($p, $admin["password"])) {
+      $_SESSION["admin"] = true;
+      header("Location: index.php");
+      exit;
+    }
+
+    $error = "Anmeldung fehlgeschlagen";
   }
-
-  $error = "Login failed";
 }
 ?>
 <!DOCTYPE html>

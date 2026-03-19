@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION["admin"])) {
+    header("Location: login.php");
+    exit;
+}
 include_once dirname(__FILE__) . "/../db.php";
 ?>
 <!DOCTYPE html>
@@ -82,9 +87,11 @@ include_once dirname(__FILE__) . "/../db.php";
             </div>
             <nav>
                 <a href="index.php" class="nav-link">📦 Lagerverwaltung</a>
+                <a href="mhd_reports.php" class="nav-link">📉 MHD Reports (Wöchentlich)</a>
                 <a href="ai_dashboard.php" class="nav-link">✨ AI Generator</a>
                 <a href="help.php" class="nav-link active">📚 Hilfe & Assistenz</a>
                 <a href="../setup.php" class="nav-link" onclick="return confirm('Datenbank wirklich zurücksetzen?')">⚙️ DB Setup</a>
+                <a href="logout.php" class="nav-link text-danger mt-Auto">🚪 Abmelden</a>
                 <a href="../index.html" class="nav-link mt-5">🌐 Zum Shop</a>
             </nav>
         </aside>

@@ -3,14 +3,14 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "matin_food";
+$db = "matin_food";
 
 try {
     // 0. Create Database if not exists
     $pdo_init = new PDO("mysql:host=$host", $user, $pass);
     $pdo_init->exec("CREATE DATABASE IF NOT EXISTS `$db` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
     echo "Database `$db` checked/created.<br>";
-    
+
     // Connect to the specific DB
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -21,11 +21,11 @@ try {
     echo "<p style='text-align: center; color: #7f8c8d; margin-bottom: 20px;'>Matin Food Database & Environment Setup</p>";
     echo "<p style='text-align: center; color: #2e7d32; font-weight: 600; font-size: 0.9rem; margin-bottom: 40px;'>Lagerverwaltung Pro: 1. Zentrale Bestandsführung | 2. Automatisiert Verfallsüberwachung und Bestandswarnungen</p>";
     echo "<hr style='border: 0; border-top: 2px solid #f1f8e9; margin-bottom: 30px;'>";
-    
+
     // 0. Drop Tables (to ensure clean schema)
     echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";
     echo "<strong>Step 1: Cleaning Schema</strong><br>";
-    echo "<span style='color: #555;'>Dropping old tables... </span>";
+    echo "<span style='color: #000000ff;'>Dropping old tables... </span>";
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
     $pdo->exec("DROP TABLE IF EXISTS order_items");
     $pdo->exec("DROP TABLE IF EXISTS orders");
@@ -79,6 +79,14 @@ try {
         FOREIGN KEY (product_id) REFERENCES products(id)
     )");
 
+    // Admins Table
+    $pdo->exec("CREATE TABLE IF NOT EXISTS admins (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+
     echo "<span style='color: #45804898;'>✔ Tables created successfully.</span></div>";
 
     // 2. Insert/Reset Sample Data
@@ -87,20 +95,22 @@ try {
     echo "<span style='color: #555;'>Resetting product data... </span>";
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
     $pdo->exec("TRUNCATE TABLE products");
-    $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");                                            
+    $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
 
     if (true) { // Always insert fresh data
-        
-function formatWeight($w) {
-    if (!$w) return "0,75 kg";
-    if (preg_match('/(\d+(?:\.\d+)?)\s*(kg|g|Gr|gr|ml|l)/i', $w, $m)) {
-        $val = (float)$m[1];
-        $unit = strtolower($m[2]);
-        $inKg = ($unit === 'g' || $unit === 'gr' || $unit === 'ml') ? $val / 1000 : $val;
-        return str_replace('.', ',', (string)$inKg) . ' kg';
-    }
-    return $w;
-}
+
+        function formatWeight($w)
+        {
+            if (!$w)
+                return "0,75 kg";
+            if (preg_match('/(\d+(?:\.\d+)?)\s*(kg|g|Gr|gr|ml|l)/i', $w, $m)) {
+                $val = (float) $m[1];
+                $unit = strtolower($m[2]);
+                $inKg = ($unit === 'g' || $unit === 'gr' || $unit === 'ml') ? $val / 1000 : $val;
+                return str_replace('.', ',', (string) $inKg) . ' kg';
+            }
+            return $w;
+        }
         $baseProducts = [
             ['grains', 'images/bulgur.png', 'Bulgur', 'Bulgur', 'برغل', 2.50, '2024-06-01', '2025-12-01'],
             ['grains', 'images/Ägyptische Reis.jpg', 'Egyptian Rice (1kg)', 'Ägyptischer Reis (1kg)', 'رز مصري (1 كيلو)', 3.00, '2024-07-15', '2026-06-15'],
@@ -129,18 +139,18 @@ function formatWeight($w) {
             ['canned', 'images/grilled_eggplant_jar.jpg', 'Grilled Eggplant (Premium Jar)', 'Gegrillte Aubergine (Premium Glas)', 'باذنجان مشوي (بريميوم)', 3.80, '2024-10-20', '2026-10-20'],
             ['canned', 'images/grilled_eggplant_can.jpg', 'Grilled Eggplant (Premium Dose)', 'Gegrillte Aubergine (Premium Dose)', 'باذنجان مشوي (بريميوم تنك)', 12.50, '2024-10-20', '2026-10-20'],
             ['grains', 'images/4,5 Kg Al Wazah Indien Premium Basmati Reis.webp', 'Al Wazah Basmati Rice (4.5kg)', 'Al Wazah Basmati Reis (4.5kg)', 'رز الوزة (4.5 كيلو)', 15.90, '2024-11-01', '2026-11-01'],
-            ['grains', 'images/Mahmood Reis.webp', 'Mahmood Basmati Rice', 'Mahmood Basmati Reis' , 'رز محمود', 14.50, '2024-10-15', '2026-10-15'],
+            ['grains', 'images/Mahmood Reis.webp', 'Mahmood Basmati Rice', 'Mahmood Basmati Reis', 'رز محمود', 14.50, '2024-10-15', '2026-10-15'],
             ['grains', 'images/Mahmud Reis.jpg', 'Mahmud Rice', 'Mahmud Reis', 'رز محمود (1 كيلو)', 2.90, '2024-10-15', '2026-10-15']
         ];
 
         $stmt = $pdo->prepare("INSERT INTO products (category, img, name_en, name_de, name_ar, price, weight, production_date, expiry, description_de, description_en, description_ar, discount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Leckeres Produkt', 'Delicious product', 'منتج لذيذ', ?)");
-        
+
         $totalToInsert = 500;
         $originalCount = count($baseProducts);
-        
+
         for ($i = 0; $i < $totalToInsert; $i++) {
             $p = $baseProducts[$i % $originalCount];
-            
+
             // Extract weight from name if possible (e.g. "(1kg)" or "650g)")
             $rawW = "750g"; // Default raw weight
             if (preg_match('/\((.*?)\)/', $p[2], $matches)) {
@@ -167,10 +177,29 @@ function formatWeight($w) {
             ]);
         }
         echo "<span style='color: #2e7d32;'>✔ $totalToInsert products inserted successfully.</span></div>";
+
+        // 3. Seed Admin User
+        echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";
+        echo "<strong>Step 4: Creating Default Admin</strong><br>";
+
+        $admin_user = 'admin';
+        $admin_pass = 'admin123';
+        $hashed_pass = password_hash($admin_pass, PASSWORD_BCRYPT);
+
+        $check_admin = $pdo->prepare("SELECT COUNT(*) FROM admins WHERE username = ?");
+        $check_admin->execute([$admin_user]);
+        if ($check_admin->fetchColumn() == 0) {
+            $insert_admin = $pdo->prepare("INSERT INTO admins (username, password) VALUES (?, ?)");
+            $insert_admin->execute([$admin_user, $hashed_pass]);
+            echo "<span style='color: #2e7d32;'>✔ Default admin created (user: admin, pass: admin123).</span>";
+        } else {
+            echo "<span style='color: #7f8c8d;'>✔ Admin 'admin' already exists.</span>";
+        }
+        echo "</div>";
     } else {
         echo "<div style='color: #f57f17;'>Products table already has data.</div>";
     }
-    
+
     echo "<div style='text-align: center; margin-top: 40px;'><a href='index.html' style='background: linear-gradient(135deg, #2e7d32, #43a047); color: #ffffff; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(46, 125, 50, 0.2); transition: all 0.3s; display: inline-block;'>ZURÜCK ZUM SHOP</a></div>";
     echo "</div>";
 

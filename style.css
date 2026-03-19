@@ -1040,7 +1040,8 @@ header {
 }
 
 [dir="rtl"] .nav-list {
-    flex-direction: row; /* Default flex-direction in RTL flows R-to-L */
+    flex-direction: row;
+    /* Default flex-direction in RTL flows R-to-L */
 }
 
 /* Arabic Font Override */
