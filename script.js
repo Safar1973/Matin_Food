@@ -5,6 +5,14 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 let cartTimer = null;
 
+function toggleMobileMenu() {
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (overlay) {
+        overlay.classList.toggle('active');
+        document.body.style.overflow = overlay.classList.contains('active') ? 'hidden' : '';
+    }
+}
+
 // Constants
 const API_URL = 'backend/api/get_products.php';
 
@@ -700,6 +708,7 @@ const categoryMap = translations['de'];
 function renderCategories() {
     const searchCatList = document.getElementById('search-cat-list');
     const sidebarCatList = document.getElementById('sidebar-categories');
+    const mobileCatList = document.getElementById('mobile-sidebar-categories');
 
     const categories = [...new Set(products.map(p => p.category))];
     const dict = translations[currentLanguage];
@@ -718,6 +727,15 @@ function renderCategories() {
             <li class="category-item-ref" onclick="filterByCategory('all')">${dict['all_products']}</li>
             ${categories.map(cat => `
                 <li class="category-item-ref" onclick="filterByCategory('${cat}')">${dict[cat] || cat}</li>
+            `).join('')}
+        `;
+    }
+
+    if (mobileCatList) {
+        mobileCatList.innerHTML = `
+            <li onclick="filterByCategory('all'); toggleMobileMenu()">${dict['all_products']}</li>
+            ${categories.map(cat => `
+                <li onclick="filterByCategory('${cat}'); toggleMobileMenu()">${dict[cat] || cat}</li>
             `).join('')}
         `;
     }

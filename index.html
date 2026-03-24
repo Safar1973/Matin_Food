@@ -12,17 +12,16 @@
         rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 
 <body>
 
     <header>
-        <div class="header-top-bar d-none d-lg-block">
+        <div class="header-top-bar d-none d-md-block">
             <div class="container d-flex justify-content-between">
-                <div class="top-bar-left d-flex align-items-center">
-                    <span>📞 <span data-i18n="support_label">Support</span>: +49 (0) 123 456 789</span>
-                    <span class="ms-3">🚚 <span data-i18n="free_shipping">Kostenloser Versand ab 50€</span></span>
+                <div class="top-bar-left d-flex align-items-center text-muted small">
+                    <span class="me-3">🚚 <span data-i18n="free_shipping">Kostenloser Versand ab 50€</span></span>
                     <button class="btn btn-sm ms-3 shop-status-btn" onclick="refreshShopStatus()">
                         <span class="status-dot"></span>
                         <span id="db-product-count" data-i18n="loading">Ladend...</span> <span data-i18n="live_status">Produkte live</span>
@@ -33,7 +32,19 @@
                     <a href="#" class="ms-3" onclick="goToSection('locations-section')">
                         <span class="me-1">📍</span> <span data-i18n="location_header">Filialen & Maps</span>
                     </a>
-                    <a href="#" class="ms-3" onclick="goToSection('locations-section')" data-i18n="contact">Kontakt</a>
+                    <div class="dropdown ms-3 nav-item-hover">
+                        <a href="#" class="text-muted text-decoration-none dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <span data-i18n="contact">Kontakt</span>
+                        </a>
+                        <ul class="dropdown-menu shadow-sm border-0 p-3">
+                            <li class="small mb-2">
+                                <a href="tel:+490123456789" class="text-decoration-none text-muted">📞 +49 (0) 123 456 789</a>
+                            </li>
+                            <li class="small">
+                                <a href="mailto:info@matinfood.de" class="text-decoration-none text-muted">✉️ info@matinfood.de</a>
+                            </li>
+                        </ul>
+                    </div>
                     <button class="btn btn-sm btn-link text-muted ms-3 p-0" onclick="window.print()"
                         title="Seite drucken">
                         <span>🖨️ <span data-i18n="print_label">Drucken</span></span>
@@ -63,17 +74,22 @@
                 <div class="row align-items-center py-3">
                     <!-- Logo -->
                     <div class="col-auto">
-                        <a href="#" class="logo-link" onclick="goToSection('home-section')">
-                            <img src="images/logo-1694787094.jpg" alt="Matin Food Logo"
-                                style="height: 80px; border-radius: 10px;">
-                        </a>
+                        <div class="d-flex align-items-center">
+                            <button class="btn mobile-menu-toggle d-lg-none me-2" onclick="toggleMobileMenu()">
+                                <span class="icon">☰</span>
+                            </button>
+                            <a href="#" class="logo-link" onclick="goToSection('home-section')">
+                                <img src="images/logo-1694787094.jpg" alt="Matin Food Logo"
+                                    style="height: 60px; border-radius: 10px;" class="logo-img">
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Search -->
-                    <div class="col mx-xl-5">
+                    <!-- Search (Desktop: center, Mobile: full row below) -->
+                    <div class="col mx-xl-5 header-search-col">
                         <div class="header-search-box">
                             <form onsubmit="handleSearch(event)" class="d-flex">
-                                <div class="dropdown search-category-dropdown">
+                                <div class="dropdown search-category-dropdown d-none d-md-block">
                                     <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown"
                                         id="searchCatBtn" data-i18n="all_categories">
                                         Alle Kategorien
@@ -94,15 +110,15 @@
                     </div>
 
                     <!-- Actions -->
-                    <div class="col-auto d-flex header-actions">
-                        <div class="action-item" onclick="filterByCategory('wishlist')">
+                    <div class="col-auto ms-auto d-flex header-actions">
+                        <div class="action-item d-none d-md-flex" onclick="filterByCategory('wishlist')">
                             <div class="icon-wrapper">
                                 <span class="icon">❤️</span>
                                 <span class="badge" id="wishlist-count">0</span>
                             </div>
                             <span class="label" data-i18n="wishlist">Lieblingsprodukte</span>
                         </div>
-                        <div class="action-item mx-3" onclick="goToSection('account-section')">
+                        <div class="action-item mx-md-3" onclick="goToSection('account-section')">
                             <span class="icon">👤</span>
                             <span class="label" data-i18n="account">My Account</span>
                         </div>
@@ -437,7 +453,8 @@
                                         <h3 class="fw-bold mb-0">Oberhausen</h3>
                                     </div>
                                     <p class="text-muted mb-1">Matin Food GmbH</p>
-                                    <p class="text-muted mb-4">Allee Str. 4, 46049 Oberhausen</p>
+                                    <p class="text-muted mb-1">Allee Str. 4, 46049 Oberhausen</p>
+                                    <p class="text-muted mb-4"><a href="mailto:info@matinfood.de" class="text-decoration-none text-muted">✉️ info@matinfood.de</a></p>
 
                                     <div class="d-flex gap-2 mb-4">
                                         <a href="https://www.google.com/maps/dir/?api=1&destination=Allee+Str.+4+46049+Oberhausen"
@@ -466,7 +483,8 @@
                                         <h3 class="fw-bold mb-0">Wuppertal</h3>
                                     </div>
                                     <p class="text-muted mb-1">Matin Food GmbH - Filiale Wuppertal</p>
-                                    <p class="text-muted mb-4">Wuppertaler Str. 123, 42103 Wuppertal</p>
+                                    <p class="text-muted mb-1">Wuppertaler Str. 123, 42103 Wuppertal</p>
+                                    <p class="text-muted mb-4"><a href="mailto:wuppertal@matinfood.de" class="text-decoration-none text-muted">✉️ wuppertal@matinfood.de</a></p>
 
                                     <div class="d-flex gap-2 mb-4">
                                         <a href="https://www.google.com/maps/dir/?api=1&destination=Wuppertaler+Str.+123+42103+Wuppertal"
@@ -545,7 +563,7 @@
 
 
                 <!-- Newsletter -->
-                <div class="col-lg-3">
+                <div class="col-md-6 col-lg-3">
                     <h4 class="fw-bold mb-3">Newsletter</h4>
                     <p class="small text-muted mb-4">Abonnieren Sie den kostenlosen MATIN FOOD Newsletter.</p>
                     <form>
@@ -565,7 +583,7 @@
 
 
                 <!-- Links Sections -->
-                <div class="col-lg-3">
+                <div class="col-md-6 col-lg-3">
                     <h4 class="fw-bold mb-3">Shop Service</h4>
                     <ul class="list-unstyled small footer-links">
                         <li><a href="#" class="text-muted text-decoration-none"
@@ -580,7 +598,7 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-md-6 col-lg-3">
                     <h4 class="fw-bold mb-3">Information</h4>
                     <ul class="list-unstyled small footer-links">
                         <li><a href="#" class="text-muted text-decoration-none">Batteriegesetz</a></li>
@@ -665,6 +683,43 @@
                 data-i18n="cookie_only_essential">Nur Essenzielle</button>
             <button class="cookie-btn cookie-btn-accept" onclick="acceptAllCookies()" data-i18n="cookie_accept_all">Alle
                 akzeptieren</button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+        <div class="mobile-nav-content">
+            <div class="mobile-nav-header">
+                <img src="images/logo-1694787094.jpg" alt="Logo" style="height: 40px; border-radius: 5px;">
+                <button class="btn-close" onclick="toggleMobileMenu()"></button>
+            </div>
+            <div class="mobile-nav-body">
+                <ul class="mobile-nav-list list-unstyled">
+                    <li><a href="#" onclick="filterByCategory('all'); toggleMobileMenu()" data-i18n="home">Startseite</a></li>
+                    <li><a href="#" onclick="filterByCategory('grains'); toggleMobileMenu()" data-i18n="cat_grains">Getreide & Körner</a></li>
+                    <li><a href="#" onclick="filterByCategory('canned'); toggleMobileMenu()" data-i18n="cat_canned">Konserven</a></li>
+                    <li><a href="#" onclick="filterByCategory('syrups'); toggleMobileMenu()" data-i18n="cat_syrups">Sirupe & Saucen</a></li>
+                    <li><a href="#" onclick="filterByCategory('offers'); toggleMobileMenu()" class="text-danger fw-bold" data-i18n="offers">ANGEBOTE</a></li>
+                    <li><a href="#" onclick="goToSection('about-section'); toggleMobileMenu()" data-i18n="about_us">Über uns</a></li>
+                    <li><a href="#" onclick="goToSection('locations-section'); toggleMobileMenu()" data-i18n="contact">Kontakt</a></li>
+                </ul>
+
+                <div class="mobile-nav-divider"></div>
+                
+                <h6 class="px-3 mt-4 mb-2 text-muted small text-uppercase fw-bold" data-i18n="categories">Kategorien</h6>
+                <ul class="mobile-nav-list list-unstyled" id="mobile-sidebar-categories">
+                    <!-- Dynamic -->
+                </ul>
+
+                <div class="mobile-nav-footer mt-5 p-3">
+                    <!-- Language Switcher Mobile -->
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-secondary flex-grow-1" onclick="setLanguage('de')">DE</button>
+                        <button class="btn btn-sm btn-outline-secondary flex-grow-1" onclick="setLanguage('en')">EN</button>
+                        <button class="btn btn-sm btn-outline-secondary flex-grow-1" onclick="setLanguage('ar')">AR</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
