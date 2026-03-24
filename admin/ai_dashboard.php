@@ -16,32 +16,37 @@ while ($p = mysqli_fetch_assoc($res)) {
 ?>
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Content Generator | Matin Food</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="admin-style.css">
     <style>
         .ai-card {
             background: white;
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             margin-bottom: 2rem;
         }
+
         .magic-btn {
             background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             border: none;
             color: white;
             transition: all 0.3s ease;
         }
+
         .magic-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(168, 85, 247, 0.4);
             color: white;
         }
+
         .generated-box {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
@@ -49,6 +54,7 @@ while ($p = mysqli_fetch_assoc($res)) {
             padding: 1rem;
             height: 100%;
         }
+
         .lang-badge {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -58,20 +64,58 @@ while ($p = mysqli_fetch_assoc($res)) {
             margin-bottom: 0.5rem;
             display: inline-block;
         }
-        .badge-de { background: #fee2e2; color: #991b1b; }
-        .badge-en { background: #dbeafe; color: #1e40af; }
-        .badge-ar { background: #dcfce7; color: #166534; }
-        
+
+        .badge-de {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .badge-en {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-ar {
+            background: #dcfce7;
+            color: #166534;
+        }
+
         @media print {
-            .sidebar, .header-actions, .ai-card, .btn-success { display: none !important; }
-            .admin-wrapper { margin-left: 0; padding: 0; }
-            .generated-box { border: none; padding: 0; }
-            body { background: white; }
-            #resultsArea { display: block !important; }
-            textarea { border: 1px solid #ccc !important; resize: none; height: auto !important; }
+
+            .sidebar,
+            .header-actions,
+            .ai-card,
+            .btn-success {
+                display: none !important;
+            }
+
+            .admin-wrapper {
+                margin-left: 0;
+                padding: 0;
+            }
+
+            .generated-box {
+                border: none;
+                padding: 0;
+            }
+
+            body {
+                background: white;
+            }
+
+            #resultsArea {
+                display: block !important;
+            }
+
+            textarea {
+                border: 1px solid #ccc !important;
+                resize: none;
+                height: auto !important;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="admin-wrapper">
@@ -82,10 +126,12 @@ while ($p = mysqli_fetch_assoc($res)) {
             </div>
             <nav>
                 <a href="index.php" class="nav-link">📦 Lagerverwaltung</a>
+                <a href="stock_log.php" class="nav-link">📜 Audit-Log (Neu)</a>
                 <a href="mhd_reports.php" class="nav-link">📉 MHD Reports (Wöchentlich)</a>
                 <a href="ai_dashboard.php" class="nav-link active">✨ AI Generator</a>
                 <a href="help.php" class="nav-link">📚 Hilfe & Assistenz</a>
-                <a href="../setup.php" class="nav-link" onclick="return confirm('Datenbank wirklich zurücksetzen?')">⚙️ DB Setup</a>
+                <a href="../setup.php" class="nav-link" onclick="return confirm('Datenbank wirklich zurücksetzen?')">⚙️
+                    DB Setup</a>
                 <a href="logout.php" class="nav-link text-danger mt-Auto">🚪 Abmelden</a>
                 <a href="../index.html" class="nav-link mt-5">🌐 Zum Shop</a>
             </nav>
@@ -108,7 +154,8 @@ while ($p = mysqli_fetch_assoc($res)) {
                 <div class="row g-3 align-items-end">
                     <div class="col-md-4">
                         <label class="form-label fw-bold">Google Gemini API Key</label>
-                        <input type="password" id="apiKey" class="form-control" placeholder="AIza..." value="<?php echo isset($_COOKIE['gemini_key']) ? $_COOKIE['gemini_key'] : ''; ?>">
+                        <input type="password" id="apiKey" class="form-control" placeholder="AIza..."
+                            value="<?php echo isset($_COOKIE['gemini_key']) ? $_COOKIE['gemini_key'] : ''; ?>">
                         <div class="form-text">Wird lokal im Browser gespeichert.</div>
                     </div>
                     <div class="col-md-5">
@@ -156,7 +203,8 @@ while ($p = mysqli_fetch_assoc($res)) {
                 <div class="col-md-4">
                     <div class="generated-box">
                         <span class="lang-badge badge-ar">Arabisch</span>
-                        <textarea id="desc_ar" class="form-control border-0 bg-transparent text-end" dir="rtl" rows="6"></textarea>
+                        <textarea id="desc_ar" class="form-control border-0 bg-transparent text-end" dir="rtl"
+                            rows="6"></textarea>
                     </div>
                 </div>
 
@@ -184,14 +232,16 @@ while ($p = mysqli_fetch_assoc($res)) {
                         <li class="list-group-item">Wählen Sie ein <strong>Produkt</strong> aus der Liste.</li>
                         <li class="list-group-item">Klicken Sie auf <strong>✨ Generieren</strong>.</li>
                         <li class="list-group-item">Überprüfen Sie die Texte in DE/EN/AR.</li>
-                        <li class="list-group-item">Klicken Sie auf <strong>💾 Speichern</strong>, um sie im Shop sichtbar zu machen.</li>
+                        <li class="list-group-item">Klicken Sie auf <strong>💾 Speichern</strong>, um sie im Shop
+                            sichtbar zu machen.</li>
                     </ol>
                     <div class="alert alert-info small">
                         <strong>Tipp:</strong> Sie können die generierten Texte vor dem Speichern manuell bearbeiten!
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-primary rounded-pill px-4" data-bs-dismiss="modal">Verstanden</button>
+                    <button type="button" class="btn btn-primary rounded-pill px-4"
+                        data-bs-dismiss="modal">Verstanden</button>
                 </div>
             </div>
         </div>
@@ -229,7 +279,7 @@ while ($p = mysqli_fetch_assoc($res)) {
                         product_name: productName
                     })
                 });
-                
+
                 const result = await response.json();
 
                 if (result.success) {
@@ -256,7 +306,7 @@ while ($p = mysqli_fetch_assoc($res)) {
         async function saveToDb() {
             const productSelect = document.getElementById('productSelect');
             const productId = productSelect.value;
-            
+
             const data = {
                 product_id: productId,
                 descriptions: {
@@ -273,7 +323,7 @@ while ($p = mysqli_fetch_assoc($res)) {
                     body: JSON.stringify(data)
                 });
                 const result = await response.json();
-                
+
                 if (result.success) {
                     alert('Erfolgreich gespeichert!');
                 } else {
@@ -285,4 +335,5 @@ while ($p = mysqli_fetch_assoc($res)) {
         }
     </script>
 </body>
+
 </html>

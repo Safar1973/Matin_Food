@@ -29,6 +29,7 @@ try {
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
     $pdo->exec("DROP TABLE IF EXISTS order_items");
     $pdo->exec("DROP TABLE IF EXISTS orders");
+    $pdo->exec("DROP TABLE IF EXISTS stock_log");
     $pdo->exec("DROP TABLE IF EXISTS products");
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
     echo "<span style='color: #2e7d32;'>✔ Done</span></div>";
@@ -87,7 +88,20 @@ try {
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
 
-    echo "<span style='color: #45804898;'>✔ Tables created successfully.</span></div>";
+    // Stock Log Table (Audit Log)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS stock_log (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        product_id INT NOT NULL,
+        user_name VARCHAR(100) DEFAULT 'System',
+        action_type VARCHAR(50) NOT NULL,
+        quantity_change INT NOT NULL,
+        new_stock INT NOT NULL,
+        details VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
+    )");
+
+    echo "<span style='color: #2e7d32;'>✔ Tables created successfully.</span></div>";
 
     // 2. Insert/Reset Sample Data
     echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";
@@ -175,8 +189,13 @@ try {
                 $p[7], // expiry
                 ($i % 5 === 0) ? 20 : 0 // Add 20% discount to every 5th product
             ]);
+            
+            // Log Initial Stock in Audit Log
+            $inserted_id = $pdo->lastInsertId();
+            $log_stmt = $pdo->prepare("INSERT INTO stock_log (product_id, user_name, action_type, quantity_change, new_stock, details) VALUES (?, 'System', 'INITIAL_RESTOCK', 100, 100, 'Initial setup stocking')");
+            $log_stmt->execute([$inserted_id]);
         }
-        echo "<span style='color: #2e7d32;'>✔ $totalToInsert products inserted successfully.</span></div>";
+        echo "<span style='color: #2e7d32;'>✔ $totalToInsert products and initial stock logs inserted successfully.</span></div>";
 
         // 3. Seed Admin User
         echo "<div style='background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);'>";

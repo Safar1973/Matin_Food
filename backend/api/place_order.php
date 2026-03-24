@@ -39,6 +39,11 @@ try {
         }
 
         mysqli_query($conn, "UPDATE products SET stock = stock - $qty WHERE id=$pid");
+        $new_stock = $row["stock"] - $qty;
+
+        include_once "../../backend/stock_logger.php";
+        $details = "Bestellung #$order_id";
+        log_stock_movement($conn, $pid, -$qty, $new_stock, 'ORDER', "Kunde: $name", $details);
 
         mysqli_query($conn,
             "INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase)

@@ -167,6 +167,13 @@ body {
     color: #c62828;
 }
 
+.editable-stock:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    filter: brightness(0.95);
+    transition: all 0.2s;
+}
+
 .btn-action {
     padding: 5px 10px;
     font-size: 0.85rem;
