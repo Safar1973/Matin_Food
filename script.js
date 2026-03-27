@@ -296,7 +296,7 @@ function renderProducts(productsToRender = products, category = 'all') {
         grid.innerHTML = `
             <div class="col-12 text-center py-5 no-results-container" style="grid-column: 1 / -1; min-height: 300px;">
                 <div class="display-3 mb-4 opacity-50">🔍</div>
-                <h3 class="fw-bold mb-3" data-i18n="${category === 'wishlist' ? 'empty_wishlist_msg' : 'empty_category_msg'}">Keine Produkte gefunden.</h3>
+                <h3 class="fw-bold mb-3" data-i18n="${category === 'wishlist' ? 'empty_wishlist_msg' : 'empty_category_msg'}">Keine Produkte in dieser Kategorie gefunden.</h3>
                 <p class="text-muted mb-4 mx-auto" style="max-width: 450px;" data-i18n="try_other_filter">Leider konnten wir keine Produkte finden, die Ihren Suchkriterien entsprechen. Probieren Sie es mit anderen Filtern.</p>
                 <button class="btn btn-primary rounded-pill px-4 py-2 fw-bold" onclick="filterByCategory('all')" data-i18n="show_all_products">Alle Produkte anzeigen</button>
             </div>`;
