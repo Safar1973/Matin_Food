@@ -147,6 +147,7 @@
                             data-i18n="offers">ANGEBOTE</a>
                     </li>
                     <li><a href="#" onclick="goToSection('about-section')" data-i18n="about_us">Über uns</a></li>
+                    <li><a href="#" onclick="goToSection('feedback-section')" data-i18n="feedback_label">Feedback</a></li>
                     <li class="nav-item-hover">
                         <a href="#" style="cursor: default;" data-i18n="opening_hours">Öffnungszeiten</a>
                         <div class="dropdown-menu">
@@ -224,9 +225,45 @@
                 <div class="hero-banner text-center">
                     <h1 data-i18n="welcome_title">Willkommen bei MATIN FOOD</h1>
                     <p data-i18n="welcome_text">Entdecken Sie authentische orientalische Spezialitäten und frische
-                        Lebensmittel in bester
-                        Qualität.</p>
+                        Lebensmittel in bester Qualität.</p>
                 </div>
+
+                <!-- Shopping Benefits Bar -->
+                <div class="benefits-bar py-4 bg-white shadow-sm mb-5 rounded-4">
+                    <div class="container">
+                        <div class="row text-center g-4">
+                            <div class="col-6 col-md-3">
+                                <div class="benefit-item">
+                                    <div class="fs-2 mb-2">🔭</div>
+                                    <h6 class="fw-bold mb-1" data-i18n="feature_nav_title">Klare & einfache Navigation</h6>
+                                    <p class="small text-muted mb-0" data-i18n="feature_nav_desc">Finden Sie blitzschnell exactly das, was Sie suchen.</p>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="benefit-item border-start-md">
+                                    <div class="fs-2 mb-2">⚡</div>
+                                    <h6 class="fw-bold mb-1" data-i18n="feature_shipping_title">Schneller Versand</h6>
+                                    <p class="small text-muted mb-0" data-i18n="feature_shipping_desc">Bestellungen sind innerhalb von 24h versandbereit.</p>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="benefit-item border-start-md">
+                                    <div class="fs-2 mb-2">⭐</div>
+                                    <h6 class="fw-bold mb-1" data-i18n="feature_quality_title">Beste Qualität</h6>
+                                    <p class="small text-muted mb-0" data-i18n="feature_quality_desc">Frische orientalische Spezialitäten.</p>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="benefit-item border-start-md">
+                                    <div class="fs-2 mb-2">🛡️</div>
+                                    <h6 class="fw-bold mb-1" data-i18n="feature_payment_title">Sicher Bezahlen</h6>
+                                    <p class="small text-muted mb-0" data-i18n="feature_payment_desc">Sichere Zahlungsmöglichkeiten.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="product-grid" id="product-grid">
                     <!-- Populated by JS -->
                 </div>
@@ -490,7 +527,7 @@
                                         <a href="https://www.google.com/maps/dir/?api=1&destination=Wuppertaler+Str.+123+42103+Wuppertal"
                                             target="_blank"
                                             class="btn btn-outline-primary flex-grow-1 rounded-pill">Route planen</a>
-                                        <a href="tel:+490123456789" class="btn btn-light rounded-circle">📞</a>
+                                        <a href="tel:+490123456789" class="btn btn-light rounded-circle text-decoration-none">📞</a>
                                     </div>
 
                                     <div class="rounded-3 overflow-hidden" style="height: 250px;">
@@ -500,6 +537,99 @@
                                             loading="lazy">
                                         </iframe>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback Section -->
+            <section id="feedback-section" class="page-section">
+                <div class="container py-5">
+                    <div class="row justify-content-center mb-5">
+                        <div class="col-lg-8 text-center">
+                            <h2 class="fw-bold mb-3" data-i18n="feedback_title">Was unsere Kunden sagen</h2>
+                            <p class="text-muted" data-i18n="feedback_subtitle">Ihre Zufriedenheit ist unser größter Ansporn. Teilen Sie uns Ihre Erfahrungen mit!</p>
+                        </div>
+                    </div>
+
+                    <!-- Testimonials Carousel/Grid -->
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-4">
+                            <div class="feedback-card p-4 rounded-4 shadow-sm bg-white h-100">
+                                <div class="stars mb-3 text-warning">⭐⭐⭐⭐⭐</div>
+                                <p class="feedback-text italic mb-4">"Beste Qualität an orientalischen Lebensmitteln in der Region. Besonders die Frische beim Gemüse hat mich überzeugt!"</p>
+                                <div class="d-flex align-items-center mt-auto">
+                                    <div class="avatar me-3 bg-primary text-white d-flex align-items-center justify-content-center rounded-circle" style="width: 40px; height: 40px;">A</div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">Ahmed K.</h6>
+                                        <small class="text-muted" data-i18n="verified_buyer">Verifizierter Käufer</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feedback-card p-4 rounded-4 shadow-sm bg-white h-100">
+                                <div class="stars mb-3 text-warning">⭐⭐⭐⭐⭐</div>
+                                <p class="feedback-text italic mb-4">"Super schneller Versand und alles top verpackt. Die Auswahl an Gewürzen ist einfach fantastisch."</p>
+                                <div class="d-flex align-items-center mt-auto">
+                                    <div class="avatar me-3 bg-success text-white d-flex align-items-center justify-content-center rounded-circle" style="width: 40px; height: 40px;">M</div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">Maria S.</h6>
+                                        <small class="text-muted" data-i18n="verified_buyer">Verifizierter Käufer</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="feedback-card p-4 rounded-4 shadow-sm bg-white h-100">
+                                <div class="stars mb-3 text-warning">⭐⭐⭐⭐⭐</div>
+                                <p class="feedback-text italic mb-4">"Sehr freundliches Personal in den Filialen und tolle Angebote. Ich kaufe hier jede Woche ein."</p>
+                                <div class="d-flex align-items-center mt-auto">
+                                    <div class="avatar me-3 bg-danger text-white d-flex align-items-center justify-content-center rounded-circle" style="width: 40px; height: 40px;">T</div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">Thomas L.</h6>
+                                        <small class="text-muted" data-i18n="verified_buyer">Verifizierter Käufer</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Form -->
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="bg-white p-5 rounded-4 shadow-sm">
+                                <h3 class="fw-bold mb-4 text-center" data-i18n="leave_feedback">Feedback geben</h3>
+                                <form id="feedback-form" onsubmit="handleFeedbackSubmission(event)">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold small" data-i18n="full_name">Name</label>
+                                        <input type="text" class="form-control rounded-pill" id="fb-name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold small" data-i18n="email">E-Mail</label>
+                                        <input type="email" class="form-control rounded-pill" id="fb-email" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold small" data-i18n="rating">Bewertung</label>
+                                        <select class="form-select rounded-pill" id="fb-rating">
+                                            <option value="5">⭐⭐⭐⭐⭐ (Sehr gut)</option>
+                                            <option value="4">⭐⭐⭐⭐ (Gut)</option>
+                                            <option value="3">⭐⭐⭐ (Befriedigend)</option>
+                                            <option value="2">⭐⭐ (Ausreichend)</option>
+                                            <option value="1">⭐ (Mangelhaft)</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label fw-bold small" data-i18n="message">Ihre Nachricht</label>
+                                        <textarea class="form-control rounded-4" id="fb-message" rows="4" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100 rounded-pill py-3 fw-bold" 
+                                            style="background: var(--primary-color); border: none;" data-i18n="send_feedback">Feedback senden</button>
+                                </form>
+                                <div id="feedback-success" class="alert alert-success mt-3 d-none rounded-pill text-center" data-i18n="feedback_success">
+                                    Vielen Dank für Ihr Feedback!
                                 </div>
                             </div>
                         </div>
@@ -701,6 +831,7 @@
                     <li><a href="#" onclick="filterByCategory('syrups'); toggleMobileMenu()" data-i18n="cat_syrups">Sirupe & Saucen</a></li>
                     <li><a href="#" onclick="filterByCategory('offers'); toggleMobileMenu()" class="text-danger fw-bold" data-i18n="offers">ANGEBOTE</a></li>
                     <li><a href="#" onclick="goToSection('about-section'); toggleMobileMenu()" data-i18n="about_us">Über uns</a></li>
+                    <li><a href="#" onclick="goToSection('feedback-section'); toggleMobileMenu()" data-i18n="feedback_label">Feedback</a></li>
                     <li><a href="#" onclick="goToSection('locations-section'); toggleMobileMenu()" data-i18n="contact">Kontakt</a></li>
                 </ul>
 

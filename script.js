@@ -294,9 +294,11 @@ function renderProducts(productsToRender = products, category = 'all') {
 
     if (productsToRender.length === 0) {
         grid.innerHTML = `
-            <div class="col-12 text-center py-5" style="grid-column: 1 / -1;">
-                <p class="text-muted fs-5" data-i18n="${category === 'wishlist' ? 'empty_wishlist_msg' : 'empty_category_msg'}">Keine Produkte gefunden.</p>
-                <button class="btn btn-outline-primary mt-2" onclick="filterByCategory('all')" data-i18n="show_all_products">Alle Produkte anzeigen</button>
+            <div class="col-12 text-center py-5 no-results-container" style="grid-column: 1 / -1; min-height: 300px;">
+                <div class="display-3 mb-4 opacity-50">🔍</div>
+                <h3 class="fw-bold mb-3" data-i18n="${category === 'wishlist' ? 'empty_wishlist_msg' : 'empty_category_msg'}">Keine Produkte gefunden.</h3>
+                <p class="text-muted mb-4 mx-auto" style="max-width: 450px;" data-i18n="try_other_filter">Leider konnten wir keine Produkte finden, die Ihren Suchkriterien entsprechen. Probieren Sie es mit anderen Filtern.</p>
+                <button class="btn btn-primary rounded-pill px-4 py-2 fw-bold" onclick="filterByCategory('all')" data-i18n="show_all_products">Alle Produkte anzeigen</button>
             </div>`;
         updateStaticText();
         return;
@@ -461,7 +463,25 @@ const translations = {
         'wishlist_added': 'Zu Lieblingsprodukten hinzugefügt ❤️',
         'wishlist_removed': 'Von Lieblingsprodukten entfernt',
         'loading': 'Ladend...',
-        'misc': 'Verschiedenes'
+        'misc': 'Verschiedenes',
+        'feedback_label': 'Feedback',
+        'feedback_title': 'Was unsere Kunden sagen',
+        'feedback_subtitle': 'Ihre Zufriedenheit ist unser größter Ansporn. Teilen Sie uns Ihre Erfahrungen mit!',
+        'verified_buyer': 'Verifizierter Käufer',
+        'leave_feedback': 'Feedback geben',
+        'rating': 'Bewertung',
+        'message': 'Ihre Nachricht',
+        'send_feedback': 'Feedback senden',
+        'feedback_success': 'Vielen Dank für Ihr Feedback! Wir schätzen Ihre Meinung.',
+        'feature_nav_title': 'Klare & einfache Navigation',
+        'feature_nav_desc': 'Finden Sie blitzschnell exactly das, was Sie suchen.',
+        'feature_shipping_title': 'Schneller Versand',
+        'feature_shipping_desc': 'Ihre Bestellung ist innerhalb von 24h versandbereit.',
+        'feature_quality_title': 'Beste Qualität',
+        'feature_quality_desc': 'Frische orientalische Spezialitäten, sorgfältig ausgewählt.',
+        'feature_payment_title': 'Sicher Bezahlen',
+        'feature_payment_desc': 'Vielfältige und sichere Zahlungsmöglichkeiten.',
+        'try_other_filter': 'Leider konnten wir keine Produkte finden, die Ihren Suchkriterien entsprechen. Probieren Sie es mit anderen Filtern.'
     },
     'en': {
         'help': 'Help',
@@ -579,7 +599,25 @@ const translations = {
         'wishlist_added': 'Added to favorites ❤️',
         'wishlist_removed': 'Removed from favorites',
         'loading': 'Loading...',
-        'misc': 'Miscellaneous'
+        'misc': 'Miscellaneous',
+        'feedback_label': 'Feedback',
+        'feedback_title': 'What our customers say',
+        'feedback_subtitle': 'Your satisfaction is our greatest motivation. Share your experiences with us!',
+        'verified_buyer': 'Verified Buyer',
+        'leave_feedback': 'Give Feedback',
+        'rating': 'Rating',
+        'message': 'Your Message',
+        'send_feedback': 'Send Feedback',
+        'feedback_success': 'Thank you for your feedback! We value your opinion.',
+        'feature_nav_title': 'Clear & Simple Navigation',
+        'feature_nav_desc': 'Find exactly what you are looking for in no time.',
+        'feature_shipping_title': 'Fast Shipping',
+        'feature_shipping_desc': 'Your order is ready for shipment within 24h.',
+        'feature_quality_title': 'Best Quality',
+        'feature_quality_desc': 'Fresh oriental specialties, carefully selected.',
+        'feature_payment_title': 'Secure Payment',
+        'feature_payment_desc': 'Diverse and secure payment options.',
+        'try_other_filter': 'Unfortunately, we could not find any products that match your search criteria. Try other filters.'
     },
     'ar': {
         'help': 'مساعدة',
@@ -697,7 +735,25 @@ const translations = {
         'wishlist_added': 'تمت الإضافة للمفضلة ❤️',
         'wishlist_removed': 'تمت الإزالة من المفضلة',
         'loading': 'جاري التحميل...',
-        'misc': 'متنوع'
+        'misc': 'متنوع',
+        'feedback_label': 'ملاحظات العملاء',
+        'feedback_title': 'ماذا يقول عملاؤنا',
+        'feedback_subtitle': 'رضاكم هو أكبر حافز لنا. شاركنا تجربتك!',
+        'verified_buyer': 'مشتري مؤكد',
+        'leave_feedback': 'أضف تعليقك',
+        'rating': 'التقييم',
+        'message': 'رسالتك',
+        'send_feedback': 'إرسال التعليق',
+        'feedback_success': 'شكراً جزيلاً لتعليقك! نحن نقدر رأيك.',
+        'feature_nav_title': 'تنقل واضح وبسيط',
+        'feature_nav_desc': 'تجد بالضبط ما تبحث عنه في أسرع وقت.',
+        'feature_shipping_title': 'شحن سريع',
+        'feature_shipping_desc': 'طلبك جاهز للشحن خلال ٢٤ ساعة.',
+        'feature_quality_title': 'أفضل جودة',
+        'feature_quality_desc': 'تخصصات شرقية طازجة، مختارة بعناية.',
+        'feature_payment_title': 'دفع آمن',
+        'feature_payment_desc': 'خيارات دفع متنوعة وآمنة.',
+        'try_other_filter': 'للأسف، لم نتمكن من العثور على أي منتجات تطابق معايير بحثك. جرب عوامل تصفية أخرى.'
     }
 };
 
@@ -1289,4 +1345,35 @@ if (!document.getElementById('cookie-extra-styles')) {
         }
     `;
     document.head.appendChild(style);
+}
+
+// Feedback Submission Logic
+function handleFeedbackSubmission(event) {
+    event.preventDefault();
+    const name = document.getElementById('fb-name').value;
+    const email = document.getElementById('fb-email').value;
+    const rating = document.getElementById('fb-rating').value;
+    const message = document.getElementById('fb-message').value;
+
+    console.log('Feedback received:', { name, email, rating, message });
+
+    // Show success message
+    const successMsg = document.getElementById('feedback-success');
+    const form = document.getElementById('feedback-form');
+    
+    if (successMsg && form) {
+        form.reset();
+        successMsg.classList.remove('d-none');
+        
+        // Use existing showToast for extra feedback
+        const dict = translations[currentLanguage];
+        if (typeof showToast === 'function') {
+            showToast('✅ ' + dict['feedback_success']);
+        }
+        
+        // Hide success alert after 5 seconds
+        setTimeout(() => {
+            successMsg.classList.add('d-none');
+        }, 5000);
+    }
 }

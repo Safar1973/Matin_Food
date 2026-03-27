@@ -270,12 +270,30 @@ header {
     font-weight: 600;
     font-size: 14px;
     text-transform: uppercase;
-    transition: color 0.2s;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
 }
 
 .nav-list a:hover,
 .nav-list a.active {
     color: var(--primary-color);
+}
+
+.nav-list a:hover::after,
+.nav-list a.active::after {
+    width: 100%;
 }
 
 /* Layout */
@@ -1625,3 +1643,82 @@ header {
         width: 100% !important;
     }
 }
+
+/* Feedback Section */
+.feedback-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.feedback-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+.stars {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+}
+
+.feedback-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+    position: relative;
+    font-style: italic;
+}
+
+.avatar {
+    font-weight: 800;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#feedback-form .form-control, 
+#feedback-form .form-select {
+    border: 1px solid #eee;
+    padding: 0.75rem 1.25rem;
+    transition: all 0.2s;
+}
+
+#feedback-form .form-control:focus,
+#feedback-form .form-select:focus {
+    box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.1);
+    border-color: var(--primary-color);
+}
+
+.italic {
+    font-style: italic;
+}
+
+/* Benefits Bar */
+.benefits-bar {
+    border: 1px solid rgba(0,0,0,0.05);
+    background: white;
+}
+
+.benefit-item {
+    padding: 10px;
+}
+
+.benefit-item h6 {
+    color: var(--primary-color);
+}
+
+@media (min-width: 768px) {
+    .border-start-md {
+        border-left: 1px solid #eee;
+    }
+}
+
+.no-results-container {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
