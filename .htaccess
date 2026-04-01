@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Ensure API requests are routed to the v1/index.php
+RewriteRule ^api/v1/(.*)$ api/v1/index.php?request=$1 [QSA,L]
+
+# Optional: Redirect non-ssl to ssl (if user wants https)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
