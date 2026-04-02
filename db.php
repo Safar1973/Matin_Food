@@ -5,7 +5,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
 $user = "root";
 $pass = "";
 $db   = "matin_food";
-$port = 3307;
+$port = 3306;
 
 // Try 1: IPv4 Loopback
 $host = "127.0.0.1";
