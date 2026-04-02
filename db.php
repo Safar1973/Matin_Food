@@ -5,7 +5,7 @@ mysqli_report(MYSQLI_REPORT_OFF);
 $user = "root";
 $pass = "";
 $db   = "matin_food";
-$port = 3306;
+$port = 3307;
 
 // Try 1: IPv4 Loopback
 $host = "127.0.0.1";
@@ -42,12 +42,12 @@ mysqli_set_charset($conn, "utf8mb4");
 
 // Helper for PDO (used in setup scripts)
 try {
-    $pdo = new PDO("mysql:host=127.0.0.1;dbname=$db;charset=utf8mb4", $user, $pass);
+    $pdo = new PDO("mysql:host=127.0.0.1;port=$port;dbname=$db;charset=utf8mb4", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     // Fallback to localhost for PDO
     try {
-        $pdo = new PDO("mysql:host=localhost;dbname=$db;charset=utf8mb4", $user, $pass);
+        $pdo = new PDO("mysql:host=localhost;port=$port;dbname=$db;charset=utf8mb4", $user, $pass);
     } catch (PDOException $e2) {
         // Silent fail for PDO if main connection worked, relying on mysqli for now
     }

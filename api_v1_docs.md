@@ -3,7 +3,7 @@
 This project now supports a formal REST API starting at version 1.
 
 ## Base URL
-`https://matin-food.local/api/v1`
+`https://matin-food.local/api/v1/`
 
 ## 1. Directory Structure
 ```text
