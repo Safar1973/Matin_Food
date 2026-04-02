@@ -1,5 +1,0 @@
-RewriteEngine On
-
-# Ensure API requests are routed to the v1/index.php
-# NC makes it case-insensitive, QSA appends existing query strings
-RewriteRule ^api/v1/(.*)$ api/v1/index.php?request=$1 [QSA,NC,L]
